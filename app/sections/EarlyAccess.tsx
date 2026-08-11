@@ -23,7 +23,7 @@ export default function EarlyAccess() {
           </em>{" "}
           today.
         </h2>
-        <p className="text-base text-[rgba(245,239,224,0.48)] mb-12">
+        <p className="text-base text-[rgba(245,239,224,0.58)] mb-12">
           It takes three minutes. It lasts much longer than that.
         </p>
         <div className="flex gap-4 justify-center flex-wrap">

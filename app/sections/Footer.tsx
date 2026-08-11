@@ -7,7 +7,7 @@ export default function Footer() {
         <span className="font-serif text-[1.2rem] font-medium tracking-[0.1em] text-gold">
           Ebun
         </span>
-        <span className="text-[0.76rem] text-gold-dark">
+        <span className="text-[0.86rem] font-semibold tracking-wider text-gold-dark">
           The gift of giving, reimagined.
         </span>
       </div>
@@ -17,7 +17,7 @@ export default function Footer() {
           <li key={link}>
             <a
               href="#"
-              className="text-[0.74rem] text-gold-dark no-underline tracking-[0.06em] transition-colors duration-300 hover:text-gold-light"
+              className="text-[0.85rem] text-gold-dark no-underline tracking-[0.06em] transition-colors duration-300 hover:text-gold-light"
             >
               {link}
             </a>
@@ -25,8 +25,8 @@ export default function Footer() {
         ))}
       </ul>
 
-      <div className="text-[0.74rem] text-gold-dark">
-        ebun.ng · Lagos, Nigeria
+      <div className="text-[0.85rem] text-gold-dark">
+        ebun.ng · Nigeria
       </div>
     </footer>
   );

@@ -58,7 +58,7 @@ export default function Navbar() {
         </a>
         <a
           href="#early-access"
-          className="border border-gold-dark text-gold bg-transparent px-[22px] py-[9px] rounded-sm font-sans text-[0.72rem] tracking-[0.16em] uppercase transition-all duration-300 hover:bg-[rgba(201,168,76,0.8)] hover:border-gold hover:text-gold-light"
+          className="border border-gold-dark text-gold bg-transparent px-[22px] py-[9px] rounded-sm font-sans font-semibold text-[0.72rem] tracking-[0.16em] uppercase transition-all duration-300 hover:bg-[rgba(201,168,76,0.8)] hover:border-gold hover:text-gold-light"
         >
           Send a Gift
         </a>

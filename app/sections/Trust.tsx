@@ -39,13 +39,13 @@ export default function Trust() {
           </h2>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-[rgba(201,168,76,0.07)]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-[rgba(201,168,76,0.18)]">
           {pillars.map((p, i) => (
             <RevealOnScroll key={p.title} delay={i * 0.1}>
               <div className="bg-ink-2 p-10">
                 <p.icon className="w-6 h-6 text-gold mb-4" strokeWidth={1.5} />
-                <h3 className="font-serif text-[1.2rem] font-normal text-cream mb-[10px]">{p.title}</h3>
-                <p className="text-[0.85rem] text-[rgba(245,239,224,0.48)] leading-[1.8]">{p.body}</p>
+                <h3 className="font-serif text-[1.5rem] font-normal tracking-wide text-cream mb-[10px]">{p.title}</h3>
+                <p className="text-[0.85rem] text-[rgba(245,239,224,0.58)] leading-[1.8]">{p.body}</p>
               </div>
             </RevealOnScroll>
           ))}
