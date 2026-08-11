@@ -55,12 +55,12 @@ export default function HowItWorks() {
                     background: "linear-gradient(90deg, transparent, var(--gold-dk), transparent)",
                   }}
                 />
-                <div className="font-serif text-[4rem] font-light text-[rgba(201,168,76,0.08)] leading-none mb-7">
+                <div className="font-serif text-[4rem] font-light text-[rgba(201,168,76,0.4)] leading-none mb-7">
                   {step.num}
                 </div>
                 <step.icon className="w-6 h-6 text-gold mb-[18px]" strokeWidth={1.5} />
                 <h3 className="font-serif text-[1.45rem] font-normal text-cream mb-3">{step.title}</h3>
-                <p className="text-[0.87rem] text-[rgba(245,239,224,0.48)] leading-[1.82]">{step.body}</p>
+                <p className="text-[0.87rem] text-[rgba(245,239,224,0.55)] leading-[1.82]">{step.body}</p>
               </div>
             </RevealOnScroll>
           ))}

@@ -40,25 +40,25 @@ export default function Navbar() {
       <div className="flex items-center gap-9">
         <a
           href="#how"
-          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.48)] hover:text-gold-light transition-colors duration-300"
+          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.8)] hover:text-gold-light transition-colors duration-300"
         >
           How it works
         </a>
         <a
           href="#stories"
-          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.48)] hover:text-gold-light transition-colors duration-300"
+          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.8)] hover:text-gold-light transition-colors duration-300"
         >
           Stories
         </a>
         <a
           href="#corporate"
-          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.48)] hover:text-gold-light transition-colors duration-300"
+          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.8)] hover:text-gold-light transition-colors duration-300"
         >
           Corporate
         </a>
         <a
           href="#early-access"
-          className="border border-gold-dark text-gold bg-transparent px-[22px] py-[9px] rounded-sm font-sans text-[0.72rem] tracking-[0.16em] uppercase transition-all duration-300 hover:bg-[rgba(201,168,76,0.10)] hover:border-gold hover:text-gold-light"
+          className="border border-gold-dark text-gold bg-transparent px-[22px] py-[9px] rounded-sm font-sans text-[0.72rem] tracking-[0.16em] uppercase transition-all duration-300 hover:bg-[rgba(201,168,76,0.8)] hover:border-gold hover:text-gold-light"
         >
           Send a Gift
         </a>

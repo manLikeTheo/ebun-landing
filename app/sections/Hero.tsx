@@ -65,6 +65,25 @@ export default function Hero() {
         Send a real, meaningful gift to anyone in Nigeria — from Lagos or London — in under three minutes. No address. No app download. Just a phone number.
       </motion.p>
 
+      {/* Visual anchor - decorative gift box */}
+<motion.div
+  initial={{ opacity: 0, scale: 0.9 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{ duration: 1, delay: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+  className="mt-8 mb-4 relative"
+>
+  <div className="w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-2xl border border-[rgba(201,168,76,0.15)] bg-gradient-to-b from-[rgba(201,168,76,0.08)] to-transparent flex items-center justify-center relative overflow-hidden">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(201,168,76,0.12),transparent_60%)]" />
+    <div className="text-center z-10">
+      <div className="text-5xl mb-3">🎁</div>
+      <div className="font-serif text-gold text-lg italic">Tap to reveal</div>
+      <div className="text-[0.7rem] text-[rgba(245,239,224,0.4)] tracking-[0.2em] uppercase mt-2">Your gift is waiting</div>
+    </div>
+    {/* Animated glow ring */}
+    <div className="absolute inset-0 rounded-2xl border border-gold/20 animate-pulse" />
+  </div>
+</motion.div>
+
       {/* CTAs */}
       <motion.div
         initial={{ opacity: 0, y: 22 }}
@@ -83,7 +102,7 @@ export default function Hero() {
         transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94], delay: 1.1 }}
         className="absolute bottom-11 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-[0.62rem] tracking-[0.22em] uppercase text-gold-dark">Discover</span>
+        {/* <span className="text-[0.62rem] tracking-[0.22em] uppercase text-gold-dark">Discover</span> */}
         <div
           className="w-px h-11 animate-pulse"
           style={{ background: "linear-gradient(to bottom, var(--gold-dk), transparent)" }}
