@@ -19,15 +19,18 @@ export default function EarlyAccess() {
           Someone deserves to feel
           <br />
           <em className="text-gold" style={{ fontStyle: "italic" }}>
-            celebrated
+            celebrated.
           </em>{" "}
-          today.
         </h2>
         <p className="text-base text-[rgba(245,239,224,0.58)] mb-12">
-          It takes three minutes. It lasts much longer than that.
+          It should take only a few seconds. It should last much longer than that....
+          {" "}
+          <em className="text-gold" style={{ fontStyle: "italic" }}>
+            And we are building a better way to make that happen.
+          </em>{" "}
         </p>
         <div className="flex gap-4 justify-center flex-wrap">
-          <GoldButton href="#">Join Early Access</GoldButton>
+          <GoldButton href="#">Explore our offerings</GoldButton>
           <GhostButton href="#corporate">Corporate Gifting</GhostButton>
         </div>
       </RevealOnScroll>

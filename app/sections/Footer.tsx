@@ -13,7 +13,7 @@ export default function Footer() {
       </div>
 
       <ul className="flex gap-6 list-none">
-        {["How it works", "Corporate", "Become a Vendor", "Contact"].map((link) => (
+        {["How it works", "Corporate", "Become a Founding Vendor", "Contact"].map((link) => (
           <li key={link}>
             <a
               href="#"

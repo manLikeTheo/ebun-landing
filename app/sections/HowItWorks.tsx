@@ -9,19 +9,19 @@ const steps = [
     num: "01",
     icon: Gift,
     title: "Choose the occasion and gift",
-    body: "Select from Birthday, Anniversary, New Baby, Just Because, and more. Browse food, experiences, keepsakes, and everyday utility gifts. All curated. Nothing generic.",
+    body: "When Ebun launches, senders will be able to choose from curated gifts across birthdays, weddings, anniversaries, new babies, and more. All curated. Nothing generic.",
   },
   {
     num: "02",
     icon: Video,
-    title: "Record your personal message",
-    body: "A 30-second video, a voice note, or written words. This is what they will see the moment the gift is revealed — your face, your voice, your intention.",
+    title: "Add your message",
+    body: "Add a short video, voice note, or written message to make the gift personal. This is what they will see the moment the gift is revealed — your face, your voice, your intention.",
   },
   {
     num: "03",
     icon: Smartphone,
-    title: "They scratch to reveal",
-    body: "A WhatsApp link arrives. They tap. A themed gift box appears on their screen. They scratch with their finger. Your face appears. Their gift is revealed underneath.",
+    title: "Reveal",
+    body: "The recipient will receive a WhatsApp link, open the digital gift, and discover your message as the gift is revealed.",
   },
 ];
 

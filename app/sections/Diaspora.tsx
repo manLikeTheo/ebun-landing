@@ -44,16 +44,16 @@ export default function Diaspora() {
         <RevealOnScroll delay={0.25}>
           <div className="max-w-[640px]">
             <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-4">
-              You shouldn&apos;t have to know their address.
+              Miles apart. Still part of the moment.
             </p>
             <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-4">
-              You shouldn&apos;t have to coordinate delivery yourself.
+              Ebun is being built so someone in London, Toronto, or Houston can celebrate someone in Nigeria without having to coordinate every detail themselves.
             </p>
             <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-6">
-              You shouldn&apos;t have to turn a celebration into a bank transaction.
+              You shouldn&apos;t have to turn every heartfelt gesture into a bank transaction.
             </p>
             <p className="text-[1.1rem] text-cream font-serif italic leading-[1.65]">
-              You just need to know their number.
+              Just know their number.
             </p>
           </div>
         </RevealOnScroll>

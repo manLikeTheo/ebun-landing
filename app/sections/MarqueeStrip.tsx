@@ -1,8 +1,8 @@
 "use client";
 
 const cities = [
-  { label: "Delivering in", items: ["Victoria Island", "Lekki", "Ikoyi", "Yaba", "Ikeja"] },
-  { label: "Sending from anywhere", items: ["London", "Houston", "Toronto", "Dubai", "New York"] },
+  { label: "Starting in Nigeria", items: ["Lagos", "Abuja", "Ibadan", "Port Harcourt", "More cities to come"] },
+  { label: "Designed for diaspora senders", items: ["London", "Houston", "Toronto", "Dubai", "New York"] },
 ];
 
 export default function MarqueeStrip() {

@@ -8,17 +8,17 @@ const pillars = [
   {
     icon: Lock,
     title: "Secure payments",
-    body: "Every transaction is processed via Paystack — Nigeria's most trusted payment infrastructure. Local and international cards accepted.",
+    body: "Payments will be handled through trusted payment infrastructure, with security built into the transaction flow.",
   },
   {
     icon: Package,
-    title: "Vendor-verified fulfilment",
-    body: "Every vendor partner is personally vetted before they fulfil a single Ebun order. Quality is a standard, not a hope.",
+    title: "Trusted partners",
+    body: "We’re building a curated network of Nigerian gift and experience partners with quality and reliability at the centre.",
   },
   {
     icon: RefreshCw,
-    title: "Automatic recovery",
-    body: "If anything goes wrong — failed delivery, vendor issue, broken link — Ebun automatically resolves it. No chasing required.",
+    title: "Support when you need it",
+    body: "We’re designing Ebun to make cancellations, delivery issues, and redemption problems easier to resolve",
   },
 ];
 
@@ -27,7 +27,7 @@ export default function Trust() {
     <section className="py-[120px] px-6 md:px-[52px]">
       <div className="max-w-[1080px] mx-auto">
         <RevealOnScroll>
-          <SectionEyebrow text="Built for Trust" />
+          <SectionEyebrow text="Built with trust in mind" />
           <h2
             className="font-serif font-light text-cream mb-14"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}

@@ -59,30 +59,20 @@ export default function Hero() {
         initial={{ opacity: 0, y: 22 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.55 }}
-        className="font-sans font-light text-[rgba(245,239,224,0.72)] max-w-[520px] leading-[1.85] mb-14"
+        className="font-sans font-light text-[rgba(245,239,224,0.92)] max-w-[520px] leading-[1.85] mb-14"
         style={{ fontSize: "clamp(1rem, 2vw, 1.15rem)" }}
       >
-        Send a real, meaningful gift to anyone in Nigeria — from Lagos or London — in under three minutes. No address. No app download. Just a phone number.
+        Send a thoughtful gift to someone in Nigeria.... From anywhere in the world.
       </motion.p>
-
-      {/* Visual anchor - decorative gift box */}
-<motion.div
-  initial={{ opacity: 0, scale: 0.9 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{ duration: 1, delay: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-  className="mt-8 mb-4 relative"
->
-  <div className="w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-2xl border border-[rgba(201,168,76,0.15)] bg-gradient-to-b from-[rgba(201,168,76,0.08)] to-transparent flex items-center justify-center relative overflow-hidden">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(201,168,76,0.12),transparent_60%)]" />
-    <div className="text-center z-10">
-      <div className="text-5xl mb-3">🎁</div>
-      <div className="font-serif text-gold text-lg italic">Tap to reveal</div>
-      <div className="text-[0.7rem] text-[rgba(245,239,224,0.4)] tracking-[0.2em] uppercase mt-2">Your gift is waiting</div>
-    </div>
-    {/* Animated glow ring */}
-    <div className="absolute inset-0 rounded-2xl border border-gold/20 animate-pulse" />
-  </div>
-</motion.div>
+      <motion.p
+        initial={{ opacity: 0, y: 22 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.8], delay: 0.55 }}
+        className="font-sans font-light text-[rgba(245,239,224,0.62)] max-w-[520px] leading-[1.85] mb-14"
+        style={{ fontSize: "clamp(1rem, 2vw, 1.15rem)" }}
+      >
+        We’re building a simpler way to choose, personalise, and send gifts without the logistics chaos.
+      </motion.p>
 
       {/* CTAs */}
       <motion.div
@@ -91,7 +81,7 @@ export default function Hero() {
         transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.7 }}
         className="flex items-center gap-[18px] flex-wrap justify-center"
       >
-        <GoldButton href="#early-access">Send a Gift</GoldButton>
+        <GoldButton href="#early-access">Join Early Access</GoldButton>
         <GhostButton href="#how">See How It Works →</GhostButton>
       </motion.div>
 

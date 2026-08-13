@@ -29,14 +29,14 @@ export default function Corporate() {
             className="font-serif font-light text-cream mb-6"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
           >
-            Gift your team.
+           A better way to give
             <br />
             <em className="text-gold" style={{ fontStyle: "italic" }}>
-              Without the chaos.
+              At scale.
             </em>
           </h2>
           <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-10">
-            One CSV upload. One payment. Every employee receives a personalised WhatsApp reveal — with your CEO&apos;s video — and you receive a full redemption report.
+            We’re designing Ebun for employee appreciation, customer rewards, celebrations, and corporate gifting without the usual hamper and coordination headaches.
           </p>
           <ul className="flex flex-col gap-[18px] mb-10">
             {benefits.map((b) => (
@@ -48,10 +48,10 @@ export default function Corporate() {
               </li>
             ))}
           </ul>
-          <GoldButton href="#early-access">Get a Corporate Quote</GoldButton>
+          <GoldButton href="#early-access">Talk to us about corporate gifting</GoldButton>
         </RevealOnScroll>
 
-        <RevealOnScroll delay={0.2}>
+        {/* <RevealOnScroll delay={0.2}>
           <div className="grid grid-cols-2 gap-[2px] bg-[rgba(201,168,76,0.07)]">
             {stats.map((s) => (
               <div key={s.label} className="bg-ink p-8">
@@ -63,7 +63,7 @@ export default function Corporate() {
               </div>
             ))}
           </div>
-        </RevealOnScroll>
+        </RevealOnScroll> */}
       </div>
     </section>
   );

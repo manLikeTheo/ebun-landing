@@ -8,22 +8,22 @@ const categories = [
   {
     icon: UtensilsCrossed,
     title: "Food & Drinks",
-    body: "Birthday cakes, breakfast hampers, restaurant vouchers, cocktail kits, meal deliveries from Lagos's best.",
+    body: "Cakes, meals, work lunch packages, dining experiences and more.",
   },
   {
     icon: Sparkles,
     title: "Experiences",
-    body: "Cinema tickets, spa vouchers, photography sessions, cooking classes — memories, not things.",
+    body: "Cinema, spa, tours, photography, classes and other experiences — memories, not things.",
   },
   {
     icon: Ribbon,
     title: "Keepsakes",
-    body: "Custom photo frames, engraved pieces, personalised candles, memory boxes that last.",
+    body: "Personalised items designed to last beyond the moment.",
   },
   {
     icon: Zap,
     title: "Utility Gifts",
-    body: "Airtime, data bundles, electricity units, fuel credit. Practical love — delivered with the same emotional weight.",
+    body: "Airtime, data, electricity, fuel credit, and practical gifts — delivered with the same emotional weight.",
   },
 ];
 
@@ -37,11 +37,11 @@ export default function Categories() {
             className="font-serif font-light text-cream mb-14"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
           >
-            Something meaningful for{" "}
-            <em className="text-gold" style={{ fontStyle: "italic" }}>
+            Gifts we are building around{" "}
+            {/* <em className="text-gold" style={{ fontStyle: "italic" }}>
               every
             </em>{" "}
-            occasion.
+            occasion. */}
           </h2>
         </RevealOnScroll>
 
