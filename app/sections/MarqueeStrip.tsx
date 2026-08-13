@@ -27,11 +27,11 @@ export default function MarqueeStrip() {
   );
 
   return (
-    <div className="py-7 border-t border-b border-[rgba(201,168,76,0.07)] overflow-hidden bg-[rgba(201, 168,76,0.1)] overflow-hidden bg-[rgba(201, 168, 76, 0.02)] backdrop-blur-[24px]">
-      <div className="flex animate-marquee whitespace-nowrap">
-        {content}
-        {content}
-      </div>
+  <div className="py-7 border-t border-b border-[rgba(201,168,76,0.07)] overflow-hidden bg-[rgba(201,168,76,0.02)] backdrop-blur-[24px]">
+    <div className="flex animate-marquee whitespace-nowrap">
+      {content}
+      {content}
     </div>
-  );
+  </div>
+);
 }

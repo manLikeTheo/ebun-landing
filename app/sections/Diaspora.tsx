@@ -9,12 +9,19 @@ export default function Diaspora() {
       <div className="max-w-[1080px] mx-auto">
         <RevealOnScroll>
           <SectionEyebrow text="Miles Apart" />
+
           <h2
             className="font-serif font-light text-cream mb-6"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
+            style={{
+              fontSize: "clamp(2.4rem, 5vw, 4.2rem)",
+              lineHeight: 1.14,
+            }}
           >
             Still part of the{" "}
-            <em className="text-gold" style={{ fontStyle: "italic" }}>
+            <em
+              className="text-gold"
+              style={{ fontStyle: "italic" }}
+            >
               moment.
             </em>
           </h2>
@@ -34,8 +41,14 @@ export default function Diaspora() {
                 <div className="font-serif text-[1.5rem] text-cream mb-2">
                   {route.from}
                 </div>
-                <div className="text-gold text-[0.75rem] tracking-[0.2em] uppercase mb-2">→</div>
-                <div className="font-serif text-[1.5rem] text-cream">{route.to}</div>
+
+                <div className="text-gold text-[0.75rem] tracking-[0.2em] uppercase mb-2">
+                  →
+                </div>
+
+                <div className="font-serif text-[1.5rem] text-cream">
+                  {route.to}
+                </div>
               </div>
             ))}
           </div>
@@ -43,15 +56,23 @@ export default function Diaspora() {
 
         <RevealOnScroll delay={0.25}>
           <div className="max-w-[640px]">
-            <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-4">
-              Miles apart. Still part of the moment.
+            <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-5">
+              Ebun is being built for people who want to celebrate loved ones
+              in Nigeria without being there in person — or having to
+              coordinate the entire gifting process themselves.
             </p>
-            <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-4">
-              Ebun is being built so someone in London, Toronto, or Houston can celebrate someone in Nigeria without having to coordinate every detail themselves.
+
+            <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-5">
+              Someone in London can celebrate someone in Lagos. Someone in
+              Toronto can send a gift to Abuja. Someone in Houston can show up
+              for a moment in Ibadan.
             </p>
+
             <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-6">
-              You shouldn&apos;t have to turn every heartfelt gesture into a bank transaction.
+              You shouldn&apos;t have to turn a thoughtful gesture into a bank
+              transaction.
             </p>
+
             <p className="text-[1.1rem] text-cream font-serif italic leading-[1.65]">
               Just know their number.
             </p>

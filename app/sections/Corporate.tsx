@@ -51,7 +51,7 @@ export default function Corporate() {
           <GoldButton href="#early-access">Talk to us about corporate gifting</GoldButton>
         </RevealOnScroll>
 
-        {/* <RevealOnScroll delay={0.2}>
+        <RevealOnScroll delay={0.2}>
           <div className="grid grid-cols-2 gap-[2px] bg-[rgba(201,168,76,0.07)]">
             {stats.map((s) => (
               <div key={s.label} className="bg-ink p-8">
@@ -63,7 +63,7 @@ export default function Corporate() {
               </div>
             ))}
           </div>
-        </RevealOnScroll> */}
+        </RevealOnScroll>
       </div>
     </section>
   );
