@@ -15,11 +15,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Corner accents */}
-      <div className="absolute top-[110px] left-[52px] w-14 h-14 border-t border-l border-gold opacity-25 hidden md:block" />
-      <div className="absolute top-[110px] right-[52px] w-14 h-14 border-t border-r border-gold opacity-25 hidden md:block" />
-      <div className="absolute bottom-20 left-[52px] w-14 h-14 border-b border-l border-gold opacity-25 hidden md:block" />
-      <div className="absolute bottom-20 right-[52px] w-14 h-14 border-b border-r border-gold opacity-25 hidden md:block" />
 
 {/* Tag */}
 <motion.div
