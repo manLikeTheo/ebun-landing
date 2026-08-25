@@ -40,7 +40,8 @@ export default function HowItWorks() {
               &ldquo;Look what I got.&rdquo;
             </em>
           </h2>
-          <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] max-w-[580px] mb-16">rk that words rarely can.
+          <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] max-w-[580px] mb-16">
+            No address required from you. No app download required from them. The reveal does the work that words rarely can.
           </p>
         </RevealOnScroll>
 
