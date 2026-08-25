@@ -35,12 +35,12 @@ export default function Corporate() {
               At scale.
             </em>
           </h2>
-          <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-10">
+          <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] mb-10">
             We’re designing Ebun for employee appreciation, customer rewards, celebrations, and corporate gifting without the usual hamper and coordination headaches.
           </p>
           <ul className="flex flex-col gap-[18px] mb-10">
             {benefits.map((b) => (
-              <li key={b} className="flex items-start gap-[14px] text-[0.9rem] text-[rgba(245,239,224,0.48)] leading-[1.75]">
+              <li key={b} className="flex items-start gap-[14px] text-[0.9rem] text-[rgba(245,239,224,0.68)] leading-[1.75]">
                 <span className="w-[18px] h-[18px] min-w-[18px] border border-gold-dark rounded-full flex items-center justify-center text-[0.6rem] text-gold mt-[2px]">
                   <Check className="w-3 h-3" strokeWidth={2} />
                 </span>
@@ -48,7 +48,7 @@ export default function Corporate() {
               </li>
             ))}
           </ul>
-          <GoldButton href="#early-access">Talk to us about corporate gifting</GoldButton>
+          <GoldButton href="#early-access" className="text-center text-lg tracking-wide">Talk to us about corporate gifting</GoldButton>
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.2}>
@@ -59,7 +59,7 @@ export default function Corporate() {
                   {s.num}
                   {s.unit && <span className="text-[1.3rem]">{s.unit}</span>}
                 </div>
-                <div className="text-[0.78rem] text-[rgba(245,239,224,0.48)]">{s.label}</div>
+                <div className="text-[0.78rem] text-[rgba(245,239,224,0.68)]">{s.label}</div>
               </div>
             ))}
           </div>

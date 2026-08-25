@@ -27,7 +27,7 @@ export default function Problem() {
             </em>
           </h2>
 
-          <div className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] max-w-[580px]">
+          <div className="text-[1rem] tracking-wider text-[rgba(245,239,224,0.68)] leading-[1.85] max-w-[580px]">
             <p>
               A bank transfer can move money.
               <br />

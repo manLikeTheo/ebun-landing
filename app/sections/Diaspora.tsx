@@ -56,19 +56,19 @@ export default function Diaspora() {
 
         <RevealOnScroll delay={0.25}>
           <div className="max-w-[640px]">
-            <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-5">
+            <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] mb-5">
               Ebun is being built for people who want to celebrate loved ones
               in Nigeria without being there in person — or having to
               coordinate the entire gifting process themselves.
             </p>
 
-            <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-5">
+            <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] mb-5">
               Someone in London can celebrate someone in Lagos. Someone in
               Toronto can send a gift to Abuja. Someone in Houston can show up
               for a moment in Ibadan.
             </p>
 
-            <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] mb-6">
+            <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] mb-6">
               You shouldn&apos;t have to turn a thoughtful gesture into a bank
               transaction.
             </p>

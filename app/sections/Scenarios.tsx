@@ -46,7 +46,7 @@ export default function Scenarios() {
         <div className="flex flex-col gap-[2px] bg-[rgba(201,168,76,0.07)]">
           {stories.map((story) => (
             <RevealOnScroll key={story.who}>
-              <div className="bg-ink-2 p-12 md:p-[48px_52px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-12 items-start transition-colors duration-300 hover:bg-[#181613]">
+              <div className="bg-ink-2 p-12 md:p-[48px_52px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-12 items-start transition-colors duration-300 hover:bg-ink-3">
                 <div>
                   <span className="inline-block text-[0.63rem] tracking-[0.2em] uppercase text-gold border border-[rgba(201,168,76,0.16)] px-3 py-[5px] rounded-sm mb-4">
                     {story.tag}
@@ -59,7 +59,7 @@ export default function Scenarios() {
                   <p className="font-serif text-[1.1rem] italic text-gold-light leading-[1.65] mb-[14px]">
                     {story.quote}
                   </p>
-                  <p className="text-[0.87rem] text-[rgba(245,239,224,0.48)] leading-[1.82]">
+                  <p className="text-[0.87rem] text-[rgba(245,239,224,0.68)] leading-[1.82]">
                     {story.body}
                   </p>
                 </div>

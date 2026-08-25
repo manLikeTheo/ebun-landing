@@ -8,10 +8,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: { DEFAULT: "#0E0D0B", 2: "#161410" },
-        gold: { DEFAULT: "#D4B86A", light: "#E8D5A3", dark: "#9A7E3C" },
-        cream: { DEFAULT: "#F5EFE0", 2: "#EDE4D0" },
-      },
+  ink: { DEFAULT: "#0E0D0B", 2: "#161410", 3: "#1E1B15" },
+  gold: {
+    DEFAULT: "#C9A84C",
+    light: "#E2C07A",
+    dark: "#8A6F32",
+    bronze: "#5C4A26",
+    champagne: "#F0DFAE",
+  },
+  cream: { DEFAULT: "#F5EFE0", 2: "#EDE4D0" },
+},
       fontFamily: {
         serif: ["var(--font-cormorant)", "Georgia", "serif"],
         sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],

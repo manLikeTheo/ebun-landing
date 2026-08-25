@@ -4,22 +4,26 @@
 
 @layer base {
   :root {
-    --ink: #0E0D0B;
-    --ink-2: #161410;
-    --gold: #C9A84C;
-    --gold-lt: #E2C07A;
-    --gold-dk: #8A6F32;
-    --cream: #F5EFE0;
-    --muted: rgba(245,239,224,0.48);
-  }
+  --ink: #0E0D0B;
+  --ink-2: #161410;
+  --ink-3: #1E1B15;
+  --ink-deep: #0A0908;
+  --gold: #C9A84C;
+  --gold-lt: #E2C07A;
+  --gold-dk: #8A6F32;
+  --gold-bronze: #5C4A26;
+  --gold-champagne: #F0DFAE;
+  --cream: #F5EFE0;
+  --muted: rgba(245,239,224,0.48);
+  --muted-strong: rgba(245,239,224,0.68);
+}
   html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   body {
-    background: var(--ink);
-    color: var(--cream);
-    overflow-x: hidden;
-    /* Subtle warm radial glow from top-center */
-    background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 55%);
-    background-attachment: fixed;
-  }
+  background: var(--ink-deep);   /* was: var(--ink) */
+  color: var(--cream);
+  overflow-x: hidden;
+  background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 55%);
+  background-attachment: fixed;
+}
   ::selection { background: rgba(201,168,76,0.25); color: var(--cream); }
 }

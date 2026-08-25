@@ -48,7 +48,7 @@ export default function Categories() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[2px] bg-[rgba(201,168,76,0.07)]">
           {categories.map((cat, i) => (
             <RevealOnScroll key={cat.title} delay={i * 0.1}>
-              <div className="bg-ink-2 p-10 text-center transition-colors duration-300 hover:bg-[#1A1814]">
+              <div className="bg-ink-2 p-10 text-center transition-colors duration-300 hover:bg-ink-3">
                 <cat.icon className="w-8 h-8 text-gold mx-auto mb-4" strokeWidth={1.5} />
                 <h3 className="font-serif text-[1.2rem] font-normal text-cream mb-[10px]">{cat.title}</h3>
                 <p className="text-[0.8rem] text-[rgba(245,239,224,0.48)] leading-[1.7]">{cat.body}</p>

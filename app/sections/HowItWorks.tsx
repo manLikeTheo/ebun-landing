@@ -40,15 +40,14 @@ export default function HowItWorks() {
               &ldquo;Look what I got.&rdquo;
             </em>
           </h2>
-          <p className="text-[0.95rem] text-[rgba(245,239,224,0.48)] leading-[1.85] max-w-[580px] mb-16">
-            No address required from you. No app download required from them. The reveal does the work that words rarely can.
+          <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] max-w-[580px] mb-16">rk that words rarely can.
           </p>
         </RevealOnScroll>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-[rgba(201,168,76,0.07)]">
           {steps.map((step, i) => (
             <RevealOnScroll key={step.num} delay={i * 0.1}>
-              <div className="bg-ink-2 p-[52px_40px] relative overflow-hidden group transition-colors duration-400 hover:bg-[#1A1814]">
+              <div className="bg-ink-2 p-[52px_40px] relative overflow-hidden group transition-colors duration-400 hover:bg-ink-3">
                 <div
                   className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-400"
                   style={{
