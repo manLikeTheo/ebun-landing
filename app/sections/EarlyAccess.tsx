@@ -2,8 +2,8 @@
 
 import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
-import GoldButton from "../components/GoldButton";
 import GhostButton from "../components/GhostButton";
+import WaitlistScratchCard from "../components/WaitlistScratchCard";
 
 export default function EarlyAccess() {
   return (
@@ -29,8 +29,8 @@ export default function EarlyAccess() {
             And we are building a better way to make that happen.
           </em>{" "}
         </p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <GoldButton href="#">Explore our offerings</GoldButton>
+        <div className="flex flex-col sm:flex-row items-center gap-6">
+          <WaitlistScratchCard />
           <GhostButton href="#corporate">Corporate Gifting</GhostButton>
         </div>
       </RevealOnScroll>
