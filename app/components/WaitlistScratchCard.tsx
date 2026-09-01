@@ -2,21 +2,46 @@
 
 import { useState, useRef, useEffect } from "react";
 
-// TODO: swap this stub for a real Supabase insert once the table exists.
-// Keep the same input/output shape so nothing else in this file changes.
+const COUNTRY_CODES = [
+  { code: "+234", label: "🇳🇬 +234" },
+  { code: "+44", label: "🇬🇧 +44" },
+  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+971", label: "🇦🇪 +971" },
+];
+
+function normalizePhone(countryCode: string, raw: string) {
+  let digits = raw.replace(/\D/g, "");
+  if (countryCode !== "+1" && digits.startsWith("0")) {
+    digits = digits.slice(1);
+  }
+  return `${countryCode}${digits}`;
+}
+
 async function submitWaitlist(payload: {
   whatsapp: string;
   email?: string;
+  hp: string;
 }): Promise<{ queueNumber: number }> {
-  await new Promise((r) => setTimeout(r, 600)); // simulate network
-  return { queueNumber: 142 };
+  const res = await fetch("/api/waitlist", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error || "Something went wrong. Try again.");
+  }
+  const data = await res.json();
+  return { queueNumber: data.queueNumber };
 }
 
 export default function WaitlistScratchCard() {
+  const [countryCode, setCountryCode] = useState("+234");
   const [phone, setPhone] = useState("");
   const [optin, setOptin] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [error, setError] = useState("");
   const [stage, setStage] = useState<"form" | "loading" | "scratch">("form");
   const [queueNumber, setQueueNumber] = useState<number | null>(null);
@@ -28,10 +53,11 @@ export default function WaitlistScratchCard() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const scratchingRef = useRef(false);
   const lastPosRef = useRef<{ x: number; y: number } | null>(null);
+  const completeRevealRef = useRef<() => void>(() => {});
 
   const handleSubmit = async () => {
     const digits = phone.replace(/\D/g, "");
-    if (digits.length < 10) {
+    if (digits.length < 7) {
       setError("Enter a valid WhatsApp number first");
       return;
     }
@@ -41,12 +67,18 @@ export default function WaitlistScratchCard() {
     }
     setError("");
     setStage("loading");
-    const res = await submitWaitlist({
-      whatsapp: phone,
-      email: showEmail ? email : undefined,
-    });
-    setQueueNumber(res.queueNumber);
-    setStage("scratch");
+    try {
+      const res = await submitWaitlist({
+        whatsapp: normalizePhone(countryCode, phone),
+        email: showEmail ? email : undefined,
+        hp: honeypot,
+      });
+      setQueueNumber(res.queueNumber);
+      setStage("scratch");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Try again.");
+      setStage("form");
+    }
   };
 
   useEffect(() => {
@@ -79,6 +111,12 @@ export default function WaitlistScratchCard() {
 
     ctx.globalCompositeOperation = "destination-out";
 
+    const complete = () => {
+      setRevealed(true);
+      setTimeout(() => setShowShare(true), 400);
+    };
+    completeRevealRef.current = complete;
+
     const getPos = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       return { x: e.clientX - rect.left, y: e.clientY - rect.top };
@@ -99,10 +137,7 @@ export default function WaitlistScratchCard() {
           if (data[(y * w + x) * 4 + 3] < 40) cleared++;
         }
       }
-      if (cleared / total > 0.5) {
-        setRevealed(true);
-        setTimeout(() => setShowShare(true), 400);
-      }
+      if (cleared / total > 0.5) complete();
     };
 
     const onDown = (e: PointerEvent) => {
@@ -143,7 +178,6 @@ export default function WaitlistScratchCard() {
 
   const handleShare = () => {
     setCopied(true);
-    // TODO: real share link once queueNumber is backed by a real record.
     setTimeout(() => setCopied(false), 1600);
   };
 
@@ -154,33 +188,62 @@ export default function WaitlistScratchCard() {
     setError("");
   };
 
+  const loading = stage === "loading";
+
   return (
     <div className="max-w-[440px] mx-auto bg-ink-2 border border-[rgba(201,168,76,0.14)] rounded-[14px] p-9 text-center">
       {stage !== "scratch" ? (
         <div>
-          <label className="block text-left text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-[10px]">
+          {/* Honeypot: invisible to sighted users, skipped in tab order.
+              Real bots that auto-fill every field populate it; real people never do. */}
+          <input
+            type="text"
+            name="companyWebsite"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            className="sr-only"
+          />
+
+          <label htmlFor="phone" className="block text-left text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-[10px]">
             WhatsApp number
           </label>
           <div className="flex gap-2 mb-2">
+            <select
+              value={countryCode}
+              onChange={(e) => setCountryCode(e.target.value)}
+              disabled={loading}
+              aria-label="Country code"
+              className="w-[100px] bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg text-cream text-[0.85rem] px-2 h-[46px] outline-none focus:border-gold disabled:opacity-50"
+            >
+              {COUNTRY_CODES.map((c) => (
+                <option key={c.code} value={c.code} className="bg-ink text-cream">
+                  {c.label}
+                </option>
+              ))}
+            </select>
             <input
-              readOnly
-              value="+234"
-              className="w-[68px] bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg text-cream text-[0.9rem] text-center"
-            />
-            <input
+              id="phone"
               type="tel"
               placeholder="801 234 5678"
               value={phone}
+              disabled={loading}
+              aria-describedby={error ? "phoneError" : undefined}
               onChange={(e) => setPhone(e.target.value)}
-              className="flex-1 bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg text-cream text-[0.95rem] px-[14px] h-[46px] outline-none focus:border-gold"
+              className="flex-1 bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg text-cream text-[0.95rem] px-[14px] h-[46px] outline-none focus:border-gold disabled:opacity-50"
             />
           </div>
-          <div className="text-[#E0897A] text-[0.76rem] text-left min-h-[18px] my-1">{error}</div>
+          <div id="phoneError" role="alert" aria-live="polite" className="text-[#E0897A] text-[0.76rem] text-left min-h-[18px] my-1">
+            {error}
+          </div>
 
           <label className="flex gap-2 text-left text-[0.74rem] text-muted leading-[1.5] my-3">
             <input
               type="checkbox"
               checked={optin}
+              disabled={loading}
               onChange={(e) => setOptin(e.target.checked)}
               className="mt-[3px] accent-gold shrink-0"
             />
@@ -189,24 +252,30 @@ export default function WaitlistScratchCard() {
 
           <button
             onClick={handleSubmit}
-            disabled={stage === "loading"}
+            disabled={loading}
             className="w-full bg-gold text-ink rounded-lg py-[15px] font-sans font-medium text-[0.78rem] tracking-[0.14em] uppercase transition-all hover:bg-gold-light hover:-translate-y-0.5 shadow-[0_4px_26px_rgba(201,168,76,0.22)] disabled:opacity-60"
           >
-            {stage === "loading" ? "Joining..." : "Join early access"}
+            {loading ? "Joining..." : "Join early access"}
           </button>
 
           {showEmail && (
-            <input
-              type="email"
-              placeholder="name@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full mt-3 bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg text-cream text-[0.9rem] px-[14px] h-[42px] outline-none focus:border-gold"
-            />
+            <>
+              <label htmlFor="waitlist-email" className="sr-only">Email address</label>
+              <input
+                id="waitlist-email"
+                type="email"
+                placeholder="name@email.com"
+                value={email}
+                disabled={loading}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full mt-3 bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg text-cream text-[0.9rem] px-[14px] h-[42px] outline-none focus:border-gold disabled:opacity-50"
+              />
+            </>
           )}
           <button
             onClick={() => setShowEmail((s) => !s)}
-            className="mt-[14px] text-[0.76rem] text-muted underline underline-offset-4 hover:text-gold-light"
+            disabled={loading}
+            className="mt-[14px] text-[0.76rem] text-muted underline underline-offset-4 hover:text-gold-light disabled:opacity-50"
           >
             In case we can&apos;t reach you on WhatsApp yet, add an email
           </button>
@@ -225,6 +294,7 @@ export default function WaitlistScratchCard() {
             </div>
             <canvas
               ref={canvasRef}
+              aria-hidden="true"
               className="absolute inset-0 cursor-grab active:cursor-grabbing touch-none transition-opacity duration-500"
               style={{ opacity: revealed ? 0 : 1 }}
             />
@@ -235,6 +305,16 @@ export default function WaitlistScratchCard() {
               Scratch to reveal
             </div>
           </div>
+
+          {!revealed && (
+            <button
+              onClick={() => completeRevealRef.current()}
+              className="mb-4 text-[0.74rem] text-muted underline underline-offset-4 hover:text-gold-light"
+            >
+              Prefer not to scratch? Reveal instantly
+            </button>
+          )}
+
           <button
             onClick={handleShare}
             className={`w-full border border-[rgba(201,168,76,0.35)] rounded-lg py-[14px] text-gold text-[0.76rem] tracking-[0.14em] uppercase transition-all hover:border-gold hover:text-gold-light hover:bg-[rgba(201,168,76,0.06)] ${
