@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const COUNTRY_CODES = [
   { code: "+234", label: "🇳🇬 +234" },
@@ -8,6 +9,10 @@ const COUNTRY_CODES = [
   { code: "+1", label: "🇺🇸 +1" },
   { code: "+971", label: "🇦🇪 +971" },
 ];
+
+const ID_STORAGE_KEY = "ebun_waitlist_id";
+const STATUS_POLL_MS = 12000;
+const FOUNDER_WHATSAPP = process.env.NEXT_PUBLIC_FOUNDER_WHATSAPP || "";
 
 function normalizePhone(countryCode: string, raw: string) {
   let digits = raw.replace(/\D/g, "");
@@ -21,7 +26,8 @@ async function submitWaitlist(payload: {
   whatsapp: string;
   email?: string;
   hp: string;
-}): Promise<{ queueNumber: number }> {
+  ref: string | null;
+}): Promise<{ id: string; queueNumber: number }> {
   const res = await fetch("/api/waitlist", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -31,11 +37,18 @@ async function submitWaitlist(payload: {
     const body = await res.json().catch(() => ({}));
     throw new Error(body.error || "Something went wrong. Try again.");
   }
-  const data = await res.json();
-  return { queueNumber: data.queueNumber };
+  return res.json();
+}
+
+async function fetchStatus(id: string) {
+  const res = await fetch(`/api/waitlist/status?id=${id}`);
+  if (!res.ok) return null;
+  return res.json() as Promise<{ queueNumber: number; referralCount: number; position: number }>;
 }
 
 export default function WaitlistScratchCard() {
+  const savedId = typeof window !== "undefined" ? localStorage.getItem(ID_STORAGE_KEY) : null;
+
   const [countryCode, setCountryCode] = useState("+234");
   const [phone, setPhone] = useState("");
   const [optin, setOptin] = useState(false);
@@ -43,17 +56,70 @@ export default function WaitlistScratchCard() {
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [error, setError] = useState("");
-  const [stage, setStage] = useState<"form" | "loading" | "scratch">("form");
+  const [stage, setStage] = useState<"form" | "loading" | "scratch">(() =>
+    savedId ? "scratch" : "form"
+  );
+  const [returning, setReturning] = useState(() => !!savedId);
+  const [myId, setMyId] = useState<string | null>(savedId);
   const [queueNumber, setQueueNumber] = useState<number | null>(null);
+  const [displayNumber, setDisplayNumber] = useState<number | null>(null);
+  const [justRevealed, setJustRevealed] = useState(false);
+  const [referralCount, setReferralCount] = useState(0);
+  const [position, setPosition] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
-  const [revealed, setRevealed] = useState(false);
-  const [showShare, setShowShare] = useState(false);
+  const [revealed, setRevealed] = useState(() => !!savedId);
+  const [showShare, setShowShare] = useState(() => !!savedId);
 
+  const referrerRef = useRef<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const scratchingRef = useRef(false);
   const lastPosRef = useRef<{ x: number; y: number } | null>(null);
   const completeRevealRef = useRef<() => void>(() => {});
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+    if (ref) {
+      referrerRef.current = ref;
+      params.delete("ref");
+      const clean = window.location.pathname + (params.toString() ? `?${params}` : "") + window.location.hash;
+      window.history.replaceState({}, "", clean);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!myId || stage !== "scratch") return;
+    let cancelled = false;
+
+    const tick = async () => {
+      const status = await fetchStatus(myId);
+      if (status && !cancelled) {
+        setQueueNumber(status.queueNumber);
+        setReferralCount(status.referralCount);
+        setPosition(status.position);
+      }
+    };
+    tick();
+    const interval = setInterval(tick, STATUS_POLL_MS);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [myId, stage]);
+
+  const animateCountUp = (target: number) => {
+    const start = Math.max(1, target - 40);
+    const duration = 900;
+    const startTime = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min(1, (now - startTime) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayNumber(Math.round(start + (target - start) * eased));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
 
   const handleSubmit = async () => {
     const digits = phone.replace(/\D/g, "");
@@ -72,8 +138,12 @@ export default function WaitlistScratchCard() {
         whatsapp: normalizePhone(countryCode, phone),
         email: showEmail ? email : undefined,
         hp: honeypot,
+        ref: referrerRef.current,
       });
+      localStorage.setItem(ID_STORAGE_KEY, res.id);
+      setMyId(res.id);
       setQueueNumber(res.queueNumber);
+      setPosition(res.queueNumber);
       setStage("scratch");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Try again.");
@@ -82,7 +152,7 @@ export default function WaitlistScratchCard() {
   };
 
   useEffect(() => {
-    if (stage !== "scratch" || !canvasRef.current || !wrapRef.current) return;
+    if (stage !== "scratch" || returning || !canvasRef.current || !wrapRef.current) return;
     const canvas = canvasRef.current;
     const wrap = wrapRef.current;
     const w = wrap.clientWidth;
@@ -94,6 +164,7 @@ export default function WaitlistScratchCard() {
 
     setRevealed(false);
     setShowShare(false);
+    setJustRevealed(false);
 
     const grad = ctx.createLinearGradient(0, 0, w, h);
     grad.addColorStop(0, "#E2C07A");
@@ -113,6 +184,8 @@ export default function WaitlistScratchCard() {
 
     const complete = () => {
       setRevealed(true);
+      setJustRevealed(true);
+      if (queueNumber !== null) animateCountUp(queueNumber);
       setTimeout(() => setShowShare(true), 400);
     };
     completeRevealRef.current = complete;
@@ -174,19 +247,21 @@ export default function WaitlistScratchCard() {
       canvas.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
     };
-  }, [stage]);
+  }, [stage, returning, queueNumber]);
 
-  const handleShare = () => {
+  const handleShare = async () => {
+    if (!myId) return;
+    const link = `${window.location.origin}/?ref=${myId}`;
+    await navigator.clipboard.writeText(link);
     setCopied(true);
     setTimeout(() => setCopied(false), 1600);
   };
 
-  const reset = () => {
-    setStage("form");
-    setPhone("");
-    setOptin(false);
-    setError("");
-  };
+  const waLink = FOUNDER_WHATSAPP
+    ? `https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(
+        `Hey! I just joined the Ebun waitlist as Founding Sender No. ${queueNumber ?? ""}`
+      )}`
+    : null;
 
   const loading = stage === "loading";
 
@@ -194,8 +269,6 @@ export default function WaitlistScratchCard() {
     <div className="max-w-[440px] mx-auto bg-ink-2 border border-[rgba(201,168,76,0.14)] rounded-[14px] p-9 text-center">
       {stage !== "scratch" ? (
         <div>
-          {/* Honeypot: invisible to sighted users, skipped in tab order.
-              Real bots that auto-fill every field populate it; real people never do. */}
           <input
             type="text"
             name="companyWebsite"
@@ -285,28 +358,32 @@ export default function WaitlistScratchCard() {
           <div ref={wrapRef} className="relative w-full h-[220px] rounded-[10px] overflow-hidden mb-[22px] bg-ink">
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-5">
               <div className="text-[0.64rem] tracking-[0.2em] uppercase text-gold-light mb-[10px]">You&apos;re in</div>
-              <div className="font-serif italic text-[2.5rem] text-gold-champagne leading-none mb-[10px]">
-                Founding Sender No. {queueNumber}
+              <div className={`font-serif italic text-[2.5rem] leading-none mb-[10px] ${justRevealed ? "shimmer-text" : "text-gold-champagne"}`}>
+                Founding Sender No. {displayNumber ?? queueNumber}
               </div>
               <div className="text-cream text-[0.85rem] max-w-[260px] leading-[1.6]">
-                First to know when Ebun opens. First to send the first gift.
+                First to know when we launch. First to send the first gift.
               </div>
             </div>
-            <canvas
-              ref={canvasRef}
-              aria-hidden="true"
-              className="absolute inset-0 cursor-grab active:cursor-grabbing touch-none transition-opacity duration-500"
-              style={{ opacity: revealed ? 0 : 1 }}
-            />
-            <div
-              className="absolute top-[14px] left-1/2 -translate-x-1/2 text-[0.66rem] tracking-[0.16em] uppercase text-[rgba(14,13,11,0.55)] pointer-events-none transition-opacity duration-300"
-              style={{ opacity: revealed ? 0 : 1 }}
-            >
-              Scratch to reveal
-            </div>
+            {!returning && (
+              <canvas
+                ref={canvasRef}
+                aria-hidden="true"
+                className="absolute inset-0 cursor-grab active:cursor-grabbing touch-none transition-opacity duration-500"
+                style={{ opacity: revealed ? 0 : 1 }}
+              />
+            )}
+            {!returning && (
+              <div
+                className="absolute top-[14px] left-1/2 -translate-x-1/2 text-[0.66rem] tracking-[0.16em] uppercase text-[rgba(14,13,11,0.55)] pointer-events-none transition-opacity duration-300"
+                style={{ opacity: revealed ? 0 : 1 }}
+              >
+                Scratch to reveal
+              </div>
+            )}
           </div>
 
-          {!revealed && (
+          {!returning && !revealed && (
             <button
               onClick={() => completeRevealRef.current()}
               className="mb-4 text-[0.74rem] text-muted underline underline-offset-4 hover:text-gold-light"
@@ -315,17 +392,43 @@ export default function WaitlistScratchCard() {
             </button>
           )}
 
-          <button
-            onClick={handleShare}
-            className={`w-full border border-[rgba(201,168,76,0.35)] rounded-lg py-[14px] text-gold text-[0.76rem] tracking-[0.14em] uppercase transition-all hover:border-gold hover:text-gold-light hover:bg-[rgba(201,168,76,0.06)] ${
-              showShare ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-            }`}
-          >
-            {copied ? "Link copied ✓" : "Share your spot ↗"}
-          </button>
-          <button onClick={reset} className="mt-[18px] text-[0.74rem] text-muted underline underline-offset-4 hover:text-gold-light">
-            Start over
-          </button>
+          {revealed && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-1 text-center"
+            >
+              <div className="text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-2">
+                Your invite position
+              </div>
+              <div className="text-cream text-[1.5rem] font-serif font-semibold tracking-wide mb-2">
+                #{position ?? queueNumber}
+              </div>
+              <div className="text-muted text-[0.88rem] leading-[1.6] mb-4">
+                {referralCount > 0
+                  ? `${referralCount} friend${referralCount === 1 ? "" : "s"} joined through your link. Every referral moves you up 5 spots.`
+                  : "Share your link — every friend who joins moves you up 5 spots."}
+              </div>
+              <button
+                onClick={handleShare}
+                className="w-full border border-[rgba(201,168,76,0.35)] rounded-lg py-[14px] text-gold text-[0.76rem] tracking-[0.14em] uppercase transition-all hover:border-gold hover:text-gold-light hover:bg-[rgba(201,168,76,0.06)]"
+              >
+                {copied ? "Link copied ✓" : "Copy your invite link"}
+              </button>
+
+              {waLink && (
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 block w-full text-center py-[14px] text-gold-light text-[0.76rem] tracking-[0.14em] uppercase hover:text-gold-champagne transition-colors"
+                >
+                  Say hello on WhatsApp →
+                </a>
+              )}
+            </motion.div>
+          )}
         </div>
       )}
     </div>

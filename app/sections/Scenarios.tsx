@@ -7,14 +7,14 @@ const stories = [
   {
     tag: "Consumer",
     who: "The birthday you almost forgot",
-    quote: "It’s 10am. You remember. Instead of sending another transfer, you choose something she'll actually enjoy, add your voice, and send it in minutes.",
-    body: "Segun opens Ebun during his commute. Picks a Chicken Republic voucher. Records a 15-second voice note. Enters her number. Pays. Two minutes later, her phone lights up. She scratches. She hears his voice before she sees the gift. She posts it on her story. He didn't just remember — he made it a moment.",
+    quote: "It’s 10AM. You remember. Instead of sending another transfer, you choose something she'll actually enjoy, add your voice/Video, and send it in minutes.",
+    body: "Segun opens Ebun during his commute to work. Picks a Chicken Republic voucher. Records a 15-second voice note. Enters her number. Pays. Two minutes later, her phone lights up. She scratches to see the gift. She hears his voice before she sees the gift. He didn't just remember — he made it a moment.",
   },
   {
     tag: "Diaspora",
     who: "Miles away. Still part of the celebration.",
-    quote: "Your brother just graduated in Enugu. You're in Scotland. You want to send something that feels like a gift—not just cash.",
-    body: `Chidi pays in pounds from Scotland. His younger brother in Enugu receives 5GB data and a ₦2,000 airtime top-up instantly. The gift says "I thought about what you actually need right now." His brother sends a voice note back. That exchange — back and forth, real and specific — is what no bank transfer ever creates.`,
+    quote: "Your brother just graduated in Enugu, but you're in Ontario. You want to send something that feels like a thoughtful gift — not just cash.",
+    body: `Chidi pays in dollars from Ontario. His younger brother in Enugu receives 5GB data and a ₦2,000 airtime top-up instantly. The gift says "I thought about what you actually need right now." His brother sends a voice note back. That exchange — back and forth, real and specific — is what no bank transfer ever creates.`,
   },
   {
     tag: "Corporate",
@@ -56,7 +56,7 @@ export default function Scenarios() {
                   </h3>
                 </div>
                 <div>
-                  <p className="font-serif text-[1.1rem] italic text-gold-light leading-[1.65] mb-[14px]">
+                  <p className="font-mono text-[1.1rem] italic text-gold-light leading-[1.65] mb-[14px]">
                     {story.quote}
                   </p>
                   <p className="text-[0.87rem] text-[rgba(245,239,224,0.68)] leading-[1.82]">
