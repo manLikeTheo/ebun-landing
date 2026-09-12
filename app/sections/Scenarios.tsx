@@ -39,7 +39,7 @@ export default function Scenarios() {
               arrive,
             </em>
             <br />
-            not just gifts that are sent.
+            not just gifts that are sent...
           </h2>
         </RevealOnScroll>
 
