@@ -40,3 +40,20 @@
   color: transparent;
   animation: shimmer-sweep 2.2s ease-in-out 1;
 }
+
+@keyframes sparkle-rise {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(-90px) scale(1); opacity: 0; }
+}
+.sparkle {
+  position: absolute;
+  bottom: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #F0DFAE;
+  box-shadow: 0 0 6px 1px rgba(240,223,174,0.8);
+  animation: sparkle-rise 1.8s ease-out forwards;
+  pointer-events: none;
+}
