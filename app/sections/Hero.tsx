@@ -27,9 +27,9 @@ export default function Hero() {
   }}
   className="inline-flex items-center gap-[14px] text-[0.68rem] tracking-[0.26em] uppercase text-gold mb-9"
 >
-  <span className="w-7 h-px bg-gold-dark" />
+  {/* <span className="w-7 h-px bg-gold-dark" /> */}
   Digital Gifting for Nigeria & the Diaspora
-  <span className="w-7 h-px bg-gold-dark" />
+  {/* <span className="w-7 h-px bg-gold-dark" /> */}
 </motion.div>
 
 {/* Headline */}
@@ -73,7 +73,7 @@ export default function Hero() {
   className="font-sans font-light text-[rgba(245,239,224,0.86)] max-w-[560px] leading-[1.8] mb-14"
   style={{ fontSize: "clamp(1rem, 2vw, 1.15rem)" }}
 >
-  We&apos;re building a simpler way to send thoughtful gifts from anywhere in
+  We&apos;re building a simpler way to send thoughtful Gifts & Rewards from anywhere in
   the world — with less logistics and more of the moment.
 </motion.p>
 

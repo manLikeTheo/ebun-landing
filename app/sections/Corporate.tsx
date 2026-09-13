@@ -24,18 +24,18 @@ export default function Corporate() {
     <section id="corporate" className="bg-ink-2 border-t border-b border-[rgba(201,168,76,0.07)]">
       <div className="max-w-[1080px] mx-auto py-[120px] px-6 md:px-[52px] grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
         <RevealOnScroll>
-          <SectionEyebrow text="For Companies" />
+          <SectionEyebrow text="For Companies and  Corporate Gifting & Rewards" />
           <h2
             className="font-serif font-light text-cream mb-6"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
           >
-           A better way to give
+           A better way to GIFT, REWARD, and CELEBRATE loyal employees and customers...
             <br />
             <em className="text-gold" style={{ fontStyle: "italic" }}>
               At scale.
             </em>
           </h2>
-          <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] mb-10">
+          <p className="text-[1rem] text-[rgba(245,239,224,0.75)] leading-[1.85] mb-10">
             We’re designing Ebun for employee appreciation, customer rewards, celebrations, and corporate gifting without the usual hamper and coordination headaches.
           </p>
           <ul className="flex flex-col gap-[18px] mb-10">

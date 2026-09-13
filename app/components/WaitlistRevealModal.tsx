@@ -261,12 +261,12 @@ export default function WaitlistRevealModal({
 
             <div ref={wrapRef} className="relative w-full h-[250px] rounded-[12px] overflow-hidden mb-[22px] bg-ink">
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-5">
-                <div className="text-[0.64rem] tracking-[0.2em] uppercase text-gold-light mb-[10px]">You&apos;re in</div>
+                <div className="text-[0.95rem] tracking-[0.2em] uppercase text-gold-light mb-[10px]">You&apos;re in</div>
                 <div className={`font-serif italic text-[2.7rem] leading-none mb-[10px] ${justRevealed ? "shimmer-text" : "text-gold-champagne"}`}>
                   Founding Sender No. {displayNumber ?? queueNumber}
                 </div>
                 <div className="text-cream text-[0.85rem] max-w-[280px] leading-[1.6]">
-                  First to know when Ebun opens. First to send the first gift.
+                  First to know when Ebun opens. First to send the Gift Experience.
                 </div>
               </div>
 
@@ -302,14 +302,14 @@ export default function WaitlistRevealModal({
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-1 text-left"
+                className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-1 text-center"
               >
-                <div className="text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-2">Your invite position</div>
-                <div className="text-cream text-[1.3rem] font-serif mb-2">#{position ?? queueNumber}</div>
-                <div className="text-muted text-[0.78rem] leading-[1.6] mb-4">
+                <div className="text-[0.8rem] tracking-[0.14em] font-semibold uppercase text-gold-light mb-2">Your invite position</div>
+                <div className="text-cream text-[1.3rem] font-mono font-semibold tracking-wider mb-2">#{position ?? queueNumber}</div>
+                <div className="text-muted text-[0.8rem] leading-[1.6] mb-4">
                   {referralCount > 0
                     ? `${referralCount} friend${referralCount === 1 ? "" : "s"} joined through your link. Every referral moves you up 5 spots.`
-                    : "Share your link — every friend who joins moves you up 5 spots."}
+                    : "Share your link... Every friend who joins moves you up 5 spots."}
                 </div>
                 <button
                   onClick={handleShare}
@@ -322,7 +322,7 @@ export default function WaitlistRevealModal({
                     href={waLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 block w-full text-center py-[14px] text-gold-light text-[0.76rem] tracking-[0.14em] uppercase hover:text-gold-champagne transition-colors"
+                    className="mt-3 block w-full text-center py-[14px] text-gold-light text-[0.76rem] tracking-[0.14em] uppercase hover:text-gold-champagne hover:font-semibold transition-colors"
                   >
                     Say hello on WhatsApp →
                   </a>

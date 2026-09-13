@@ -31,6 +31,7 @@ export default function WaitlistScratchCard() {
   const [honeypot, setHoneypot] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const [myId, setMyId] = useState<string | null>(() => {
     if (typeof window === "undefined") return null;
@@ -104,7 +105,7 @@ export default function WaitlistScratchCard() {
 
   return (
     <div className="max-w-[440px] mx-auto bg-ink-2 border border-[rgba(201,168,76,0.14)] rounded-[14px] p-9 text-center">
-      {!hasJoined ? (
+      {!mounted || !hasJoined ? (
         <div>
           <input
             type="text"

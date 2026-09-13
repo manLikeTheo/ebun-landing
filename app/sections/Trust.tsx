@@ -27,7 +27,7 @@ export default function Trust() {
     <section className="py-[120px] px-6 md:px-[52px]">
       <div className="max-w-[1080px] mx-auto">
         <RevealOnScroll>
-          <SectionEyebrow text="Built with trust in mind" />
+          <SectionEyebrow text="Building with trust in mind" />
           <h2
             className="font-serif font-light text-cream mb-14"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}

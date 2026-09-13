@@ -1,5 +1,13 @@
 "use client";
 
+const footerLinks = [
+  { label: "How it works", href: "#how" },
+  { label: "Corporate", href: "#corporate" },
+  { label: "Become a Founding Vendor", href: "#" }, // TODO: real destination pending
+  { label: "Contact", href: "#" }, // TODO: real destination pending
+];
+
+
 export default function Footer() {
   return (
     <footer className="py-12 px-6 md:px-[52px] border-t border-[rgba(201,168,76,0.07)] flex flex-col md:flex-row items-center justify-between gap-6">
@@ -13,13 +21,13 @@ export default function Footer() {
       </div>
 
       <ul className="flex gap-6 list-none">
-        {["How it works", "Corporate", "Become a Founding Vendor", "Contact"].map((link) => (
-          <li key={link}>
+        {footerLinks.map((link) => (
+          <li key={link.label}>
             <a
-              href="#"
+              href={link.href}
               className="text-[0.85rem] text-gold-dark no-underline tracking-[0.06em] transition-colors duration-300 hover:text-gold-light"
             >
-              {link}
+              {link.label}
             </a>
           </li>
         ))}
