@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
     }
 
     const supabaseAdmin = getSupabaseAdmin();
+
     const { error } = await supabaseAdmin
       .from("survey_responses")
       .upsert({ waitlist_id: waitlistId, segment, frustration, occasion }, { onConflict: "waitlist_id" });
