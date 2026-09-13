@@ -410,8 +410,8 @@ export default function WaitlistRevealModal({
                   ))}
                 </div>
                 {surveyError && (
-  <div className="text-[#E0897A] text-[0.74rem] mb-2">{surveyError}</div>
-)}
+                  <div className="text-[#E0897A] text-[0.74rem] mb-2">{surveyError}</div>
+                )}
                 <button
                   onClick={onSurveyDone}
                   className="text-[0.72rem] text-muted underline underline-offset-4 hover:text-gold-light"

@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid answer" }, { status: 400 });
     }
 
+    const supabaseAdmin = getSupabaseAdmin();
     const { error } = await supabaseAdmin
       .from("survey_responses")
       .upsert({ waitlist_id: waitlistId, segment, frustration, occasion }, { onConflict: "waitlist_id" });
