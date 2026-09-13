@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 const SKIP_PER_REFERRAL = 5;
 
@@ -7,6 +7,8 @@ export async function GET(req: NextRequest) {
   const id = req.nextUrl.searchParams.get("id");
   if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
 
+  try {
+  const supabaseAdmin = getSupabaseAdmin();
   const { data: row, error } = await supabaseAdmin
     .from("waitlist")
     .select("id, queue_number")
@@ -28,5 +30,10 @@ export async function GET(req: NextRequest) {
     queueNumber: row.queue_number,
     referralCount: referralCount ?? 0,
     position,
-  });
+  });  
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Service unavailable" }, { status: 500 });
+  }
+  
 }

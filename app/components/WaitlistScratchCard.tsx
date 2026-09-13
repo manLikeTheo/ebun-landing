@@ -13,6 +13,7 @@ const COUNTRY_CODES = [
 
 const ID_STORAGE_KEY = "ebun_waitlist_id";
 const REVEALED_STORAGE_KEY = "ebun_waitlist_revealed";
+const SURVEY_STORAGE_KEY = "ebun_waitlist_surveyed";
 
 function normalizePhone(countryCode: string, raw: string) {
   let digits = raw.replace(/\D/g, "");
@@ -31,23 +32,23 @@ export default function WaitlistScratchCard() {
   const [honeypot, setHoneypot] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   const [myId, setMyId] = useState<string | null>(() => {
     if (typeof window === "undefined") return null;
     return localStorage.getItem(ID_STORAGE_KEY);
   });
   const [queueNumber, setQueueNumber] = useState<number | null>(null);
-  const [hasJoined, setHasJoined] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    return Boolean(localStorage.getItem(ID_STORAGE_KEY));
-  });
   const [hasRevealed, setHasRevealed] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem(REVEALED_STORAGE_KEY) === "true";
   });
+  const [hasSurveyed, setHasSurveyed] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem(SURVEY_STORAGE_KEY) === "true";
+  });
   const [modalOpen, setModalOpen] = useState(false);
 
+  const hasJoined = myId !== null;
   const referrerRef = useRef<string | null>(null);
 
   useEffect(() => {
@@ -89,7 +90,6 @@ export default function WaitlistScratchCard() {
       localStorage.setItem(ID_STORAGE_KEY, res.id);
       setMyId(res.id);
       setQueueNumber(res.queueNumber);
-      setHasJoined(true);
       setModalOpen(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Try again.");
@@ -103,9 +103,14 @@ export default function WaitlistScratchCard() {
     localStorage.setItem(REVEALED_STORAGE_KEY, "true");
   };
 
+  const handleSurveyDone = () => {
+    setHasSurveyed(true);
+    localStorage.setItem(SURVEY_STORAGE_KEY, "true");
+  };
+
   return (
     <div className="max-w-[440px] mx-auto bg-ink-2 border border-[rgba(201,168,76,0.14)] rounded-[14px] p-9 text-center">
-      {!mounted || !hasJoined ? (
+      {!hasJoined ? (
         <div>
           <input
             type="text"
@@ -213,6 +218,8 @@ export default function WaitlistScratchCard() {
         initialQueueNumber={queueNumber}
         playScratch={!hasRevealed}
         onRevealed={handleRevealed}
+        surveyDone={hasSurveyed}
+        onSurveyDone={handleSurveyDone}
       />
     </div>
   );

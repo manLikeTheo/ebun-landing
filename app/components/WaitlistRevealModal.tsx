@@ -2,10 +2,20 @@
 
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { fetchWaitlistStatus } from "@/lib/waitlist-client";
+import { fetchWaitlistStatus, submitSurvey } from "@/lib/waitlist-client";
 
 const STATUS_POLL_MS = 12000;
 const FOUNDER_WHATSAPP = process.env.NEXT_PUBLIC_FOUNDER_WHATSAPP || "";
+
+const SURVEY_STEPS = [
+  { key: "segment", question: "Sending from Nigeria, or abroad?", options: ["Nigeria", "Abroad (diaspora)"] },
+  {
+    key: "frustration",
+    question: "What's stopped you from sending a real gift before?",
+    options: ["Bank transfer felt easier", "Vendors felt unreliable", "Too far to coordinate", "Never really tried"],
+  },
+  { key: "occasion", question: "First occasion you'd use Ebun for?", options: ["Birthday", "Wedding", "Anniversary", "Just because"] },
+] as const;
 
 interface Props {
   isOpen: boolean;
@@ -14,6 +24,8 @@ interface Props {
   initialQueueNumber: number | null;
   playScratch: boolean;
   onRevealed: () => void;
+  surveyDone: boolean;
+  onSurveyDone: () => void;
 }
 
 export default function WaitlistRevealModal({
@@ -23,15 +35,23 @@ export default function WaitlistRevealModal({
   initialQueueNumber,
   playScratch,
   onRevealed,
+  surveyDone,
+  onSurveyDone,
 }: Props) {
   const [queueNumber, setQueueNumber] = useState<number | null>(initialQueueNumber);
-  const [displayNumber, setDisplayNumber] = useState<number | null>(null);
+  const [displayNumber, setDisplayNumber] = useState<number | null>(() => (!playScratch ? initialQueueNumber : null));
   const [justRevealed, setJustRevealed] = useState(false);
   const [revealed, setRevealed] = useState(!playScratch);
   const [referralCount, setReferralCount] = useState(0);
   const [position, setPosition] = useState<number | null>(initialQueueNumber);
   const [copied, setCopied] = useState(false);
   const [particles, setParticles] = useState<{ id: number; x: number; delay: number }[]>([]);
+
+  const [surveyStep, setSurveyStep] = useState(0);
+  const [surveyAnswers, setSurveyAnswers] = useState<Record<string, string>>({});
+  const [surveySubmitting, setSurveySubmitting] = useState(false);
+  const [surveyError, setSurveyError] = useState("");
+
 
   const panelRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -218,6 +238,33 @@ export default function WaitlistRevealModal({
     setTimeout(() => setCopied(false), 1600);
   };
 
+  const handleSurveyTap = async (value: string) => {
+  const key = SURVEY_STEPS[surveyStep].key;
+  const nextAnswers = { ...surveyAnswers, [key]: value };
+  setSurveyAnswers(nextAnswers);
+  setSurveyError("");
+
+  if (surveyStep < SURVEY_STEPS.length - 1) {
+    setSurveyStep((s) => s + 1);
+    return;
+  }
+
+  if (!id) return;
+  setSurveySubmitting(true);
+  const ok = await submitSurvey({
+    waitlistId: id,
+    segment: nextAnswers.segment,
+    frustration: nextAnswers.frustration,
+    occasion: nextAnswers.occasion,
+  });
+  setSurveySubmitting(false);
+  if (ok) {
+    onSurveyDone();
+  } else {
+    setSurveyError("Couldn't save that — try tapping again?");
+  }
+};
+
   const waLink = FOUNDER_WHATSAPP
     ? `https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(
         `Hey! I just joined the Ebun waitlist as Founding Sender No. ${queueNumber ?? ""} 🎁`
@@ -261,12 +308,12 @@ export default function WaitlistRevealModal({
 
             <div ref={wrapRef} className="relative w-full h-[250px] rounded-[12px] overflow-hidden mb-[22px] bg-ink">
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-5">
-                <div className="text-[0.95rem] tracking-[0.2em] uppercase text-gold-light mb-[10px]">You&apos;re in</div>
+                <div className="text-[0.64rem] tracking-[0.2em] uppercase text-gold-light mb-[10px]">You&apos;re in</div>
                 <div className={`font-serif italic text-[2.7rem] leading-none mb-[10px] ${justRevealed ? "shimmer-text" : "text-gold-champagne"}`}>
                   Founding Sender No. {displayNumber ?? queueNumber}
                 </div>
                 <div className="text-cream text-[0.85rem] max-w-[280px] leading-[1.6]">
-                  First to know when Ebun opens. First to send the Gift Experience.
+                  First to know when Ebun opens. First to send the first gift.
                 </div>
               </div>
 
@@ -302,14 +349,14 @@ export default function WaitlistRevealModal({
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-1 text-center"
+                className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-1 text-left"
               >
-                <div className="text-[0.8rem] tracking-[0.14em] font-semibold uppercase text-gold-light mb-2">Your invite position</div>
-                <div className="text-cream text-[1.3rem] font-mono font-semibold tracking-wider mb-2">#{position ?? queueNumber}</div>
-                <div className="text-muted text-[0.8rem] leading-[1.6] mb-4">
+                <div className="text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-2">Your invite position</div>
+                <div className="text-cream text-[1.3rem] font-serif mb-2">#{position ?? queueNumber}</div>
+                <div className="text-muted text-[0.78rem] leading-[1.6] mb-4">
                   {referralCount > 0
                     ? `${referralCount} friend${referralCount === 1 ? "" : "s"} joined through your link. Every referral moves you up 5 spots.`
-                    : "Share your link... Every friend who joins moves you up 5 spots."}
+                    : "Share your link — every friend who joins moves you up 5 spots."}
                 </div>
                 <button
                   onClick={handleShare}
@@ -322,11 +369,55 @@ export default function WaitlistRevealModal({
                     href={waLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 block w-full text-center py-[14px] text-gold-light text-[0.76rem] tracking-[0.14em] uppercase hover:text-gold-champagne hover:font-semibold transition-colors"
+                    className="mt-3 block w-full text-center py-[14px] text-gold-light text-[0.76rem] tracking-[0.14em] uppercase hover:text-gold-champagne transition-colors"
                   >
                     Say hello on WhatsApp →
                   </a>
                 )}
+              </motion.div>
+            )}
+
+            {revealed && !surveyDone && (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-5 text-left"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-[0.66rem] tracking-[0.14em] uppercase text-gold-light">One more thing — 15 seconds</div>
+                  <div className="flex gap-1">
+                    {SURVEY_STEPS.map((_, i) => (
+                      <span
+                        key={i}
+                        className="w-[6px] h-[6px] rounded-full"
+                        style={{ background: i <= surveyStep ? "#C9A84C" : "rgba(201,168,76,0.2)" }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="text-cream text-[0.92rem] mb-3">{SURVEY_STEPS[surveyStep].question}</div>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {SURVEY_STEPS[surveyStep].options.map((opt) => (
+                    <button
+                      key={opt}
+                      disabled={surveySubmitting}
+                      onClick={() => handleSurveyTap(opt)}
+                      className="px-4 py-2 rounded-full border border-[rgba(201,168,76,0.3)] text-cream text-[0.78rem] hover:border-gold hover:text-gold-light hover:bg-[rgba(201,168,76,0.06)] transition-all disabled:opacity-50"
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+                {surveyError && (
+  <div className="text-[#E0897A] text-[0.74rem] mb-2">{surveyError}</div>
+)}
+                <button
+                  onClick={onSurveyDone}
+                  className="text-[0.72rem] text-muted underline underline-offset-4 hover:text-gold-light"
+                >
+                  Skip for now
+                </button>
               </motion.div>
             )}
           </motion.div>

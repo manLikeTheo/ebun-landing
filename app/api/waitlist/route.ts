@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 const PHONE_PATTERN = /^\+[1-9]\d{7,14}$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,11 +29,12 @@ async function sendWelcomeEmail(to: string, queueNumber: number) {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabaseAdmin = getSupabaseAdmin();
     const { whatsapp, email, hp, ref } = await req.json();
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
     if (hp) {
-      const { count } = await supabaseAdmin
+      const { count } = await getSupabaseAdmin()
         .from("waitlist")
         .select("*", { count: "exact", head: true });
       return NextResponse.json({ queueNumber: (count ?? 0) + 1 });
