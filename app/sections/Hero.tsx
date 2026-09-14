@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import GoldButton from "../components/GoldButton";
 import GhostButton from "../components/GhostButton";
+import { useWaitlistModal } from "../context/WaitlistModalContext";
 
 export default function Hero() {
+  const { openModal } = useWaitlistModal();
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-[140px] pb-[100px] overflow-hidden">
       {/* Glow */}
@@ -84,7 +86,7 @@ export default function Hero() {
         transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.7 }}
         className="flex items-center gap-[18px] flex-wrap justify-center"
       >
-        <GoldButton href="#early-access">Join Early Access</GoldButton>
+        <GoldButton onClick={openModal}>Join Early Access</GoldButton>
         <GhostButton href="#how">See How It Works →</GhostButton>
       </motion.div>
 

@@ -13,10 +13,12 @@ import Corporate from "./sections/Corporate";
 import Trust from "./sections/Trust";
 import EarlyAccess from "./sections/EarlyAccess";
 import Footer from "./sections/Footer";
+import { WaitlistModalProvider } from "./context/WaitlistModalContext";
+import WaitlistModal from "./components/WaitlistModal";
 
 export default function Home() {
   return (
-    <>
+    <WaitlistModalProvider>
       <CustomCursor />
       <NoiseOverlay />
       <Navbar />
@@ -41,6 +43,7 @@ export default function Home() {
       </main>
 
       <Footer />
-    </>
+      <WaitlistModal />
+    </WaitlistModalProvider>
   );
 }

@@ -3,9 +3,12 @@
 import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 import GhostButton from "../components/GhostButton";
-import WaitlistScratchCard from "../components/WaitlistScratchCard";
+import GoldButton from "../components/GoldButton";
+import { useWaitlistModal } from "../context/WaitlistModalContext";
 
 export default function EarlyAccess() {
+  const { openModal, mounted, hasJoined, queueNumber } = useWaitlistModal();
+
   return (
     <section id="early-access" className="py-[140px] px-6 text-center">
       <RevealOnScroll>
@@ -29,8 +32,10 @@ export default function EarlyAccess() {
             And we are building a better way to make that happen.
           </em>{" "}
         </p>
-        <div className="flex flex-col sm:flex-row items-center gap-6">
-          <WaitlistScratchCard />
+        <div className="flex flex-col items-center gap-6">
+          <GoldButton onClick={openModal}>
+            {mounted && hasJoined ? `View your invite — No. ${queueNumber ?? "—"}` : "Join Early Access"}
+          </GoldButton>
           <GhostButton href="#corporate">Corporate Gifting</GhostButton>
         </div>
       </RevealOnScroll>
