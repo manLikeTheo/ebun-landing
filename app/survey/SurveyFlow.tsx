@@ -181,22 +181,60 @@ export default function SurveyFlow() {
   }
 
   if (stage === "outro") {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-center px-6">
-        <div className="text-gold text-[0.7rem] tracking-[0.2em] uppercase mb-4">Ebun</div>
-        <h1 className="font-serif font-light text-cream text-[2rem] mb-2">One more thing.</h1>
-        <p className="text-muted mb-6">Scratch the card below.</p>
-        <div ref={wrapRef} className="relative w-[280px] h-[180px] rounded-[14px] overflow-hidden bg-ink-2 border border-[rgba(201,168,76,0.2)]">
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-5">
-            <div className="text-gold-champagne font-serif italic text-[1.3rem] mb-2">Thank you 🎁</div>
-            <div className="text-muted-strong text-[0.78rem]">Your answers are shaping what we build next.</div>
-          </div>
-          {!revealed && <canvas ref={canvasRef} className="absolute inset-0 cursor-grab active:cursor-grabbing touch-none" />}
-        </div>
-        <div className="text-muted text-[0.75rem] mt-4">Drag your finger or cursor across the card</div>
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-10">
+      <div className="text-gold text-[0.7rem] tracking-[0.2em] uppercase mb-4">Ebun</div>
+      <h1 className="font-serif font-light text-cream text-[2rem] mb-2">One more thing.</h1>
+      <p className="text-muted mb-6">Scratch the card below.</p>
+
+      {/* Container for Scratch Card */}
+<div
+  ref={wrapRef}
+  className="relative w-[320px] h-[340px] rounded-[16px] overflow-hidden bg-ink-2 border border-[rgba(201,168,76,0.2)] shadow-2xl"
+>
+  {/* Underneath Layer: Video + Elegant Text Footer */}
+  <div className="absolute inset-0 flex flex-col bg-ink-2 w-full h-full">
+    {/* Top 65%: Video Player */}
+    <div className="relative w-full h-[65%] overflow-hidden bg-black">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-full object-cover"
+      >
+        <source src="/gift_reveal_moment.mp4" type="video/mp4" />
+      </video>
+      {/* Subtle bottom gradient overlay for smooth visual transition */}
+      <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-ink-2 to-transparent" />
+    </div>
+
+    {/* Bottom 35%: Thank-You Text */}
+    <div className="flex-1 flex flex-col items-center justify-center text-center px-4 py-3 bg-ink-2">
+      <div className="text-gold-champagne font-serif italic text-[1.2rem] font-bold">
+        Thank you!
       </div>
-    );
-  }
+      <div className="text-muted-strong text-[0.9rem] mt-1 leading-snug max-w-[240px]">
+        Your answers are shaping what we build next.
+      </div>
+    </div>
+  </div>
+
+  {/* Scratchable Canvas Layer */}
+  {!revealed && (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 cursor-grab active:cursor-grabbing touch-none z-10"
+    />
+  )}
+</div>
+
+      <div className="text-muted text-[0.9rem] mt-4">
+        {revealed ? "You're all set! Thank you." : "Drag your finger or cursor across the card"}
+      </div>
+    </div>
+  );
+}
 
   const pct = Math.round((currentStep / visibleSteps.length) * 100);
 
