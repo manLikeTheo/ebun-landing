@@ -551,6 +551,23 @@ export default function WaitlistModal() {
                     </button>
                   </motion.div>
                 )}
+                {revealed && hasSurveyed && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="border-t border-[rgba(201,168,76,0.12)] pt-4 mt-5 text-center"
+                  >
+                    <a
+                      href="/survey"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[0.76rem] text-gold-light underline underline-offset-4 hover:text-gold-champagne transition-colors"
+                    >
+                      Got 2 more minutes? Help us build this right →
+                    </a>
+                  </motion.div>
+                )}
               </div>
             )}
           </motion.div>
