@@ -485,11 +485,11 @@ export default function WaitlistModal() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-1 text-left"
+                    className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-1 text-center"
                   >
                     <div className="text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-2">Your invite position</div>
-                    <div className="text-cream text-[1.3rem] font-serif mb-2">#{position ?? queueNumber}</div>
-                    <div className="text-muted text-[0.78rem] leading-[1.6] mb-4">
+                    <div className="text-cream text-[1.5rem] tracking-wider font-serif mb-2">#{position ?? queueNumber}</div>
+                    <div className="text-cream text-[0.78rem] leading-[1.6] mb-4">
                       {referralCount > 0
                         ? `${referralCount} friend${referralCount === 1 ? "" : "s"} joined through your link. Every referral moves you up 5 spots.`
                         : "Share your link — every friend who joins moves you up 5 spots."}
@@ -562,7 +562,7 @@ export default function WaitlistModal() {
                       href="/survey"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[0.76rem] text-gold-light underline underline-offset-4 hover:text-gold-champagne transition-colors"
+                      className="text-[0.9rem] text-gold-light underline underline-offset-4 hover:text-gold-champagne transition-colors"
                     >
                       Got 2 more minutes? Help us build this right →
                     </a>
