@@ -17,6 +17,8 @@ const config: Config = {
     champagne: "#F0DFAE",
   },
   cream: { DEFAULT: "#F5EFE0", 2: "#EDE4D0" },
+    muted: { DEFAULT: "rgba(245,239,224,0.48)", strong: "rgba(245,239,224,0.68)" },
+
 },
       fontFamily: {
         serif: ["var(--font-cormorant)", "Georgia", "serif"],
