@@ -55,6 +55,7 @@ export default function SurveyFlow() {
 
   const [revealed, setRevealed] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const scratchingRef = useRef(false);
   const lastPosRef = useRef<{ x: number; y: number } | null>(null);
@@ -82,12 +83,12 @@ export default function SurveyFlow() {
     return typeof value === "string" ? value : "";
   };
 
-  const getNumberPairAnswer = (key: string, field: string) => {
-    const value = responses[key];
-    const pair = asNumberRecord(value);
-    const fieldValue = pair[field];
-    return typeof fieldValue === "string" || typeof fieldValue === "number" ? fieldValue : "";
-  };
+  // const getNumberPairAnswer = (key: string, field: string) => {
+  //   const value = responses[key];
+  //   const pair = asNumberRecord(value);
+  //   const fieldValue = pair[field];
+  //   return typeof fieldValue === "string" || typeof fieldValue === "number" ? fieldValue : "";
+  // };
 
   const isAnswered = (s: Step) => {
     const v = responses[s.key];
@@ -137,7 +138,13 @@ export default function SurveyFlow() {
       const data = ctx.getImageData(0, 0, w, h).data;
       let cleared = 0, total = 0;
       for (let y = 0; y < h; y += 8) for (let x = 0; x < w; x += 8) { total++; if (data[(y * w + x) * 4 + 3] < 40) cleared++; }
-      if (cleared / total > 0.5) setRevealed(true);
+      if (cleared / total > 0.5) {
+        setRevealed(true);
+        if(videoRef.current) {
+          videoRef.current.currentTime = 0;
+                videoRef.current.play().catch(() => {}); 
+        }
+      }
     };
     const onDown = (e: PointerEvent) => { scratchingRef.current = true; const p = getPos(e); lastPosRef.current = p; scratchAt(p.x, p.y); };
     const onMove = (e: PointerEvent) => {
@@ -197,7 +204,8 @@ export default function SurveyFlow() {
     {/* Top 65%: Video Player */}
     <div className="relative w-full h-[65%] overflow-hidden bg-black">
       <video
-        autoPlay
+        ref={videoRef}
+        preload="auto"
         loop
         muted
         playsInline
