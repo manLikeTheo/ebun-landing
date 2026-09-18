@@ -2,7 +2,7 @@
 
 import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
-import { Gift, Video, Smartphone } from "lucide-react";
+import { Gift, Video, Smartphone, PackageCheck } from "lucide-react";
 
 const steps = [
   {
@@ -23,6 +23,12 @@ const steps = [
     title: "Reveal",
     body: "The recipient will receive a WhatsApp link, open the digital gift, and discover your message as the gift is revealed.",
   },
+  {
+  num: "04",
+  icon: PackageCheck,
+  title: "They choose how it arrives",
+  body: "Delivered to their door, swapped for something else, or redeemed instantly if it's digital. Their call, not yours.",
+},
 ];
 
 export default function HowItWorks() {
@@ -46,7 +52,7 @@ export default function HowItWorks() {
           </p>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-[rgba(201,168,76,0.08)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-[rgba(201,168,76,0.07)]">
           {steps.map((step, i) => (
             <RevealOnScroll key={step.num} delay={i * 0.1}>
               <div className="bg-ink-2 p-[52px_40px] relative overflow-hidden group transition-colors duration-400 hover:bg-ink-3">

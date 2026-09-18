@@ -10,15 +10,15 @@ export default function MarqueeStrip() {
     <div className="flex items-center gap-12 pr-12">
       {cities.map((group, gi) => (
         <div key={gi} className="flex items-center gap-12">
-          <span className="text-[0.68rem] tracking-[0.2em] uppercase text-gold-dark whitespace-nowrap">
+          <span className="text-[0.68rem] tracking-[0.2em] uppercase text-gold whitespace-nowrap">
             {group.label}
           </span>
           {group.items.map((city, ci) => (
             <div key={ci} className="flex items-center gap-12">
-              <span className="font-serif text-[0.95rem] text-[rgba(245,239,224,0.55)] whitespace-nowrap">
+              <span className="font-serif font-semibold tracking-wider text-[1rem] text-[rgba(245,239,244,0.85)] whitespace-nowrap">
                 {city}
               </span>
-              <div className="w-[3px] h-[3px] rounded-full bg-gold-dark opacity-35" />
+              <div className="w-[5px] h-[5px] rounded-full bg-gold-dark opacity-35" />
             </div>
           ))}
         </div>

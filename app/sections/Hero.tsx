@@ -8,96 +8,96 @@ import { useWaitlistModal } from "../context/WaitlistModalContext";
 export default function Hero() {
   const { openModal } = useWaitlistModal();
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-[140px] pb-[100px] overflow-hidden">
-      {/* Glow */}
+    <section className="relative min-h-screen flex items-center px-6 md:px-[52px] pt-[140px] pb-[100px] overflow-hidden">
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none"
+        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none"
         style={{
           background: "radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%)",
         }}
       />
 
+      <div className="relative w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-10">
+        <div className="flex-1 text-center lg:text-left flex flex-col items-center lg:items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
+            className="inline-flex items-center gap-[14px] text-[0.68rem] tracking-[0.26em] uppercase text-gold mb-9"
+          >
+            Digital Gifting for Nigeria & the Diaspora
+          </motion.div>
 
-{/* Tag */}
-<motion.div
-  initial={{ opacity: 0, y: 22 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{
-    duration: 0.8,
-    ease: [0.25, 0.46, 0.45, 0.94],
-    delay: 0.1,
-  }}
-  className="inline-flex items-center gap-[14px] text-[0.68rem] tracking-[0.26em] uppercase text-gold mb-9"
->
-  {/* <span className="w-7 h-px bg-gold-dark" /> */}
-  Digital Gifting for Nigeria & the Diaspora
-  {/* <span className="w-7 h-px bg-gold-dark" /> */}
-</motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
+            className="font-serif font-light text-cream leading-[1.04]"
+            style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}
+          >
+            Send a gift,
+          </motion.h1>
 
-{/* Headline */}
-<motion.h1
-  initial={{ opacity: 0, y: 22 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{
-    duration: 0.9,
-    ease: [0.25, 0.46, 0.45, 0.94],
-    delay: 0.25,
-  }}
-  className="font-serif font-light text-cream leading-[1.04]"
-  style={{ fontSize: "clamp(3.4rem, 8.5vw, 8rem)" }}
->
-  Make someone feel
-</motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.4 }}
+            className="font-serif font-light italic text-gold leading-[1.04] mb-11"
+            style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}
+          >
+            not just a transfer.
+          </motion.h1>
 
-<motion.h1
-  initial={{ opacity: 0, y: 22 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{
-    duration: 0.9,
-    ease: [0.25, 0.46, 0.45, 0.94],
-    delay: 0.4,
-  }}
-  className="font-serif font-light italic text-gold leading-[1.04] mb-11"
-  style={{ fontSize: "clamp(3.4rem, 8.5vw, 8rem)" }}
->
-  remembered.
-</motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.55 }}
+            className="font-sans font-light text-[rgba(245,239,224,0.86)] max-w-[500px] leading-[1.8] mb-10"
+            style={{ fontSize: "clamp(1rem, 1.6vw, 1.15rem)" }}
+          >
+            Pick something thoughtful, add your voice, and send it straight to their WhatsApp.
+            They reveal it, then receive it exactly how they want — delivered, swapped, or redeemed instantly.
+          </motion.p>
 
-{/* Subtitle */}
-<motion.p
-  initial={{ opacity: 0, y: 22 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{
-    duration: 0.9,
-    ease: [0.25, 0.46, 0.45, 0.94],
-    delay: 0.55,
-  }}
-  className="font-sans font-light text-[rgba(245,239,224,0.86)] max-w-[560px] leading-[1.8] mb-14"
-  style={{ fontSize: "clamp(1rem, 2vw, 1.15rem)" }}
->
-  We&apos;re building a simpler way to send thoughtful Gifts & Rewards from anywhere in
-  the world — with less logistics and more of the moment.
-</motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.7 }}
+            className="flex items-center gap-[18px] flex-wrap justify-center lg:justify-start mb-6"
+          >
+            <GoldButton onClick={openModal}>Join Early Access</GoldButton>
+            <GhostButton href="#how">See How It Works →</GhostButton>
+          </motion.div>
 
-      {/* CTAs */}
-      <motion.div
-        initial={{ opacity: 0, y: 22 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.7 }}
-        className="flex items-center gap-[18px] flex-wrap justify-center"
-      >
-        <GoldButton onClick={openModal}>Join Early Access</GoldButton>
-        <GhostButton href="#how">See How It Works →</GhostButton>
-      </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.85 }}
+            className="text-[0.7rem] tracking-[0.2em] uppercase text-gold-dark"
+          >
+            Choose · Personalise · Reveal · Redeem
+          </motion.div>
+        </div>
 
-      {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.1, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.5 }}
+          className="flex-1 w-full max-w-[480px] lg:max-w-none"
+        >
+          <div className="relative aspect-[4/5] lg:aspect-[3/4] w-full rounded-[20px] overflow-hidden border border-[rgba(201,168,76,0.18)] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+            <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+              <source src="/hero-gift.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </motion.div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 22 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94], delay: 1.1 }}
         className="absolute bottom-11 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        {/* <span className="text-[0.62rem] tracking-[0.22em] uppercase text-gold-dark">Discover</span> */}
         <div
           className="w-px h-11 animate-pulse"
           style={{ background: "linear-gradient(to bottom, var(--gold-dk), transparent)" }}
