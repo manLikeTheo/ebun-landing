@@ -29,8 +29,7 @@ export default function Corporate() {
             className="font-serif font-light text-cream mb-6"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
           >
-           Reward your people. Skip the logistics. <br /> 
-            <br />
+           Reward your people. Skip the logistics. <br />
             <em className="text-gold" style={{ fontStyle: "italic" }}>
               At scale.
             </em>
