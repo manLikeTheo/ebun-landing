@@ -8,26 +8,26 @@ const steps = [
   {
     num: "01",
     icon: Gift,
-    title: "Choose the occasion and gift",
-    body: "When we launch, senders will be able to choose from curated gifts across birthdays, weddings, anniversaries, new babies, and more. All curated. Nothing generic.",
+    title: "Choose",
+    body: "Pick from curated gifts across food, experiences, utility, custom pieces and everyday essentials. Nothing generic.",
   },
   {
     num: "02",
     icon: Video,
-    title: "Add your message",
-    body: "Add a short video, voice note, or written message to make the gift personal. This is what they will see the moment the gift is revealed — your face, your voice, your intention.",
+    title: "Personalise",
+    body: "Add a video, a voice note, or a few words. This is what plays the moment they open it.",
   },
   {
     num: "03",
     icon: Smartphone,
     title: "Reveal",
-    body: "The recipient will receive a WhatsApp link, open the digital gift, and discover your message as the gift is revealed.",
+    body: "They get alerted on WhatsApp. They unwrap it on their phone. Your face. Your voice. Then the gift.",
   },
   {
   num: "04",
   icon: PackageCheck,
-  title: "They choose how it arrives",
-  body: "Delivered to their door, swapped for something else, or redeemed instantly if it's digital. Their call, not yours.",
+  title: "They Receive",
+  body: "Delivered, redeemed in-store, or swapped for something they'd rather have. Their choice.",
 },
 ];
 
@@ -41,10 +41,9 @@ export default function HowItWorks() {
             className="font-serif font-light text-cream mb-6 tracking-wide"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
           >
-            From &ldquo;I sent the money&rdquo; 
-            to{" "}
+            Four Steps.{" "}
             <em className="text-gold" style={{ fontStyle: "italic" }}>
-              &ldquo;I&apos;m thinking of you&rdquo;
+              One moment they&apos;ll remember.
             </em>
           </h2>
           <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] max-w-[580px] mb-16">

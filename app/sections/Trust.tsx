@@ -7,18 +7,18 @@ import { Lock, Package, RefreshCw } from "lucide-react";
 const pillars = [
   {
     icon: Lock,
-    title: "Secure payments",
-    body: "Payments will be handled through trusted payment infrastructure, with security built into the transaction flow.",
+    title: "Secure by design",
+    body: "Payments handled through established Nigerian payment infrastructure. Nothing held, nothing risked.",
   },
   {
     icon: Package,
-    title: "Trusted partners",
-    body: "We’re building a curated network of Nigerian gift and experience partners with quality and reliability at the centre.",
+    title: "Curated partners",
+    body: "Every vendor vetted before a single gift goes out.",
   },
   {
     icon: RefreshCw,
     title: "Support when you need it",
-    body: "We’re designing Ebun to make cancellations, delivery issues, and redemption problems easier to resolve",
+    body: "If something fails, it gets resolved. Automatically where possible, or with a human touch when needed.",
   },
 ];
 
@@ -27,7 +27,7 @@ export default function Trust() {
     <section className="py-[120px] px-6 md:px-[52px]">
       <div className="max-w-[1080px] mx-auto">
         <RevealOnScroll>
-          <SectionEyebrow text="Building with trust in mind" />
+          <SectionEyebrow text="HOW WE'RE BUILDING IT" />
           <h2
             className="font-serif font-light text-cream mb-14"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
@@ -44,8 +44,8 @@ export default function Trust() {
             <RevealOnScroll key={p.title} delay={i * 0.1}>
               <div className="bg-ink-2 p-10">
                 <p.icon className="w-6 h-6 text-gold mb-4" strokeWidth={1.5} />
-                <h3 className="font-serif text-[1.5rem] font-normal tracking-wide text-cream mb-[10px]">{p.title}</h3>
-                <p className="text-[0.85rem] text-[rgba(245,239,224,0.58)] leading-[1.8]">{p.body}</p>
+                <h3 className="font-serif text-[1.6rem] font-semibold tracking-wide text-cream mb-[12px]">{p.title}</h3>
+                <p className="text-[0.9rem] text-[rgba(249,249,249,0.72)] leading-[1.9]">{p.body}</p>
               </div>
             </RevealOnScroll>
           ))}

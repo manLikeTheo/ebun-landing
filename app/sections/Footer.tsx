@@ -10,7 +10,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="py-12 px-6 md:px-[52px] border-t border-[rgba(201,168,76,0.07)] flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="py-12 px-6 md:px-[52px] border-t border-[rgba(226,192,122,0.14)] flex flex-col md:flex-row items-center justify-between gap-6">
       <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
         {/* <span className="font-serif text-[1.2rem] font-medium tracking-[0.1em] text-gold">
           Ebun

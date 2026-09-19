@@ -1,8 +1,14 @@
 "use client";
 
 const cities = [
-  { label: "Starting in Nigeria", items: ["Lagos", "Abuja", "Ibadan", "Port Harcourt", "More cities to come"] },
-  { label: "Designed for diaspora senders", items: ["London", "Houston", "Toronto", "Dubai", "New York"] },
+  { 
+    label: "Starting in Nigeria", 
+    // items: ["Lagos", "Abuja", "Ibadan", "Port Harcourt", "More cities to come"] 
+  },
+  { 
+    label: "Designed for diaspora senders", 
+    // items: ["London", "Houston", "Toronto", "Dubai", "New York"] 
+  },
 ];
 
 export default function MarqueeStrip() {
@@ -13,14 +19,14 @@ export default function MarqueeStrip() {
           <span className="text-[0.68rem] tracking-[0.2em] uppercase text-gold whitespace-nowrap">
             {group.label}
           </span>
-          {group.items.map((city, ci) => (
+          {/* {group.items.map((city, ci) => (
             <div key={ci} className="flex items-center gap-12">
               <span className="font-serif font-semibold tracking-wider text-[1rem] text-[rgba(245,239,244,0.85)] whitespace-nowrap">
                 {city}
               </span>
               <div className="w-[5px] h-[5px] rounded-full bg-gold-dark opacity-35" />
             </div>
-          ))}
+          ))} */}
         </div>
       ))}
     </div>
@@ -29,7 +35,7 @@ export default function MarqueeStrip() {
   return (
   <div className="py-7 border-t border-b border-[rgba(201,168,76,0.07)] overflow-hidden bg-[rgba(201,168,76,0.02)] backdrop-blur-[24px]">
     <div className="flex animate-marquee whitespace-nowrap">
-      {content}
+      {/* {content} */}
       {content}
     </div>
   </div>

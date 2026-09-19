@@ -17,7 +17,7 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-[100] flex items-center justify-between transition-all duration-400",
         scrolled
-          ? "py-[18px] px-[52px] bg-[rgba(14,13,11,0.93)] backdrop-blur-[24px] border-b border-[rgba(201,168,76,0.07)]"
+          ? "py-[18px] px-[52px] bg-[rgba(14,13,11,0.93)] backdrop-blur-[24px] border-b border-[rgba(226,192,122,0.14)]"
           : "py-7 px-[52px] border-b border-transparent"
       )}
     >
@@ -58,7 +58,7 @@ export default function Navbar() {
         </a>
         <a
           href="#early-access"
-          className="border border-gold-dark text-gold bg-transparent px-[22px] py-[9px] rounded-sm font-sans font-semibold text-[0.72rem] tracking-[0.16em] uppercase transition-all duration-300 hover:bg-[rgba(201,168,76,0.98)] hover:border-gold hover:text-gold-light"
+          className="border border-gold-dark text-gold bg-transparent px-[22px] py-[9px] rounded-sm font-sans font-semibold text-[0.72rem] tracking-[0.16em] uppercase transition-all duration-300 hover:bg-gold hover:border-gold hover:text-ink"
         >
           Send a Gift
         </a>

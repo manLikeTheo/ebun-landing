@@ -10,7 +10,8 @@ interface Props {
 }
 
 export default function GhostButton({ children, href, onClick, className }: Props) {
-  const base = "inline-block bg-transparent text-cream/70 px-10 py-5 rounded-lg border border-gold/30 font-sans text-[0.8rem] tracking-[0.14em] uppercase transition-all hover:border-gold hover:text-gold-light hover:bg-gold/5";
+  const base =
+  "inline-block bg-transparent text-cream/80 px-10 py-5 rounded-lg border border-gold/40 font-sans text-[0.8rem] tracking-[0.14em] uppercase transition-all hover:border-gold hover:text-gold-champagne hover:bg-gold/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light";
 
   if (href) {
     return (

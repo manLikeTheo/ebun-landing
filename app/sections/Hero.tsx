@@ -34,7 +34,7 @@ export default function Hero() {
             className="font-serif font-light text-cream leading-[1.04]"
             style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}
           >
-            Send a gift,
+            Sending a gift should be
           </motion.h1>
 
           <motion.h1
@@ -44,7 +44,7 @@ export default function Hero() {
             className="font-serif font-light italic text-gold leading-[1.04] mb-11"
             style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}
           >
-            not just a transfer.
+            as easy as sending money.
           </motion.h1>
 
           <motion.p
@@ -54,8 +54,7 @@ export default function Hero() {
             className="font-sans font-light text-[rgba(245,239,224,0.86)] max-w-[500px] leading-[1.8] mb-10"
             style={{ fontSize: "clamp(1rem, 1.6vw, 1.15rem)" }}
           >
-            Pick something thoughtful, add your voice, and send it straight to their WhatsApp.
-            They reveal it, then receive it exactly how they want — delivered, swapped, or redeemed instantly.
+            Choose something thoughtful, add your voice, and send it straight to their WhatsApp. They unwrap it on their phone  —  wherever they are, wherever you are.
           </motion.p>
 
           <motion.div
@@ -72,9 +71,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.85 }}
-            className="text-[0.7rem] tracking-[0.2em] uppercase text-gold-dark"
+            className="text-[0.85rem] font-semibold tracking-[0.3em] uppercase text-gold-dark"
           >
-            Choose · Personalise · Reveal · Redeem
+            CHOOSE  ·  PERSONALISE  ·  REVEAL  ·  REDEEM
           </motion.div>
         </div>
 
@@ -84,11 +83,11 @@ export default function Hero() {
           transition={{ duration: 1.1, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.5 }}
           className="flex-1 w-full max-w-[480px] lg:max-w-none"
         >
-          <div className="relative aspect-[4/5] lg:aspect-[3/4] w-full rounded-[20px] overflow-hidden border border-[rgba(201,168,76,0.18)] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-            <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-              <source src="/hero-gift.mp4" type="video/mp4" />
-            </video>
-          </div>
+          <div className="relative aspect-[4/5] lg:aspect-[3/4] w-full rounded-[20px] overflow-hidden border border-[rgba(201,168,76,0.18)] shadow-[0_20px_60px_rgba(0,0,0,0.5)] bg-gradient-to-br from-ink-2 via-ink to-ink-3">
+  <video autoPlay loop muted playsInline poster="/hero-gift-poster.jpg" className="w-full h-full object-cover">
+    <source src="/hero-gift.mp4" type="video/mp4" />
+  </video>
+</div>
         </motion.div>
       </div>
 

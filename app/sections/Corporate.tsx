@@ -13,10 +13,10 @@ const stats = [
 ];
 
 const benefits = [
-  "No hamper coordination, no undelivered gifts, no December stress.",
-  "Every recipient gets a personalised reveal — not a generic voucher code.",
-  "Full redemption report within 24 hours for finance and HR.",
-  "From 30 recipients to 5,000 — the same seamless process.",
+  "No hamper coordination. No undelivered gifts, No December stress.",
+  "Personalised reveals, not generic voucher codes.",
+  "Full redemption reporting for finance and HR.",
+  "From 30 recipients to 5,000. Same seamless process.",
 ];
 
 export default function Corporate() {
@@ -24,19 +24,19 @@ export default function Corporate() {
     <section id="corporate" className="bg-ink-2 border-t border-b border-[rgba(201,168,76,0.07)]">
       <div className="max-w-[1080px] mx-auto py-[120px] px-6 md:px-[52px] grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
         <RevealOnScroll>
-          <SectionEyebrow text="For Companies and  Corporate Gifting & Rewards" />
+          <SectionEyebrow text="For Companies and  Corporate Organizations" />
           <h2
             className="font-serif font-light text-cream mb-6"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
           >
-           A better way to GIFT, REWARD, and CELEBRATE loyal employees and customers...
+           Reward your people. Skip the logistics. <br /> 
             <br />
             <em className="text-gold" style={{ fontStyle: "italic" }}>
               At scale.
             </em>
           </h2>
           <p className="text-[1rem] text-[rgba(245,239,224,0.75)] leading-[1.85] mb-10">
-            We’re designing Ebun for employee appreciation, customer rewards, celebrations, and corporate gifting without the usual hamper and coordination headaches.
+            One campaign. One payment. Every person receives a personalised gift with your messages attached... and you receive a full report.
           </p>
           <ul className="flex flex-col gap-[18px] mb-10">
             {benefits.map((b) => (

@@ -25,7 +25,7 @@ export default function Home() {
 
       <main>
         <Hero />
-        <MarqueeStrip />
+        {/* <MarqueeStrip /> */}
         <Problem />
         <Divider />
         <HowItWorks />

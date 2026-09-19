@@ -17,31 +17,31 @@ export default function Problem() {
               lineHeight: 1.14,
             }}
           >
-            Money gets there.
+            Money moves.
             <br />
             <em
               className="text-gold"
               style={{ fontStyle: "italic" }}
             >
-              The feeling doesn&apos;t always.
+              Meaning doesn&apos;t.
             </em>
           </h2>
 
           <div className="text-[1rem] tracking-wider text-[rgba(245,239,224,0.68)] leading-[1.85] max-w-[580px]">
             <p>
-              A bank transfer can move money.
+              A transfer says: here&apos;s some money..
               <br />
-              A voucher can move value.
+              A voucher says: here&apos;s some value.
             </p>
 
             <p className="mt-5">
               <strong className="text-cream font-normal">
-                Neither carries the moment.
+                Neither says: I was thinking about you.
               </strong>
             </p>
 
             <p className="mt-5">
-              That&apos;s the space Ebun is being built to close.
+              Ebun closes that gap.
             </p>
           </div>
         </RevealOnScroll>

@@ -29,7 +29,7 @@ export default function EarlyAccess() {
           It should take only a few seconds. It should last much longer than that....
           {" "}
           <em className="text-gold" style={{ fontStyle: "italic" }}>
-            And we are building a better way to make that happen.
+            Early access opens soon.  Be first to send one.
           </em>{" "}
         </p>
         <div className="flex flex-col items-center gap-6">
