@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import GoldButton from "../components/GoldButton";
 import GhostButton from "../components/GhostButton";
@@ -7,6 +7,15 @@ import { useWaitlistModal } from "../context/WaitlistModalContext";
 
 export default function Hero() {
   const { openModal } = useWaitlistModal();
+  
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.playbackRate = 0.2;
+    }
+  }, []);
   return (
     <section className="relative min-h-screen flex items-center px-6 md:px-[52px] pt-[140px] pb-[100px] overflow-hidden">
       <div
@@ -84,10 +93,16 @@ export default function Hero() {
           className="flex-1 w-full max-w-[480px] lg:max-w-none"
         >
           <div className="relative aspect-[4/5] lg:aspect-[3/4] w-full rounded-[20px] overflow-hidden border border-[rgba(201,168,76,0.18)] shadow-[0_20px_60px_rgba(0,0,0,0.5)] bg-gradient-to-br from-ink-2 via-ink to-ink-3">
-  <video autoPlay loop muted playsInline poster="/hero-gift-poster.jpg" className="w-full h-full object-cover">
-    <source src="/hero-gift.mp4" type="video/mp4" />
-  </video>
-</div>
+        <video 
+          ref={videoRef} 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          poster="/hero-gift-poster.jpg" className="w-full h-full object-cover">
+          <source src="/hero-gift.mp4" type="video/mp4" />
+        </video>
+      </div>
         </motion.div>
       </div>
 
