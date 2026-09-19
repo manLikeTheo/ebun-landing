@@ -23,15 +23,33 @@ export async function fetchWaitlistStatus(id: string) {
 }
 
 export async function submitSurvey(payload: {
-  waitlistId: string;
-  segment: string;
+  sessionId: string;
+  senderType: string;
   frustration: string;
   occasion: string;
 }): Promise<boolean> {
-  const res = await fetch("/api/waitlist/survey", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  return res.ok;
+  try {
+    const res = await fetch("/api/waitlist/survey", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sessionId: payload.sessionId,
+        completed: true,
+        sender_type: payload.senderType,
+        frustration_tags: payload.frustration,
+        reveal_usecase: payload.occasion,
+      }),
+    });
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => null);
+      console.error("Waitlist survey submission failed:", res.status, body);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Waitlist survey request failed:", error);
+    return false;
+  }
 }

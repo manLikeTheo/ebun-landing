@@ -300,11 +300,11 @@ export default function WaitlistModal() {
     if (!myId) return;
     setSurveySubmitting(true);
     const ok = await submitSurvey({
-      waitlistId: myId,
-      segment: nextAnswers.segment,
-      frustration: nextAnswers.frustration,
-      occasion: nextAnswers.occasion,
-    });
+  sessionId: myId,
+  senderType: nextAnswers.segment,
+  frustration: nextAnswers.frustration,
+  occasion: nextAnswers.occasion,
+});
     setSurveySubmitting(false);
     if (ok) {
       handleSurveyDone();
