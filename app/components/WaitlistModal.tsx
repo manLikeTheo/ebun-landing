@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
 import { submitWaitlist, fetchWaitlistStatus, submitSurvey } from "@/lib/waitlist-client";
+import { ArrowRight } from "lucide-react";
 
 const COUNTRY_CODES = [
   { code: "+234", label: "🇳🇬 +234" },
@@ -300,10 +301,10 @@ export default function WaitlistModal() {
     if (!myId) return;
     setSurveySubmitting(true);
     const ok = await submitSurvey({
-  sessionId: myId,
-  senderType: nextAnswers.segment,
-  frustration: nextAnswers.frustration,
-  occasion: nextAnswers.occasion,
+        sessionId: myId,
+        senderType: nextAnswers.segment,
+        frustration: nextAnswers.frustration,
+        occasion: nextAnswers.occasion,
 });
     setSurveySubmitting(false);
     if (ok) {
@@ -521,7 +522,7 @@ export default function WaitlistModal() {
                     className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-5 text-left"
                   >
                     <div className="flex items-center justify-between mb-3">
-                      <div className="text-[0.66rem] tracking-[0.14em] uppercase text-gold-light">One more thing — 15 seconds</div>
+                      <div className="text-[0.66rem] tracking-[0.14em] uppercase text-gold-light">One quick question — optional</div>
                       <div className="flex gap-1">
                         {SURVEY_STEPS.map((_, i) => (
                           <span
@@ -551,23 +552,48 @@ export default function WaitlistModal() {
                     </button>
                   </motion.div>
                 )}
-                {revealed && hasSurveyed && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="border-t border-[rgba(201,168,76,0.12)] pt-4 mt-5 text-center"
-                  >
-                    <a
-                      href="/survey"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[0.9rem] text-gold-light underline underline-offset-4 hover:text-gold-champagne transition-colors"
-                    >
-                      Got 2 more minutes? Help us build this right →
-                    </a>
-                  </motion.div>
-                )}
+                {revealed && (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.55, delay: 0.18 }}
+    className="mt-5"
+  >
+    <div className="relative overflow-hidden rounded-xl border border-[rgba(226,192,122,0.35)] bg-[linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.035)_55%,rgba(14,13,11,0.2))] p-5 text-center">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-14 -top-14 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(240,223,174,0.2),transparent_68%)]"
+      />
+
+      <div className="relative">
+        <p className="text-[0.64rem] uppercase tracking-[0.18em] text-gold-light">
+          Help shape Ebun
+        </p>
+
+        <h3 className="mt-2 font-serif text-[1.55rem] font-light leading-[1.2] text-cream">
+          Tell us how you really give.
+        </h3>
+
+        <p className="mx-auto mt-3 max-w-[320px] text-[0.8rem] leading-[1.7] text-muted-strong">
+          A few honest answers will directly shape what we build next — from
+          the gifts we offer to how the reveal feels.
+        </p>
+
+        <a
+          href="/survey"
+          className="group mt-5 flex w-full items-center justify-center gap-3 rounded-lg bg-gold px-5 py-4 text-[0.76rem] font-semibold uppercase tracking-[0.14em] text-ink transition-all hover:bg-gold-light hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light"
+        >
+          Take the 2-minute survey
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </a>
+
+        <p className="mt-3 text-[0.64rem] uppercase tracking-[0.13em] text-[rgba(226,192,122,0.7)]">
+          10 questions · saves as you go · no account needed
+        </p>
+      </div>
+    </div>
+  </motion.div>
+)}
               </div>
             )}
           </motion.div>

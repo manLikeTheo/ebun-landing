@@ -2,9 +2,25 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { useWaitlistModal } from "../context/WaitlistModalContext";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+
+  const { openModal } = useWaitlistModal();
+
+const handlePrelaunchCta = () => {
+  window.dispatchEvent(
+    new CustomEvent("ebun:prelaunch_cta_clicked", {
+      detail: {
+        source: "navbar",
+        destination: "waitlist_modal",
+      },
+    })
+  );
+
+  openModal();
+};
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -56,12 +72,13 @@ export default function Navbar() {
         >
           Corporate
         </a>
-        <a
-          href="#early-access"
-          className="border border-gold-dark text-gold bg-transparent px-[22px] py-[9px] rounded-sm font-sans font-semibold text-[0.72rem] tracking-[0.16em] uppercase transition-all duration-300 hover:bg-gold hover:border-gold hover:text-ink"
+        <button
+          type="button"
+          onClick={handlePrelaunchCta}
+          className="border border-gold-dark bg-transparent px-[22px] py-[9px] font-sans text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold transition-all duration-300 hover:border-gold hover:bg-gold hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light"
         >
-          Send a Gift
-        </a>
+          Join Early Access
+        </button>
       </div>
     </nav>
   );
