@@ -3,7 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import { saveSurveyProgress } from "@/lib/survey-client";
 
-type StepType = "chips-single" | "chips-multi" | "yesno" | "textarea" | "text" | "number-pair";
+type StepType =
+  | "chips-single"
+  | "chips-multi"
+  | "yesno"
+  | "textarea"
+  | "textarea-pills"
+  | "text"
+  | "number-pair";
 type SurveyResponseValue = string | string[] | number | Record<string, string | number | null | undefined> | null | undefined;
 type SurveyResponses = Record<string, SurveyResponseValue>;
 
@@ -23,23 +30,200 @@ interface Step {
   fields?: { key: string; label: string }[];
   required: boolean;
   showIf?: (r: SurveyResponses) => boolean;
+  pills?: string[];
+  presets?: {
+  label: string;
+  values: Record<string, string>;
+}[];
 }
 
 const STEPS: Step[] = [
-  { key: "sender_type", eyebrow: "Quick context", question: "Are you usually sending gifts from abroad, or within Nigeria?", type: "chips-single", options: ["Abroad (diaspora)", "Within Nigeria", "Both"], required: true },
-  { key: "last_gift_timing", eyebrow: "Question 1 of 10", question: "When was the last time you sent a gift or money to someone for a special occasion?", hint: "Birthday, wedding, anniversary — whatever comes to mind first.", type: "chips-single", options: ["This week", "This month", "A few months ago", "Can't remember"], required: true },
-  { key: "how_text", eyebrow: "Question 2 of 10", question: "Walk me through how you did it.", hint: "What app, platform, or method did you actually use?", type: "textarea", required: true },
-  { key: "frustration_tags", eyebrow: "Question 3 of 10", question: "What was the most frustrating part of that experience?", hint: "Pick any that apply.", type: "chips-multi", options: ["Vendor reliability", "Payment issues", "Presentation", "Delivery tracking", "Something else"], required: true },
-  { key: "frustration_other", eyebrow: "Question 3, continued", question: "Say a bit more about that.", type: "textarea", required: false, showIf: (r) => asStringArray(r.frustration_tags).includes("Something else") },
-  { key: "defaulted_transfer", eyebrow: "Question 4 of 10", question: "Have you ever just sent a bank transfer because finding a real gift across distance felt too stressful?", type: "yesno", required: true },
-  { key: "feeling_text", eyebrow: "Question 4, continued", question: "How did that make you feel?", type: "textarea", required: false, showIf: (r) => r.defaulted_transfer === "Yes" },
-  { key: "reveal_usecase", eyebrow: "Question 5 of 10", question: "If you could send a gift straight to someone's WhatsApp, with a personal reveal moment, when would you use that over cash?", type: "textarea", required: true },
-  { key: "group_coordination", eyebrow: "Question 6 of 10", question: "For group occasions — a wedding, a group birthday surprise — how do you currently coordinate contributions?", type: "chips-single", options: ["WhatsApp group chat", "One person pays, others reimburse", "We usually don't coordinate", "Other"], required: true },
-  { key: "blockers_tags", eyebrow: "Question 7 of 10", question: "What would stop you from trying a platform like Ebun?", hint: "Pick any that apply — total honesty helps us more than politeness.", type: "chips-multi", options: ["Trust in local vendors", "Price markup", "Payment security", "Delivery speed", "Honestly, nothing — I'd try it"], required: true },
-  { key: "spend", eyebrow: "Question 8 of 10", question: "Roughly how much do you spend on a gift?", type: "number-pair", fields: [{ key: "casual_spend", label: "Casual gift (₦)" }, { key: "milestone_spend", label: "Milestone gift (₦)" }], required: false },
-  { key: "fee_preference", eyebrow: "Question 9 of 10", question: "Checkout fees — what would you rather see?", type: "chips-single", options: ["A flat service fee", "A small % markup on the item", "No strong preference"], required: true },
-  { key: "wishlist_text", eyebrow: "Question 10 of 10", question: "What's one local vendor or gift you wish you could easily order for someone in Nigeria today?", hint: "No more digging through Instagram DMs.", type: "textarea", required: false },
-  { key: "contact_whatsapp", eyebrow: "Last thing", question: "Open to a 5-minute voice-note follow-up sometime?", hint: "Totally optional — leave your WhatsApp number if so.", type: "text", required: false },
+  {
+    key: "sender_type",
+    eyebrow: "Quick context",
+    question: "Where are you usually sending thoughtful gifts from?",
+    hint: "There is no wrong answer — this just helps us build for your reality.",
+    type: "chips-single",
+    options: ["Outside Nigeria", "Within Nigeria", "A bit of both"],
+    required: true,
+  },
+  {
+    key: "last_gift_timing",
+    eyebrow: "Question 1 of 10",
+    question: "Think of the last time you wanted to celebrate someone. When was it?",
+    hint: "Birthday, wedding, new job, new baby — whatever comes to mind first.",
+    type: "chips-single",
+    options: ["This week", "This month", "A few months ago", "I cannot remember"],
+    required: true,
+  },
+  {
+    key: "how_text",
+    eyebrow: "Question 2 of 10",
+    question: "How did you make it happen that time?",
+    hint: "No essay needed — tap the closest answer, or make it your own.",
+    type: "textarea-pills",
+    pills: [
+      "Sent a direct bank transfer",
+      "Used LemFi, NALA, or another transfer app",
+      "Messaged an Instagram vendor and hoped it worked out",
+      "Asked someone at home to help sort it out",
+      "Bought a voucher or gift card",
+    ],
+    required: true,
+  },
+  {
+    key: "frustration_tags",
+    eyebrow: "Question 3 of 10",
+    question: "What made the experience harder than it should have been?",
+    hint: "Pick every answer that feels true.",
+    type: "chips-multi",
+    options: [
+      "I was not sure the vendor would deliver",
+      "It felt too much like paying a bill",
+      "Payment or FX fees",
+      "Too much back-and-forth",
+      "Delivery was a headache",
+      "Something else",
+    ],
+    required: true,
+  },
+  {
+    key: "frustration_other",
+    eyebrow: "A little more context",
+    question: "What happened?",
+    hint: "A few words are enough.",
+    type: "textarea",
+    required: false,
+    showIf: (responses) =>
+      asStringArray(responses.frustration_tags).includes("Something else"),
+  },
+  {
+    key: "defaulted_transfer",
+    eyebrow: "Question 4 of 10",
+    question: "Have you ever sent cash because arranging a proper gift felt like too much work?",
+    type: "yesno",
+    required: true,
+  },
+  {
+    key: "feeling_text",
+    eyebrow: "Question 4, continued",
+    question: "How did that choice feel?",
+    hint: "Tap the thought closest to yours — you can edit it.",
+    type: "textarea-pills",
+    pills: [
+      "It felt like paying a bill when I wanted to celebrate someone",
+      "Fast, yes — but boring",
+      "I wished it felt more personal",
+      "It was easier than dealing with vendors and delivery",
+      "Honestly, cash was what they needed most",
+    ],
+    required: false,
+    showIf: (responses) => responses.defaulted_transfer === "Yes",
+  },
+  {
+    key: "reveal_usecase",
+    eyebrow: "Question 5 of 10",
+    question: "What is the first moment you would use an Ebun-style reveal for?",
+    hint: "Pick the one that makes you think: “Yes, I would send that.”",
+    type: "textarea-pills",
+    pills: [
+      "My brother or sister's birthday or milestone",
+      "A surprise cake or platter for a close friend",
+      "A Wednesday thank-you package for someone who deserves it",
+      "A wedding gift when I cannot be there in person",
+      "A thoughtful lunch for my partner, friend, or colleague",
+    ],
+    required: true,
+  },
+  {
+    key: "group_coordination",
+    eyebrow: "Question 6 of 10",
+    question: "For a wedding or group surprise, how do people usually contribute?",
+    type: "chips-single",
+    options: [
+      "A WhatsApp group that gets chaotic",
+      "One person pays and chases refunds",
+      "We usually do not bother coordinating",
+      "Ajo — everyone contributes together",
+    ],
+    required: true,
+  },
+  {
+    key: "blockers_tags",
+    eyebrow: "Question 7 of 10",
+    question: "What would make you hesitate before trying Ebun?",
+    hint: "Be brutally honest — this is how we earn trust.",
+    type: "chips-multi",
+    options: [
+      "Vendor quality",
+      "Price markup",
+      "Payment security",
+      "Delivery speed",
+      "Honestly, I would try it today",
+    ],
+    required: true,
+  },
+  {
+    key: "spend",
+    eyebrow: "Question 8 of 10",
+    question: "What does a typical gift budget look like for you?",
+    hint: "A rough range is perfect. Tap one, then edit if needed.",
+    type: "number-pair",
+    fields: [
+      { key: "casual_spend", label: "Small gesture (₦)" },
+      { key: "milestone_spend", label: "Big celebration (₦)" },
+    ],
+    presets: [
+      {
+        label: "Simple but thoughtful",
+        values: { casual_spend: "5000", milestone_spend: "15000" },
+      },
+      {
+        label: "A proper treat",
+        values: { casual_spend: "10000", milestone_spend: "30000" },
+      },
+      {
+        label: "A big moment",
+        values: { casual_spend: "20000", milestone_spend: "50000" },
+      },
+    ],
+    required: false,
+  },
+  {
+    key: "fee_preference",
+    eyebrow: "Question 9 of 10",
+    question: "At checkout, what would feel fairest?",
+    type: "chips-single",
+    options: [
+      "One clear service fee",
+      "A small markup on the item",
+      "Whichever keeps the total transparent",
+    ],
+    required: true,
+  },
+  {
+    key: "wishlist_text",
+    eyebrow: "Question 10 of 10",
+    question: "What would you genuinely love to surprise someone with?",
+    hint: "Tap an idea that makes you smile, or tell us your own.",
+    type: "textarea-pills",
+    pills: [
+      "A surprise breakfast or cake platter",
+      "A thoughtful lunch package on a Tuesday",
+      "Cinema tickets, a spa session, or a weekend pamper package",
+      "A perfume, fashion piece, or proper gift box",
+      "Data, airtime, or electricity when someone really needs it",
+    ],
+    required: false,
+  },
+  {
+    key: "contact_whatsapp",
+    eyebrow: "Last thing",
+    question: "Want first access to the prototype?",
+    hint: "Leave your WhatsApp number if you are open to a five-minute voice-note chat later.",
+    type: "text",
+    required: false,
+  },
 ];
 
 function makeSessionId() {
@@ -173,8 +357,11 @@ export default function SurveyFlow() {
       <div className="min-h-screen flex flex-col items-center justify-center text-center px-6">
         <div className="text-gold text-[0.7rem] tracking-[0.2em] uppercase mb-4">Ebun</div>
         <h1 className="font-serif font-light text-cream text-[2.4rem] mb-4">Got 2 minutes?</h1>
-        <p className="text-muted-strong max-w-[420px] leading-[1.7] mb-8">
+        {/* <p className="text-muted-strong max-w-[420px] leading-[1.7] mb-8">
           We&apos;re building a better way to gift someone back home. A few honest answers shape what we build next — not a generic survey, a real conversation.
+        </p> */}
+        <p className="text-muted-strong max-w-[420px] leading-[1.7] mb-8">
+          No essays. Tap the answer closest to yours, add a thought if you want, and keep moving. We are listening.
         </p>
         <button
           onClick={() => setStage("question")}
@@ -300,15 +487,49 @@ export default function SurveyFlow() {
           </div>
         )}
 
-        {step.type === "textarea" && (
-          <textarea
-            autoFocus
-            value={getStringAnswer(step.key)}
-            onChange={(e) => setAnswer(step.key, e.target.value)}
-            placeholder="Type your answer..."
-            className="w-full min-h-[110px] bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg p-4 text-cream text-[0.95rem] outline-none focus:border-gold resize-y"
-          />
-        )}
+        {(step.type === "textarea" || step.type === "textarea-pills") && (
+  <div>
+    {step.pills && (
+      <div className="mb-4">
+        <p className="mb-2 text-[0.72rem] text-gold-light">
+          Need a nudge? Tap a thought that feels close.
+        </p>
+
+        <div className="flex flex-wrap gap-2">
+          {step.pills.map((pill) => {
+            const active = getStringAnswer(step.key) === pill;
+
+            return (
+              <button
+                key={pill}
+                type="button"
+                onClick={() => setAnswer(step.key, pill)}
+                className={`rounded-lg border px-3 py-2.5 text-left text-[0.78rem] leading-[1.45] transition-all ${
+                  active
+                    ? "border-gold bg-gold text-ink font-medium"
+                    : "border-[rgba(201,168,76,0.3)] bg-gold/5 text-gold-light hover:border-gold hover:bg-gold/10"
+                }`}
+              >
+                {pill}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    <textarea
+      value={getStringAnswer(step.key)}
+      onChange={(event) => setAnswer(step.key, event.target.value)}
+      placeholder={
+        step.pills
+          ? "Or make the answer your own..."
+          : "A few words are enough..."
+      }
+      className="min-h-[110px] w-full resize-y rounded-lg border border-[rgba(201,168,76,0.2)] bg-ink-3 p-4 text-[0.95rem] text-cream outline-none focus:border-gold"
+    />
+  </div>
+)}
 
         {step.type === "text" && (
           <input
@@ -323,6 +544,32 @@ export default function SurveyFlow() {
         )}
 
         {step.type === "number-pair" && (
+          <>
+            {step.presets && (
+              <div className="mb-4 flex flex-wrap gap-2">
+                {step.presets.map((preset) => {
+                  const pair = asNumberRecord(responses[step.key]);
+                  const active = Object.entries(preset.values).every(
+                    ([key, value]) => String(pair[key] ?? "") === value
+                  );
+
+                  return (
+                    <button
+                      key={preset.label}
+                      type="button"
+                      onClick={() => setAnswer(step.key, preset.values)}
+                      className={`rounded-full border px-3 py-2 text-[0.72rem] transition-all ${
+                        active
+                          ? "border-gold bg-gold text-ink font-medium"
+                          : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold"
+                      }`}
+                    >
+                      {preset.label}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           <div className="flex gap-3">
             {step.fields!.map((f) => {
               const pair = asNumberRecord(responses[step.key]);
@@ -344,6 +591,7 @@ export default function SurveyFlow() {
               );
             })}
           </div>
+          </>
         )}
 
         {!step.required && (

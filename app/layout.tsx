@@ -19,6 +19,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.ebun.com.ng"),
   title: "Ebun — Send a Meaningful Gift to Anyone in Nigeria",
   description:
     "Nigeria's digital gifting platform. Send a real gift with a personal video or voice note — no address, no app, just a phone number.",
