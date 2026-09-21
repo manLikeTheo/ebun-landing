@@ -252,11 +252,11 @@ export default function WaitlistRevealModal({
   if (!id) return;
   setSurveySubmitting(true);
   const ok = await submitSurvey({
-    waitlistId: id,
-    segment: nextAnswers.segment,
-    frustration: nextAnswers.frustration,
-    occasion: nextAnswers.occasion,
-  });
+  sessionId: id,
+  senderType: nextAnswers.segment,
+  frustration: nextAnswers.frustration,
+  occasion: nextAnswers.occasion,
+});
   setSurveySubmitting(false);
   if (ok) {
     onSurveyDone();

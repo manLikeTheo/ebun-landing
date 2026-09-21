@@ -38,6 +38,8 @@ const [hasSurveyed, setHasSurveyed] = useState(false);
 const referrerRef = useRef<string | null>(null);
 
 useEffect(() => {
+  let cancelled = false;
+
   const params = new URLSearchParams(window.location.search);
   const ref = params.get("ref");
 
@@ -55,17 +57,28 @@ useEffect(() => {
 
   const savedId = localStorage.getItem(ID_STORAGE_KEY);
 
-  setMyId(savedId);
-  setHasJoined(Boolean(savedId));
-  setHasRevealed(localStorage.getItem(REVEALED_STORAGE_KEY) === "true");
-  setHasSurveyed(localStorage.getItem(SURVEY_STORAGE_KEY) === "true");
-  setMounted(true);
+  const frame = window.requestAnimationFrame(() => {
+    if (cancelled) return;
 
-  if (savedId) {
-    fetchWaitlistStatus(savedId).then((status) => {
-      if (status) setQueueNumber(status.queueNumber);
-    });
-  }
+    setMyId(savedId);
+    setHasJoined(Boolean(savedId));
+    setHasRevealed(localStorage.getItem(REVEALED_STORAGE_KEY) === "true");
+    setHasSurveyed(localStorage.getItem(SURVEY_STORAGE_KEY) === "true");
+    setMounted(true);
+
+    if (savedId) {
+      fetchWaitlistStatus(savedId).then((status) => {
+        if (!cancelled && status) {
+          setQueueNumber(status.queueNumber);
+        }
+      });
+    }
+  });
+
+  return () => {
+    cancelled = true;
+    window.cancelAnimationFrame(frame);
+  };
 }, []);
 
   const handleJoinSuccess = (id: string, qn: number) => {
