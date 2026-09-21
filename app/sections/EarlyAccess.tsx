@@ -34,7 +34,13 @@ export default function EarlyAccess() {
         </p>
         <div className="flex flex-col items-center gap-6">
           <GoldButton onClick={openModal}>
-            {mounted && hasJoined ? `View your invite — No. ${queueNumber ?? "—"}` : "Join Early Access"}
+            {!mounted
+            ? "Join Early Access"
+            : hasJoined
+              ? queueNumber === null
+                ? "Loading your invite…"
+                : `View your invite — No. ${queueNumber}`
+              : "Join Early Access"}
           </GoldButton>
           <GhostButton href="#corporate">Corporate Gifting</GhostButton>
         </div>

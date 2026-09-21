@@ -26,44 +26,47 @@ interface WaitlistModalContextValue {
 const WaitlistModalContext = createContext<WaitlistModalContextValue | null>(null);
 
 export function WaitlistModalProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const mounted = typeof window !== "undefined";
-  const [myId, setMyId] = useState<string | null>(() => {
-    if (typeof window === "undefined") return null;
-    return localStorage.getItem(ID_STORAGE_KEY);
-  });
-  const [queueNumber, setQueueNumber] = useState<number | null>(null);
-  const [hasJoined, setHasJoined] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return !!localStorage.getItem(ID_STORAGE_KEY);
-  });
-  const [hasRevealed, setHasRevealed] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return localStorage.getItem(REVEALED_STORAGE_KEY) === "true";
-  });
-  const [hasSurveyed, setHasSurveyed] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return localStorage.getItem(SURVEY_STORAGE_KEY) === "true";
-  });
-  const referrerRef = useRef<string | null>(null);
+const [isOpen, setIsOpen] = useState(false);
+const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const ref = params.get("ref");
-    if (ref) {
-      referrerRef.current = ref;
-      params.delete("ref");
-      const clean = window.location.pathname + (params.toString() ? `?${params}` : "") + window.location.hash;
-      window.history.replaceState({}, "", clean);
-    }
+const [myId, setMyId] = useState<string | null>(null);
+const [queueNumber, setQueueNumber] = useState<number | null>(null);
+const [hasJoined, setHasJoined] = useState(false);
+const [hasRevealed, setHasRevealed] = useState(false);
+const [hasSurveyed, setHasSurveyed] = useState(false);
 
-    const savedId = localStorage.getItem(ID_STORAGE_KEY);
-    if (savedId) {
-      fetchWaitlistStatus(savedId).then((status) => {
-        if (status) setQueueNumber(status.queueNumber);
-      });
-    }
-  }, []);
+const referrerRef = useRef<string | null>(null);
+
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref");
+
+  if (ref) {
+    referrerRef.current = ref;
+    params.delete("ref");
+
+    const clean =
+      window.location.pathname +
+      (params.toString() ? `?${params}` : "") +
+      window.location.hash;
+
+    window.history.replaceState({}, "", clean);
+  }
+
+  const savedId = localStorage.getItem(ID_STORAGE_KEY);
+
+  setMyId(savedId);
+  setHasJoined(Boolean(savedId));
+  setHasRevealed(localStorage.getItem(REVEALED_STORAGE_KEY) === "true");
+  setHasSurveyed(localStorage.getItem(SURVEY_STORAGE_KEY) === "true");
+  setMounted(true);
+
+  if (savedId) {
+    fetchWaitlistStatus(savedId).then((status) => {
+      if (status) setQueueNumber(status.queueNumber);
+    });
+  }
+}, []);
 
   const handleJoinSuccess = (id: string, qn: number) => {
     localStorage.setItem(ID_STORAGE_KEY, id);
