@@ -32,11 +32,12 @@ export default function Icon() {
           }}
         >
           <div
-            style={{
-              position: "relative",
-              width: 18,
-              height: 20,
-            }}
+             style={{
+            position: "relative",
+            display: "flex",
+            width: 18,
+            height: 20,
+        }}
           >
             <div
               style={{
