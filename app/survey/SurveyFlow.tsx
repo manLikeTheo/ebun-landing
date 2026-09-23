@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { saveSurveyProgress } from "@/lib/survey-client";
 
 type StepType =
@@ -425,7 +426,15 @@ export default function SurveyFlow() {
 </div>
 
       <div className="text-muted text-[0.9rem] mt-4">
-        {revealed ? "You're all set! Thank you." : "Drag your finger or cursor across the card"}
+        {revealed 
+        ? 
+        <div className="flex flex-col items-center gap-3">
+        <p>You&apos;re all set. Thank you! <br /> 
+          <Link href="https://ebun.com.ng" className="text-gold font-normal underline">Back to ebun.com.ng
+          </Link>
+          </p>
+        </div>
+        : <p>Drag your finger or cursor across the card</p>}
       </div>
     </div>
   );

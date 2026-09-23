@@ -51,7 +51,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.4 }}
             className="font-serif font-light italic text-gold leading-[1.04] mb-11"
-            style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}
+            style={{ fontSize: "clamp(2.8rem, 6.5vw, 5rem)" }}
           >
             as easy as sending money.
           </motion.h1>
