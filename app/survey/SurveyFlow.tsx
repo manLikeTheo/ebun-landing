@@ -219,8 +219,8 @@ const STEPS: Step[] = [
   {
     key: "contact_whatsapp",
     eyebrow: "Last thing",
-    question: "Want first access to the prototype?",
-    hint: "Leave your WhatsApp number if you are open to a five-minute voice-note chat later.",
+    question: "Want to be in the loop about our product launch and early access?",
+    hint: "Leave your WhatsApp number and we'll keep you in the loop. No spam, we promise.",
     type: "text",
     required: false,
   },
