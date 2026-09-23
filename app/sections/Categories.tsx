@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Ribbon, Sparkles, UtensilsCrossed, Zap } from "lucide-react";
+import { Sparkles, UtensilsCrossed, Zap } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 
@@ -19,7 +19,7 @@ const categories = [
     icon: Sparkles,
     number: "02",
     title: "Experiences",
-    body: "A spa day, cinema night, photo session or class — gifts that become part of the story they tell later.",
+    body: "A spa day, cinema night, weekend pamper package or photography session — gifts that become part of the story they tell later.",
     examples: ["Spa", "Cinema", "Creative sessions"],
     image: "/categories/experienceA.png",
     alt: "A relaxing premium experience",
@@ -28,8 +28,8 @@ const categories = [
     icon: Zap,
     number: "03",
     title: "Everyday Essentials",
-    body: "Fuel credit, groceries data and more. Practical support can still feel deeply personal.",
-    examples: ["Fuel credit", "Data", "Groceries"],
+    body: "Data, groceries, utility and more. Practical support can still feel deeply personal and valuable.",
+    examples: ["Data", "Utility", "Groceries"],
     image: "/categories/utility.jpg",
     alt: "A useful digital gift delivered to a phone",
   },
