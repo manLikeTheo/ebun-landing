@@ -64,7 +64,7 @@ const STEPS: Step[] = [
     type: "textarea-pills",
     pills: [
       "Sent a direct bank transfer",
-      "Used LemFi, NALA, or another transfer app",
+      "Used Opay, LemFi, or another transfer app",
       "Messaged an Instagram vendor and hoped it worked out",
       "Asked someone at home to help sort it out",
       "Bought a voucher or gift card",
@@ -100,7 +100,7 @@ const STEPS: Step[] = [
   {
     key: "defaulted_transfer",
     eyebrow: "Question 4 of 10",
-    question: "Have you ever sent cash because arranging a proper gift felt like too much work?",
+    question: "Have you ever sent cash because arranging a proper gift felt like too much stress?",
     type: "yesno",
     required: true,
   },
@@ -127,11 +127,11 @@ const STEPS: Step[] = [
     hint: "Pick the one that makes you think: “Yes, I would send that.”",
     type: "textarea-pills",
     pills: [
-      "My brother or sister's birthday or milestone",
-      "A surprise cake or platter for a close friend",
-      "A Wednesday thank-you package for someone who deserves it",
+      "My brother or sister's birthday or celebration when I cannot be there in person",
+      "A surprise cake or platter for a close friend or colleague",
+      "A Wednesday thank-you package for someone who deserves it but is not expecting it",
       "A wedding gift when I cannot be there in person",
-      "A thoughtful lunch for my partner, friend, or colleague",
+      "A thoughtful lunch for my partner, friend, or colleague on a random day",
     ],
     required: true,
   },
@@ -144,7 +144,7 @@ const STEPS: Step[] = [
       "A WhatsApp group that gets chaotic",
       "One person pays and chases refunds",
       "We usually do not bother coordinating",
-      "Ajo — everyone contributes together",
+      "Group Gifting — everyone contributes together",
     ],
     required: true,
   },
@@ -176,15 +176,15 @@ const STEPS: Step[] = [
     presets: [
       {
         label: "Simple but thoughtful",
-        values: { casual_spend: "5000", milestone_spend: "15000" },
+        values: { casual_spend: "5000", milestone_spend: "18000" },
       },
       {
         label: "A proper treat",
-        values: { casual_spend: "10000", milestone_spend: "30000" },
+        values: { casual_spend: "20000", milestone_spend: "50000" },
       },
       {
         label: "A big moment",
-        values: { casual_spend: "20000", milestone_spend: "50000" },
+        values: { casual_spend: "20000", milestone_spend: "100000" },
       },
     ],
     required: false,
@@ -355,21 +355,21 @@ export default function SurveyFlow() {
   if (stage === "intro") {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center px-6">
-        <div className="text-gold text-[0.7rem] tracking-[0.2em] uppercase mb-4">Ebun</div>
+        <div className="text-gold text-[0.95rem] font-semibold tracking-[0.4em] uppercase mb-4">Ebun</div>
         <h1 className="font-serif font-light text-cream text-[2.4rem] mb-4">Got 2 minutes?</h1>
         {/* <p className="text-muted-strong max-w-[420px] leading-[1.7] mb-8">
           We&apos;re building a better way to gift someone back home. A few honest answers shape what we build next — not a generic survey, a real conversation.
         </p> */}
-        <p className="text-muted-strong max-w-[420px] leading-[1.7] mb-8">
-          No essays. Tap the answer closest to yours, add a thought if you want, and keep moving. We are listening.
+        <p className="text-muted-strong max-w-[420px] leading-[1.8] mb-8">
+           A few honest answers shape what we build. Tap the answer closest to yours, add a thought if you want, and keep moving. We are listening. 
         </p>
         <button
           onClick={() => setStage("question")}
-          className="bg-gold text-ink rounded-lg px-9 py-4 font-sans font-medium text-[0.85rem] tracking-[0.12em] uppercase hover:bg-gold-light transition-all"
+          className="bg-gold text-ink rounded-lg px-9 py-4 font-sans font-semibold text-[0.95rem] tracking-[0.2em] uppercase hover:bg-gold-light transition-all"
         >
           Let&apos;s go →
         </button>
-        <div className="text-muted text-[0.75rem] mt-4">Takes about 2 minutes · Saves as you go</div>
+        <div className="text-muted text-[0.85rem] mt-4">Takes about 2 minutes · Saves as you go</div>
       </div>
     );
   }
@@ -377,7 +377,7 @@ export default function SurveyFlow() {
   if (stage === "outro") {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-10">
-      <div className="text-gold text-[0.7rem] tracking-[0.2em] uppercase mb-4">Ebun</div>
+      <div className="text-gold text-[0.95rem] font-semibold tracking-[0.4em] uppercase mb-4">Ebun</div>
       <h1 className="font-serif font-light text-cream text-[2rem] mb-2">One more thing.</h1>
       <p className="text-muted mb-6">Scratch the card below.</p>
 
@@ -436,25 +436,25 @@ export default function SurveyFlow() {
   return (
     <div className="min-h-screen flex flex-col max-w-[560px] mx-auto px-5">
       <div className="flex items-center justify-between pt-6 pb-2">
-        <div className="text-gold text-[0.7rem] tracking-[0.2em] uppercase">Ebun</div>
-        <div className="text-muted text-[0.75rem]">{currentStep + 1} / {visibleSteps.length}</div>
+        <div className="text-gold text-[0.9rem] font-semibold tracking-[0.3em] uppercase">Ebun</div>
+        <div className="text-muted text-[0.85rem]">{currentStep + 1} / {visibleSteps.length}</div>
       </div>
       <div className="h-1 bg-[rgba(255,255,255,0.08)] rounded-full overflow-hidden mb-6">
         <div className="h-full bg-gold transition-all duration-300" style={{ width: `${pct}%` }} />
       </div>
 
       <div className="flex-1 flex flex-col justify-center py-6">
-        <div className="text-gold text-[0.72rem] tracking-[0.14em] uppercase mb-2">{step.eyebrow}</div>
-        <div className={`font-serif text-[1.5rem] leading-snug mb-2 transition-colors ${shakeError ? "text-[#E0897A]" : "text-cream"}`}>
+        <div className="text-gold text-[0.85rem] tracking-[0.14em] uppercase mb-2">{step.eyebrow}</div>
+        <div className={`text-[1.5rem] leading-snug mb-2 transition-colors ${shakeError ? "text-[#E0897A]" : "text-cream"}`}>
           {step.question}
         </div>
         {step.hint && <div className="text-muted text-[0.85rem] mb-5">{step.hint}</div>}
 
         {step.type === "chips-single" && (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {step.options!.map((opt) => (
               <button key={opt} onClick={() => setAnswer(step.key, opt)}
-                className={`px-4 py-3 rounded-full border text-[0.85rem] transition-all ${responses[step.key] === opt ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold"}`}>
+                className={`px-4 py-3 rounded-full border text-[0.9rem] transition-all ${responses[step.key] === opt ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold-dark"}`}>
                 {opt}
               </button>
             ))}
@@ -462,13 +462,13 @@ export default function SurveyFlow() {
         )}
 
         {step.type === "chips-multi" && (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {step.options!.map((opt) => {
               const sel = asStringArray(responses[step.key]);
               const active = sel.includes(opt);
               return (
                 <button key={opt} onClick={() => setAnswer(step.key, active ? sel.filter((v) => v !== opt) : [...sel, opt])}
-                  className={`px-4 py-3 rounded-full border text-[0.85rem] transition-all ${active ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold"}`}>
+                  className={`px-4 py-3 rounded-full border text-[0.9rem] transition-all ${active ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold-dark"}`}>
                   {opt}
                 </button>
               );
@@ -480,7 +480,7 @@ export default function SurveyFlow() {
           <div className="flex gap-3">
             {["Yes", "No"].map((opt) => (
               <button key={opt} onClick={() => setAnswer(step.key, opt)}
-                className={`flex-1 py-4 rounded-lg border text-[0.9rem] transition-all ${responses[step.key] === opt ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold"}`}>
+                className={`flex-1 py-4 rounded-lg border text-[0.9rem] transition-all ${responses[step.key] === opt ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold-dark"}`}>
                 {opt}
               </button>
             ))}
@@ -491,7 +491,7 @@ export default function SurveyFlow() {
   <div>
     {step.pills && (
       <div className="mb-4">
-        <p className="mb-2 text-[0.72rem] text-gold-light">
+        <p className="mb-2 text-[0.9rem] text-gold-light">
           Need a nudge? Tap a thought that feels close.
         </p>
 
@@ -504,10 +504,10 @@ export default function SurveyFlow() {
                 key={pill}
                 type="button"
                 onClick={() => setAnswer(step.key, pill)}
-                className={`rounded-lg border px-3 py-2.5 text-left text-[0.78rem] leading-[1.45] transition-all ${
+                className={`rounded-lg border px-3 py-2.5 text-left text-[0.9rem] leading-[1.45] transition-all ${
                   active
                     ? "border-gold bg-gold text-ink font-medium"
-                    : "border-[rgba(201,168,76,0.3)] bg-gold/5 text-gold-light hover:border-gold hover:bg-gold/10"
+                    : "border-[rgba(201,168,76,0.3)] bg-gold/5 text-gold-light hover:border-gold-dark hover:bg-gold/10"
                 }`}
               >
                 {pill}
@@ -558,10 +558,10 @@ export default function SurveyFlow() {
                       key={preset.label}
                       type="button"
                       onClick={() => setAnswer(step.key, preset.values)}
-                      className={`rounded-full border px-3 py-2 text-[0.72rem] transition-all ${
+                      className={`rounded-full border px-3 py-2 text-[0.9rem] tracking-wide transition-all ${
                         active
                           ? "border-gold bg-gold text-ink font-medium"
-                          : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold"
+                          : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold-dark"
                       }`}
                     >
                       {preset.label}
@@ -575,7 +575,7 @@ export default function SurveyFlow() {
               const pair = asNumberRecord(responses[step.key]);
               return (
                 <div key={f.key} className="flex-1">
-                  <label className="block text-muted text-[0.72rem] mb-1">{f.label}</label>
+                  <label className="block text-muted text-[0.75rem] mb-1">{f.label}</label>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -595,7 +595,7 @@ export default function SurveyFlow() {
         )}
 
         {!step.required && (
-          <button onClick={() => goNext(true)} className="mt-4 text-muted text-[0.78rem] underline underline-offset-4 hover:text-gold-light self-start">
+          <button onClick={() => goNext(true)} className="mt-4 text-muted text-[0.85rem] underline underline-offset-4 hover:text-gold-light self-start">
             Skip this one
           </button>
         )}
@@ -605,11 +605,11 @@ export default function SurveyFlow() {
         <button onClick={goBack} className={`text-muted text-[0.85rem] hover:text-cream ${currentStep === 0 ? "invisible" : ""}`}>
           ← Back
         </button>
-        <button onClick={() => goNext()} className="bg-gold text-ink rounded-lg px-7 py-3 font-medium text-[0.85rem] tracking-[0.1em] uppercase hover:bg-gold-light transition-all">
+        <button onClick={() => goNext()} className="bg-gold text-ink rounded-lg px-7 py-3 font-semibold text-[0.85rem] tracking-[0.2em] uppercase hover:bg-gold-light transition-all">
           {currentStep === visibleSteps.length - 1 ? "Finish" : "Next →"}
         </button>
       </div>
-      <div className="text-muted text-[0.72rem] text-center pb-4">Your answers help shape Ebun directly — thank you.</div>
+      <div className="text-muted text-[0.85rem] tracking-wide text-center pb-4">Your answers help shape Ebun directly. Thank you!</div>
     </div>
   );
 }
