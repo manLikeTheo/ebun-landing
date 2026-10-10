@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import CustomCursor from "./components/CustomCursor";
 import NoiseOverlay from "./components/NoiseOverlay";
 import Navbar from "./components/Navbar";
@@ -15,6 +16,12 @@ import EarlyAccess from "./sections/EarlyAccess";
 import Footer from "./sections/Footer";
 import { WaitlistModalProvider } from "./context/WaitlistModalContext";
 import WaitlistModal from "./components/WaitlistModal";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://ebun.com.ng",
+  },
+};
 
 export default function Home() {
   return (

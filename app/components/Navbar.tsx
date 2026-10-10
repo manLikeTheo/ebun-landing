@@ -61,10 +61,10 @@ const handlePrelaunchCta = () => {
           How it works
         </a>
         <a
-          href="#stories"
+          href="#use-cases"
           className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.98)] hover:text-gold-light transition-colors duration-300"
         >
-          Stories
+          Use Cases
         </a>
         <a
           href="#corporate"

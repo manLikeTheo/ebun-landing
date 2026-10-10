@@ -19,14 +19,23 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.ebun.com.ng"),
-  title: "Ebun — Send a Meaningful Gift to Anyone in Nigeria",
+  metadataBase: new URL("https://ebun.com.ng"),
+  title: "Ebun — Digital Gifting in Nigeria | TadecLabs Innovations",
   description:
-    "Nigeria's digital gifting platform. Send a real gift with a personal video or voice note — no address, no app, just a phone number.",
+    "Ebun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
   openGraph: {
-    title: "Ebun — The Gift of Giving, Reimagined",
-    description: "Send a real, meaningful gift to anyone in Nigeria in under 3 minutes.",
-    images: ["/og-image.jpg"],
+    type: "website",
+    locale: "en_NG",
+    siteName: "Ebun",
+    title: "Ebun — Digital Gifting in Nigeria | TadecLabs Innovations",
+    description:
+      "Ebun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Ebun — Digital Gifting in Nigeria | TadecLabs Innovations",
+    description:
+      "Ebun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
   },
 };
 
