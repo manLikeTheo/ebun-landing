@@ -21,7 +21,7 @@ const benefits = [
 
 export default function Corporate() {
   return (
-    <section id="corporate" className="bg-ink-2 border-t border-b border-[rgba(201,168,76,0.07)]">
+    <section id="corporate" className="bg-ink-2 border-t border-b border-[rgba(var(--gold-rgb),0.07)]">
       <div className="max-w-[1080px] mx-auto py-[120px] px-6 md:px-[52px] grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
         <RevealOnScroll>
           <SectionEyebrow text="For Companies and  Corporate Organizations" />
@@ -34,12 +34,12 @@ export default function Corporate() {
               At scale.
             </em>
           </h2>
-          <p className="text-[1rem] text-[rgba(245,239,224,0.75)] leading-[1.85] mb-10">
+          <p className="text-[1rem] text-[rgba(var(--cream-rgb),0.75)] leading-[1.85] mb-10">
             One campaign. One payment. Every person receives a personalised gift with your messages attached... and you receive a full report.
           </p>
           <ul className="flex flex-col gap-[18px] mb-10">
             {benefits.map((b) => (
-              <li key={b} className="flex items-start gap-[14px] text-[0.9rem] text-[rgba(245,239,224,0.68)] leading-[1.75]">
+              <li key={b} className="flex items-start gap-[14px] text-[0.9rem] text-[rgba(var(--cream-rgb),0.68)] leading-[1.75]">
                 <span className="w-[18px] h-[18px] min-w-[18px] border border-gold-dark rounded-full flex items-center justify-center text-[0.6rem] text-gold mt-[2px]">
                   <Check className="w-3 h-3" strokeWidth={2} />
                 </span>
@@ -51,14 +51,14 @@ export default function Corporate() {
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.2}>
-          <div className="grid grid-cols-2 gap-[2px] bg-[rgba(201,168,76,0.07)]">
+          <div className="grid grid-cols-2 gap-[2px] bg-[rgba(var(--gold-rgb),0.07)]">
             {stats.map((s) => (
               <div key={s.label} className="bg-ink p-8">
                 <div className="font-serif text-[2.8rem] font-light text-gold leading-none mb-2">
                   {s.num}
                   {s.unit && <span className="text-[1.3rem]">{s.unit}</span>}
                 </div>
-                <div className="text-[0.78rem] text-[rgba(245,239,224,0.68)]">{s.label}</div>
+                <div className="text-[0.78rem] text-[rgba(var(--cream-rgb),0.68)]">{s.label}</div>
               </div>
             ))}
           </div>

@@ -25,7 +25,7 @@ export default function EarlyAccess() {
             celebrated.
           </em>{" "}
         </h2>
-        <p className="text-base text-[rgba(245,239,224,0.58)] mb-12">
+        <p className="text-base text-[rgba(var(--cream-rgb),0.58)] mb-12">
           It should take only a few seconds. It should last much longer than that....
           {" "}
           <em className="text-gold" style={{ fontStyle: "italic" }}>

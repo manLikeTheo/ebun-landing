@@ -63,19 +63,19 @@ export default function Categories() {
             </div>
 
             <p className="max-w-[360px] text-[0.9rem] leading-[1.85] text-muted-strong md:pb-2">
-              Ebun begins with the kinds of gifts people already reach for when
+              SendEbun begins with the kinds of gifts people already reach for when
               they want someone to feel remembered.
             </p>
           </div>
         </RevealOnScroll>
 
-        <div className="mt-14 grid grid-cols-1 gap-[2px] bg-[rgba(226,192,122,0.14)] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-[2px] bg-[rgba(var(--gold-lt-rgb),0.14)] sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category, index) => {
             const Icon = category.icon;
 
             return (
               <RevealOnScroll key={category.title} delay={index * 0.08}>
-                <article className="group h-full overflow-hidden bg-ink-2 transition-colors duration-500 hover:bg-[#1B1813]">
+                <article className="group h-full overflow-hidden bg-ink-2 transition-colors duration-500 hover:bg-ink-3">
                   <div className="relative h-[230px] overflow-hidden">
                     <Image
                       src={category.image}
@@ -84,8 +84,8 @@ export default function Categories() {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       className="object-cover transition-transform duration-[1100ms] ease-out group-hover:scale-[1.06]"
                     />
-                    <div className="absolute inset-0 bg-[rgba(14,13,11,0.28)] mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-[rgba(14,13,11,0.22)] to-transparent" />
+                    <div className="absolute inset-0 bg-[rgba(var(--ink-rgb),0.28)] mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-[rgba(var(--ink-rgb),0.22)] to-transparent" />
 
                     <div className="absolute left-5 top-5 flex items-center gap-2">
                       <span className="text-[0.62rem] tracking-[0.2em] text-gold-champagne">
@@ -94,7 +94,7 @@ export default function Categories() {
                       <span className="h-px w-7 bg-gold/50" />
                     </div>
 
-                    <div className="absolute bottom-5 left-5 flex h-10 w-10 items-center justify-center rounded-full border border-gold/35 bg-[rgba(14,13,11,0.72)] backdrop-blur-sm">
+                    <div className="absolute bottom-5 left-5 flex h-10 w-10 items-center justify-center rounded-full border border-gold/35 bg-[rgba(var(--ink-rgb),0.72)] backdrop-blur-sm">
                       <Icon className="h-[18px] w-[18px] text-gold" strokeWidth={1.5} />
                     </div>
                   </div>
@@ -111,7 +111,7 @@ export default function Categories() {
                       {category.examples.map((example) => (
                         <span
                           key={example}
-                          className="border border-[rgba(226,192,122,0.2)] px-2.5 py-1 text-[0.6rem] uppercase tracking-[0.1em] text-[rgba(226,192,122,0.90)]"
+                          className="border border-[rgba(var(--gold-lt-rgb),0.2)] px-2.5 py-1 text-[0.6rem] uppercase tracking-[0.1em] text-[rgba(var(--gold-lt-rgb),0.90)]"
                         >
                           {example}
                         </span>
@@ -187,16 +187,16 @@ export default function Categories() {
 //               giving.
 //             </em>
 //           </h2>
-//           <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] max-w-[560px] mb-14">
+//           <p className="text-[0.95rem] text-[rgba(var(--cream-rgb),0.68)] leading-[1.85] max-w-[560px] mb-14">
 //             Every category curated with Nigerian vendors and brands people
 //             genuinely love — from a ₦2,000 gesture to a milestone celebration.
 //           </p>
 //         </RevealOnScroll>
 
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-[rgba(201,168,76,0.1)]">
+//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-[rgba(var(--gold-rgb),0.1)]">
 //           {categories.map((cat, i) => (
 //             <RevealOnScroll key={cat.title} delay={i * 0.1}>
-//               <div className="bg-ink-2 group h-full overflow-hidden transition-colors duration-500 hover:bg-[#191713]">
+//               <div className="bg-ink-2 group h-full overflow-hidden transition-colors duration-500 hover:bg-ink-3">
 //                 {/* Image */}
 //                 <div className="relative h-[190px] w-full overflow-hidden">
 //                   <Image
@@ -207,11 +207,11 @@ export default function Categories() {
 //                     className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
 //                   />
 //                   {/* Warm tint + fade into card */}
-//                   <div className="absolute inset-0 bg-[rgba(14,13,11,0.35)] mix-blend-multiply" />
-//                   <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-[rgba(14,13,11,0.35)] to-transparent" />
+//                   <div className="absolute inset-0 bg-[rgba(var(--ink-rgb),0.35)] mix-blend-multiply" />
+//                   <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-[rgba(var(--ink-rgb),0.35)] to-transparent" />
 
 //                   {/* Icon badge */}
-//                   <div className="absolute bottom-4 left-6 w-9 h-9 rounded-full border border-[rgba(201,168,76,0.4)] bg-[rgba(14,13,11,0.7)] backdrop-blur-sm flex items-center justify-center">
+//                   <div className="absolute bottom-4 left-6 w-9 h-9 rounded-full border border-[rgba(var(--gold-rgb),0.4)] bg-[rgba(var(--ink-rgb),0.7)] backdrop-blur-sm flex items-center justify-center">
 //                     <cat.icon className="w-4 h-4 text-gold" strokeWidth={1.5} />
 //                   </div>
 //                 </div>
@@ -221,7 +221,7 @@ export default function Categories() {
 //                   <h3 className="font-serif text-[1.4rem] font-light text-cream mb-2.5 tracking-wide">
 //                     {cat.title}
 //                   </h3>
-//                   <p className="text-[0.82rem] text-[rgba(245,239,224,0.68)] leading-[1.8]">
+//                   <p className="text-[0.82rem] text-[rgba(var(--cream-rgb),0.68)] leading-[1.8]">
 //                     {cat.body}
 //                   </p>
 //                 </div>
@@ -231,7 +231,7 @@ export default function Categories() {
 //         </div>
 
 //         <RevealOnScroll delay={0.5}>
-//           <p className="text-center text-[0.85rem] tracking-[0.16em] uppercase text-[rgba(201,168,76,0.65)] mt-14">
+//           <p className="text-center text-[0.85rem] tracking-[0.16em] uppercase text-[rgba(var(--gold-rgb),0.65)] mt-14">
 //             Onboarding founding vendor partners across Nigeria.
 //           </p>
 //         </RevealOnScroll>

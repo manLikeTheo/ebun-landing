@@ -1,88 +1,19 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import colors from "@/brand/colors.json";
 
-export const size = {
-  width: 64,
-  height: 64,
-};
-
+export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
-export default function Icon() {
+export default async function Icon() {
+  const artwork = await readFile(join(process.cwd(), "public/brand/sendebun-logo-original.png"));
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#0E0D0B",
-        }}
-      >
-        <div
-          style={{
-            width: 48,
-            height: 48,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: "1px solid rgba(201,168,76,0.55)",
-            borderRadius: "50%",
-          }}
-        >
-          <div
-             style={{
-            position: "relative",
-            display: "flex",
-            width: 18,
-            height: 20,
-        }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                left: 0,
-                top: 0,
-                width: 2,
-                height: 20,
-                background: "#C9A84C",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                left: 0,
-                top: 0,
-                width: 15,
-                height: 2,
-                background: "#C9A84C",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                left: 0,
-                top: 9,
-                width: 11,
-                height: 2,
-                background: "#C9A84C",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                left: 0,
-                bottom: 0,
-                width: 15,
-                height: 2,
-                background: "#C9A84C",
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    ),
-    size
+    <div style={{ display: "flex", position: "relative", overflow: "hidden", width: 64, height: 64, background: colors.text, borderRadius: 10 }}>
+      {/* ImageResponse requires a native img; this is not a browser image. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`data:image/png;base64,${artwork.toString("base64")}`} alt="" width={182.4} height={182.4} style={{ position: "absolute", left: -59.52, top: -39.04 }} />
+    </div>,
+    size,
   );
 }

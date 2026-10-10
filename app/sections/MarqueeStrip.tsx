@@ -21,7 +21,7 @@ export default function MarqueeStrip() {
           </span>
           {/* {group.items.map((city, ci) => (
             <div key={ci} className="flex items-center gap-12">
-              <span className="font-serif font-semibold tracking-wider text-[1rem] text-[rgba(245,239,244,0.85)] whitespace-nowrap">
+              <span className="font-serif font-semibold tracking-wider text-[1rem] text-[rgba(var(--cream-rgb),0.85)] whitespace-nowrap">
                 {city}
               </span>
               <div className="w-[5px] h-[5px] rounded-full bg-gold-dark opacity-35" />
@@ -33,7 +33,7 @@ export default function MarqueeStrip() {
   );
 
   return (
-  <div className="py-7 border-t border-b border-[rgba(201,168,76,0.07)] overflow-hidden bg-[rgba(201,168,76,0.02)] backdrop-blur-[24px]">
+  <div className="py-7 border-t border-b border-[rgba(var(--gold-rgb),0.07)] overflow-hidden bg-[rgba(var(--gold-rgb),0.02)] backdrop-blur-[24px]">
     <div className="flex animate-marquee whitespace-nowrap">
       {/* {content} */}
       {content}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import "../brand/tokens.css";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -12,7 +13,7 @@ const cormorant = Cormorant_Garamond({
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-dm-sans",
   display: "swap",
@@ -20,22 +21,22 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ebun.com.ng"),
-  title: "Ebun — Digital Gifting in Nigeria | TadecLabs Innovations",
+  title: "SendEbun — Digital Gifting in Nigeria | TadecLabs Innovations",
   description:
-    "Ebun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
+    "SendEbun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
   openGraph: {
     type: "website",
     locale: "en_NG",
-    siteName: "Ebun",
-    title: "Ebun — Digital Gifting in Nigeria | TadecLabs Innovations",
+    siteName: "SendEbun",
+    title: "SendEbun — Digital Gifting in Nigeria | TadecLabs Innovations",
     description:
-      "Ebun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
+      "SendEbun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
   },
   twitter: {
     card: "summary",
-    title: "Ebun — Digital Gifting in Nigeria | TadecLabs Innovations",
+    title: "SendEbun — Digital Gifting in Nigeria | TadecLabs Innovations",
     description:
-      "Ebun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
+      "SendEbun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
   },
 };
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
+import BrandLogo from "./BrandLogo";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -33,49 +34,37 @@ const handlePrelaunchCta = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-[100] flex items-center justify-between transition-all duration-400",
         scrolled
-          ? "py-[18px] px-[52px] bg-[rgba(14,13,11,0.93)] backdrop-blur-[24px] border-b border-[rgba(226,192,122,0.14)]"
-          : "py-7 px-[52px] border-b border-transparent"
+          ? "py-[18px] px-4 md:px-[52px] bg-ink-deep/95 backdrop-blur-[24px] border-b border-gold/20"
+          : "py-7 px-4 md:px-[52px] bg-ink/70 backdrop-blur-sm border-b border-gold/10"
       )}
     >
-      <a href="#" className="flex items-center gap-3 no-underline">
-        <div className="w-[34px] h-[34px]">
-          <svg viewBox="0 0 36 36" fill="none" className="w-full h-full">
-            <circle cx="18" cy="18" r="16.5" stroke="#C9A84C" strokeWidth="0.7" opacity="0.35" />
-            <rect x="11" y="10" width="2" height="16" fill="#C9A84C" />
-            <rect x="11" y="10" width="10" height="2" fill="#C9A84C" />
-            <rect x="11" y="17" width="7.5" height="2" fill="#C9A84C" />
-            <rect x="11" y="24" width="10" height="2" fill="#C9A84C" />
-            <circle cx="24" cy="11.2" r="1.8" fill="#C9A84C" opacity="0.55" />
-          </svg>
-        </div>
-        <span className="font-serif text-[1.55rem] font-medium tracking-[0.09em] text-gold leading-none">
-          Ebun
-        </span>
+      <a href="#" className="flex shrink-0 items-center no-underline" aria-label="SendEbun home">
+        <BrandLogo />
       </a>
 
-      <div className="flex items-center gap-9">
+      <div className="flex items-center gap-3 lg:gap-9">
         <a
           href="#how"
-          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.98)] hover:text-gold-light transition-colors duration-300"
+          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(var(--cream-rgb),0.98)] hover:text-gold-light transition-colors duration-300"
         >
           How it works
         </a>
         <a
           href="#use-cases"
-          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.98)] hover:text-gold-light transition-colors duration-300"
+          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(var(--cream-rgb),0.98)] hover:text-gold-light transition-colors duration-300"
         >
           Use Cases
         </a>
         <a
           href="#corporate"
-          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(245,239,224,0.98)] hover:text-gold-light transition-colors duration-300"
+          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(var(--cream-rgb),0.98)] hover:text-gold-light transition-colors duration-300"
         >
           Corporate
         </a>
         <button
           type="button"
           onClick={handlePrelaunchCta}
-          className="border border-gold-dark bg-transparent px-[22px] py-[9px] font-sans text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold transition-all duration-300 hover:border-gold hover:bg-gold hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light"
+          className="min-h-11 border border-gold/60 bg-transparent px-3 py-[9px] font-sans text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-gold transition-all duration-300 sm:px-[22px] sm:text-[0.72rem] sm:tracking-[0.16em] hover:border-amber hover:bg-amber hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light"
         >
           Join Early Access
         </button>

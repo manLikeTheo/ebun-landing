@@ -109,7 +109,7 @@ export default function WaitlistScratchCard() {
   };
 
   return (
-    <div className="max-w-[440px] mx-auto bg-ink-2 border border-[rgba(201,168,76,0.14)] rounded-[14px] p-9 text-center">
+    <div className="max-w-[440px] mx-auto bg-ink-2 border border-[rgba(var(--gold-rgb),0.14)] rounded-[14px] p-9 text-center">
       {!hasJoined ? (
         <div>
           <input
@@ -132,7 +132,7 @@ export default function WaitlistScratchCard() {
               onChange={(e) => setCountryCode(e.target.value)}
               disabled={loading}
               aria-label="Country code"
-              className="w-[100px] bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg text-cream text-[0.85rem] px-2 h-[46px] outline-none focus:border-gold disabled:opacity-50"
+              className="w-[100px] bg-ink-3 border border-[rgba(var(--gold-rgb),0.2)] rounded-lg text-cream text-[0.85rem] px-2 h-[46px] outline-none focus:border-gold disabled:opacity-50"
             >
               {COUNTRY_CODES.map((c) => (
                 <option key={c.code} value={c.code} className="bg-ink text-cream">
@@ -148,10 +148,10 @@ export default function WaitlistScratchCard() {
               disabled={loading}
               aria-describedby={error ? "phoneError" : undefined}
               onChange={(e) => setPhone(e.target.value)}
-              className="flex-1 bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg text-cream text-[0.95rem] px-[14px] h-[46px] outline-none focus:border-gold disabled:opacity-50"
+              className="flex-1 bg-ink-3 border border-[rgba(var(--gold-rgb),0.2)] rounded-lg text-cream text-[0.95rem] px-[14px] h-[46px] outline-none focus:border-gold disabled:opacity-50"
             />
           </div>
-          <div id="phoneError" role="alert" aria-live="polite" className="text-[#E0897A] text-[0.76rem] text-left min-h-[18px] my-1">
+          <div id="phoneError" role="alert" aria-live="polite" className="text-error text-[0.76rem] text-left min-h-[18px] my-1">
             {error}
           </div>
 
@@ -169,7 +169,7 @@ export default function WaitlistScratchCard() {
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="w-full bg-gold text-ink rounded-lg py-[15px] font-sans font-medium text-[0.78rem] tracking-[0.14em] uppercase transition-all hover:bg-gold-light hover:-translate-y-0.5 shadow-[0_4px_26px_rgba(201,168,76,0.22)] disabled:opacity-60"
+            className="w-full bg-amber text-ink rounded-lg py-[15px] font-sans font-medium text-[0.78rem] tracking-[0.14em] uppercase transition-all hover:bg-amber-light hover:-translate-y-0.5 shadow-[0_4px_26px_rgba(var(--gold-rgb),0.22)] disabled:opacity-60"
           >
             {loading ? "Joining..." : "Join early access"}
           </button>
@@ -184,7 +184,7 @@ export default function WaitlistScratchCard() {
                 value={email}
                 disabled={loading}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full mt-3 bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg text-cream text-[0.9rem] px-[14px] h-[42px] outline-none focus:border-gold disabled:opacity-50"
+                className="w-full mt-3 bg-ink-3 border border-[rgba(var(--gold-rgb),0.2)] rounded-lg text-cream text-[0.9rem] px-[14px] h-[42px] outline-none focus:border-gold disabled:opacity-50"
               />
             </>
           )}
@@ -204,7 +204,7 @@ export default function WaitlistScratchCard() {
           </div>
           <button
             onClick={() => setModalOpen(true)}
-            className="mt-2 border border-[rgba(201,168,76,0.35)] rounded-lg px-6 py-[12px] text-gold text-[0.74rem] tracking-[0.14em] uppercase transition-all hover:border-gold hover:text-gold-light hover:bg-[rgba(201,168,76,0.06)]"
+            className="mt-2 border border-[rgba(var(--gold-rgb),0.35)] rounded-lg px-6 py-[12px] text-gold text-[0.74rem] tracking-[0.14em] uppercase transition-all hover:border-gold hover:text-gold-light hover:bg-[rgba(var(--gold-rgb),0.06)]"
           >
             View your invite
           </button>

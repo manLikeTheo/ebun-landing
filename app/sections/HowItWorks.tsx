@@ -73,7 +73,7 @@ export default function HowItWorks() {
               One moment they&apos;ll remember.
             </em>
           </h2>
-          <p className="text-[1rem] text-[rgba(245,239,224,0.8)] leading-[1.85] max-w-[560px] mb-16">
+          <p className="text-[1rem] text-[rgba(var(--cream-rgb),0.8)] leading-[1.85] max-w-[560px] mb-16">
             No address to chase. No app for them to install. Just a thoughtful gift, your voice, and a reveal that makes the distance disappear.
           </p>
         </RevealOnScroll>
@@ -89,7 +89,7 @@ export default function HowItWorks() {
                     className="h-[1px] flex-1"
                     style={{
                       background:
-                        "linear-gradient(90deg, rgba(201,168,76,0.45), rgba(201,168,76,0.12))",
+                        "linear-gradient(90deg, rgba(var(--gold-rgb),0.45), rgba(var(--gold-rgb),0.12))",
                     }}
                   />
                 )}
@@ -98,25 +98,25 @@ export default function HowItWorks() {
           </div>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-[rgba(201,168,76,0.08)]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-[rgba(var(--gold-rgb),0.08)]">
           {steps.map((step, i) => (
             <RevealOnScroll key={step.num} delay={i * 0.1}>
-              <div className="bg-ink-2 relative overflow-hidden group h-full transition-colors duration-500 hover:bg-[#191713] px-9 py-14">
+              <div className="bg-ink-2 relative overflow-hidden group h-full transition-colors duration-500 hover:bg-ink-3 px-9 py-14">
                 {/* Hover top edge */}
                 <div
                   className="absolute top-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-700 ease-out"
                   style={{
                     background:
-                      "linear-gradient(90deg, var(--gold), rgba(201,168,76,0))",
+                      "linear-gradient(90deg, var(--gold), rgba(var(--gold-rgb),0))",
                   }}
                 />
 
                 {/* Ghost number */}
                 <div
-                  className="absolute -top-2 right-5 font-serif font-light leading-none select-none pointer-events-none transition-all duration-500 group-hover:text-[rgba(201,168,76,0.12)]"
+                  className="absolute -top-2 right-5 font-serif font-light leading-none select-none pointer-events-none transition-all duration-500 group-hover:text-[rgba(var(--gold-rgb),0.12)]"
                   style={{
                     fontSize: "7rem",
-                    color: "rgba(201,168,76,0.06)",
+                    color: "rgba(var(--gold-rgb),0.06)",
                   }}
                 >
                   {step.num}
@@ -128,7 +128,7 @@ export default function HowItWorks() {
                       className="w-[22px] h-[22px] text-gold"
                       strokeWidth={1.5}
                     />
-                    <span className="text-[0.62rem] tracking-[0.22em] uppercase text-[rgba(201,168,76,0.65)]">
+                    <span className="text-[0.62rem] tracking-[0.22em] uppercase text-[rgba(var(--gold-rgb),0.65)]">
                       Step {step.num}
                     </span>
                   </div>
@@ -137,7 +137,7 @@ export default function HowItWorks() {
                     {step.title}
                   </h3>
 
-                  <p className="text-[0.87rem] text-[rgba(245,239,224,0.7)] leading-[1.85]">
+                  <p className="text-[0.87rem] text-[rgba(var(--cream-rgb),0.7)] leading-[1.85]">
                     {step.body}
                   </p>
                 </div>
@@ -148,7 +148,7 @@ export default function HowItWorks() {
 
         {/* Closing line */}
         <RevealOnScroll delay={0.5}>
-          <p className="text-center text-[0.8rem] tracking-[0.18em] uppercase text-[rgba(201,168,76,0.55)] mt-14">
+          <p className="text-center text-[0.8rem] tracking-[0.18em] uppercase text-[rgba(var(--gold-rgb),0.55)] mt-14">
             Under two minutes · From anywhere in the world
           </p>
         </RevealOnScroll>
@@ -204,13 +204,13 @@ export default function HowItWorks() {
 
 // function RevealPreview() {
 //   return (
-//     <div className="relative overflow-hidden border border-[rgba(226,192,122,0.2)] bg-[#11100D] p-5 sm:p-7">
+//     <div className="relative overflow-hidden border border-[rgba(var(--gold-lt-rgb),0.2)] bg-[#11100D] p-5 sm:p-7">
 //       <div
 //         aria-hidden="true"
-//         className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.16),transparent_68%)]"
+//         className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(var(--gold-rgb),0.16),transparent_68%)]"
 //       />
 
-//       <div className="relative flex items-center justify-between border-b border-[rgba(226,192,122,0.14)] pb-4">
+//       <div className="relative flex items-center justify-between border-b border-[rgba(var(--gold-lt-rgb),0.14)] pb-4">
 //         <div>
 //           <p className="text-[0.62rem] uppercase tracking-[0.2em] text-gold">
 //             A gift is waiting
@@ -224,7 +224,7 @@ export default function HowItWorks() {
 //         </div>
 //       </div>
 
-//       <div className="relative mt-5 rounded-[18px] border border-[rgba(226,192,122,0.18)] bg-ink p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
+//       <div className="relative mt-5 rounded-[18px] border border-[rgba(var(--gold-lt-rgb),0.18)] bg-ink p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
 //         <div className="flex items-center gap-3">
 //           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/15">
 //             <MessageCircle className="h-4 w-4 text-gold-light" strokeWidth={1.5} />
@@ -235,9 +235,9 @@ export default function HowItWorks() {
 //           </div>
 //         </div>
 
-//         <div className="mt-4 overflow-hidden rounded-xl border border-[rgba(226,192,122,0.14)] bg-ink-2">
-//           <div className="flex aspect-[16/9] items-center justify-center bg-[radial-gradient(circle_at_50%_25%,rgba(201,168,76,0.18),transparent_42%),linear-gradient(135deg,#211C15,#0E0D0B)]">
-//             <div className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/40 bg-[rgba(14,13,11,0.7)]">
+//         <div className="mt-4 overflow-hidden rounded-xl border border-[rgba(var(--gold-lt-rgb),0.14)] bg-ink-2">
+//           <div className="flex aspect-[16/9] items-center justify-center bg-[radial-gradient(circle_at_50%_25%,rgba(var(--gold-rgb),0.18),transparent_42%),linear-gradient(135deg,#211C15,#0E0D0B)]">
+//             <div className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/40 bg-[rgba(var(--ink-rgb),0.7)]">
 //               <Video className="h-4 w-4 text-gold-champagne" strokeWidth={1.5} />
 //             </div>
 //           </div>
@@ -260,7 +260,7 @@ export default function HowItWorks() {
 //         </div>
 //       </div>
 
-//       <p className="relative mt-5 text-center text-[0.63rem] uppercase tracking-[0.18em] text-[rgba(226,192,122,0.65)]">
+//       <p className="relative mt-5 text-center text-[0.63rem] uppercase tracking-[0.18em] text-[rgba(var(--gold-lt-rgb),0.65)]">
 //         A simple gift, choreographed into a moment
 //       </p>
 //     </div>
@@ -272,7 +272,7 @@ export default function HowItWorks() {
 //     <section id="how" className="relative overflow-hidden py-[120px] px-6 md:px-[52px]">
 //       <div
 //         aria-hidden="true"
-//         className="pointer-events-none absolute left-0 top-20 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.055),transparent_68%)]"
+//         className="pointer-events-none absolute left-0 top-20 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(var(--gold-rgb),0.055),transparent_68%)]"
 //       />
 
 //       <div className="relative mx-auto max-w-[1080px]">
@@ -298,17 +298,17 @@ export default function HowItWorks() {
 //           </RevealOnScroll>
 //         </div>
 
-//         <div className="relative mt-20 grid grid-cols-1 gap-[2px] bg-[rgba(226,192,122,0.13)] md:grid-cols-2 lg:grid-cols-4">
+//         <div className="relative mt-20 grid grid-cols-1 gap-[2px] bg-[rgba(var(--gold-lt-rgb),0.13)] md:grid-cols-2 lg:grid-cols-4">
 //           {steps.map((step, index) => {
 //             const Icon = step.icon;
 
 //             return (
 //               <RevealOnScroll key={step.num} delay={index * 0.08}>
-//                 <article className="group relative h-full overflow-hidden bg-ink-2 p-8 transition-colors duration-500 hover:bg-[#1B1813] md:p-9">
+//                 <article className="group relative h-full overflow-hidden bg-ink-2 p-8 transition-colors duration-500 hover:bg-ink-3 md:p-9">
 //                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-dark to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
 //                   <div className="mb-10 flex items-start justify-between">
-//                     <span className="font-serif text-[2.6rem] font-light leading-none text-[rgba(201,168,76,0.65)] transition-colors duration-500 group-hover:text-gold">
+//                     <span className="font-serif text-[2.6rem] font-light leading-none text-[rgba(var(--gold-rgb),0.65)] transition-colors duration-500 group-hover:text-gold">
 //                       {step.num}
 //                     </span>
 //                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/25 bg-gold/5 transition-colors duration-300 group-hover:bg-gold/10">

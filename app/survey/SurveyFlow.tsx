@@ -1,4 +1,5 @@
 "use client";
+import brandColors from "@/brand/colors.json";
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -124,7 +125,7 @@ const STEPS: Step[] = [
   {
     key: "reveal_usecase",
     eyebrow: "Question 5 of 10",
-    question: "What is the first moment you would use an Ebun-style reveal for?",
+    question: "What is the first moment you would use an SendEbun-style reveal for?",
     hint: "Pick the one that makes you think: “Yes, I would send that.”",
     type: "textarea-pills",
     pills: [
@@ -152,7 +153,7 @@ const STEPS: Step[] = [
   {
     key: "blockers_tags",
     eyebrow: "Question 7 of 10",
-    question: "What would make you hesitate before trying Ebun?",
+    question: "What would make you hesitate before trying SendEbun?",
     hint: "Be brutally honest — this is how we earn trust.",
     type: "chips-multi",
     options: [
@@ -310,7 +311,7 @@ export default function SurveyFlow() {
     if (!ctx) return;
 
     const grad = ctx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, "#E2C07A"); grad.addColorStop(0.5, "#C9A84C"); grad.addColorStop(1, "#8A6F32");
+    grad.addColorStop(0, brandColors.goldLight); grad.addColorStop(0.5, brandColors.gold); grad.addColorStop(1, brandColors.goldDark);
     ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
     ctx.globalCompositeOperation = "destination-out";
 
@@ -356,7 +357,7 @@ export default function SurveyFlow() {
   if (stage === "intro") {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center px-6">
-        <div className="text-gold text-[0.95rem] font-semibold tracking-[0.4em] uppercase mb-4">Ebun</div>
+        <div className="text-gold text-[0.95rem] font-semibold tracking-[0.4em] uppercase mb-4">SendEbun</div>
         <h1 className="font-serif font-light text-cream text-[2.4rem] mb-4">Got 2 minutes?</h1>
         {/* <p className="text-muted-strong max-w-[420px] leading-[1.7] mb-8">
           We&apos;re building a better way to gift someone back home. A few honest answers shape what we build next — not a generic survey, a real conversation.
@@ -378,14 +379,14 @@ export default function SurveyFlow() {
   if (stage === "outro") {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-10">
-      <div className="text-gold text-[0.95rem] font-semibold tracking-[0.4em] uppercase mb-4">Ebun</div>
+      <div className="text-gold text-[0.95rem] font-semibold tracking-[0.4em] uppercase mb-4">SendEbun</div>
       <h1 className="font-serif font-light text-cream text-[2rem] mb-2">One more thing.</h1>
       <p className="text-muted mb-6">Scratch the card below.</p>
 
       {/* Container for Scratch Card */}
 <div
   ref={wrapRef}
-  className="relative w-[320px] h-[340px] rounded-[16px] overflow-hidden bg-ink-2 border border-[rgba(201,168,76,0.2)] shadow-2xl"
+  className="relative w-[320px] h-[340px] rounded-[16px] overflow-hidden bg-ink-2 border border-[rgba(var(--gold-rgb),0.2)] shadow-2xl"
 >
   {/* Underneath Layer: Video + Elegant Text Footer */}
   <div className="absolute inset-0 flex flex-col bg-ink-2 w-full h-full">
@@ -445,7 +446,7 @@ export default function SurveyFlow() {
   return (
     <div className="min-h-screen flex flex-col max-w-[560px] mx-auto px-5">
       <div className="flex items-center justify-between pt-6 pb-2">
-        <div className="text-gold text-[0.9rem] font-semibold tracking-[0.3em] uppercase">Ebun</div>
+        <div className="text-gold text-[0.9rem] font-semibold tracking-[0.3em] uppercase">SendEbun</div>
         <div className="text-muted text-[0.85rem]">{currentStep + 1} / {visibleSteps.length}</div>
       </div>
       <div className="h-1 bg-[rgba(255,255,255,0.08)] rounded-full overflow-hidden mb-6">
@@ -454,7 +455,7 @@ export default function SurveyFlow() {
 
       <div className="flex-1 flex flex-col justify-center py-6">
         <div className="text-gold text-[0.85rem] tracking-[0.14em] uppercase mb-2">{step.eyebrow}</div>
-        <div className={`text-[1.5rem] leading-snug mb-2 transition-colors ${shakeError ? "text-[#E0897A]" : "text-cream"}`}>
+        <div className={`text-[1.5rem] leading-snug mb-2 transition-colors ${shakeError ? "text-error" : "text-cream"}`}>
           {step.question}
         </div>
         {step.hint && <div className="text-muted text-[0.85rem] mb-5">{step.hint}</div>}
@@ -463,7 +464,7 @@ export default function SurveyFlow() {
           <div className="flex flex-wrap gap-3">
             {step.options!.map((opt) => (
               <button key={opt} onClick={() => setAnswer(step.key, opt)}
-                className={`px-4 py-3 rounded-full border text-[0.9rem] transition-all ${responses[step.key] === opt ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold-dark"}`}>
+                className={`px-4 py-3 rounded-full border text-[0.9rem] transition-all ${responses[step.key] === opt ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(var(--gold-rgb),0.3)] text-cream hover:border-gold-dark"}`}>
                 {opt}
               </button>
             ))}
@@ -477,7 +478,7 @@ export default function SurveyFlow() {
               const active = sel.includes(opt);
               return (
                 <button key={opt} onClick={() => setAnswer(step.key, active ? sel.filter((v) => v !== opt) : [...sel, opt])}
-                  className={`px-4 py-3 rounded-full border text-[0.9rem] transition-all ${active ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold-dark"}`}>
+                  className={`px-4 py-3 rounded-full border text-[0.9rem] transition-all ${active ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(var(--gold-rgb),0.3)] text-cream hover:border-gold-dark"}`}>
                   {opt}
                 </button>
               );
@@ -489,7 +490,7 @@ export default function SurveyFlow() {
           <div className="flex gap-3">
             {["Yes", "No"].map((opt) => (
               <button key={opt} onClick={() => setAnswer(step.key, opt)}
-                className={`flex-1 py-4 rounded-lg border text-[0.9rem] transition-all ${responses[step.key] === opt ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold-dark"}`}>
+                className={`flex-1 py-4 rounded-lg border text-[0.9rem] transition-all ${responses[step.key] === opt ? "bg-gold text-ink border-gold font-medium" : "border-[rgba(var(--gold-rgb),0.3)] text-cream hover:border-gold-dark"}`}>
                 {opt}
               </button>
             ))}
@@ -516,7 +517,7 @@ export default function SurveyFlow() {
                 className={`rounded-lg border px-3 py-2.5 text-left text-[0.9rem] leading-[1.45] transition-all ${
                   active
                     ? "border-gold bg-gold text-ink font-medium"
-                    : "border-[rgba(201,168,76,0.3)] bg-gold/5 text-gold-light hover:border-gold-dark hover:bg-gold/10"
+                    : "border-[rgba(var(--gold-rgb),0.3)] bg-gold/5 text-gold-light hover:border-gold-dark hover:bg-gold/10"
                 }`}
               >
                 {pill}
@@ -535,7 +536,7 @@ export default function SurveyFlow() {
           ? "Or make the answer your own..."
           : "A few words are enough..."
       }
-      className="min-h-[110px] w-full resize-y rounded-lg border border-[rgba(201,168,76,0.2)] bg-ink-3 p-4 text-[0.95rem] text-cream outline-none focus:border-gold"
+      className="min-h-[110px] w-full resize-y rounded-lg border border-[rgba(var(--gold-rgb),0.2)] bg-ink-3 p-4 text-[0.95rem] text-cream outline-none focus:border-gold"
     />
   </div>
 )}
@@ -548,7 +549,7 @@ export default function SurveyFlow() {
             onChange={(e) => setAnswer(step.key, e.target.value)}
             placeholder="e.g. 08012345678"
             onKeyDown={(e) => e.key === "Enter" && goNext()}
-            className="w-full bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg px-4 h-[48px] text-cream text-[0.95rem] outline-none focus:border-gold"
+            className="w-full bg-ink-3 border border-[rgba(var(--gold-rgb),0.2)] rounded-lg px-4 h-[48px] text-cream text-[0.95rem] outline-none focus:border-gold"
           />
         )}
 
@@ -570,7 +571,7 @@ export default function SurveyFlow() {
                       className={`rounded-full border px-3 py-2 text-[0.9rem] tracking-wide transition-all ${
                         active
                           ? "border-gold bg-gold text-ink font-medium"
-                          : "border-[rgba(201,168,76,0.3)] text-cream hover:border-gold-dark"
+                          : "border-[rgba(var(--gold-rgb),0.3)] text-cream hover:border-gold-dark"
                       }`}
                     >
                       {preset.label}
@@ -594,7 +595,7 @@ export default function SurveyFlow() {
                       setAnswer(step.key, { ...nextPair, [f.key]: e.target.value });
                     }}
                     placeholder="0"
-                    className="w-full bg-ink-3 border border-[rgba(201,168,76,0.2)] rounded-lg px-3 h-[46px] text-cream text-[0.95rem] outline-none focus:border-gold"
+                    className="w-full bg-ink-3 border border-[rgba(var(--gold-rgb),0.2)] rounded-lg px-3 h-[46px] text-cream text-[0.95rem] outline-none focus:border-gold"
                   />
                 </div>
               );
@@ -618,7 +619,7 @@ export default function SurveyFlow() {
           {currentStep === visibleSteps.length - 1 ? "Finish" : "Next →"}
         </button>
       </div>
-      <div className="text-muted text-[0.85rem] tracking-wide text-center pb-4">Your answers help shape Ebun directly. Thank you!</div>
+      <div className="text-muted text-[0.85rem] tracking-wide text-center pb-4">Your answers help shape SendEbun directly. Thank you!</div>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function Problem() {
             </em>
           </h2>
 
-          <div className="text-[1rem] tracking-wider text-[rgba(245,239,224,0.68)] leading-[1.85] max-w-[580px]">
+          <div className="text-[1rem] tracking-wider text-[rgba(var(--cream-rgb),0.68)] leading-[1.85] max-w-[580px]">
             <p>
               A transfer says: here&apos;s some money..
               <br />
@@ -41,7 +41,7 @@ export default function Problem() {
             </p>
 
             <p className="mt-5">
-              Ebun closes that gap.
+              SendEbun closes that gap.
             </p>
           </div>
         </RevealOnScroll>

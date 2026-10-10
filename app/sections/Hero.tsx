@@ -21,7 +21,7 @@ export default function Hero() {
       <div
         className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(var(--sendebun-surfaceRaised-rgb),0.35) 0%, transparent 70%)",
         }}
       />
 
@@ -60,7 +60,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.55 }}
-            className="font-sans font-light text-[rgba(245,239,224,0.86)] max-w-[500px] leading-[1.8] mb-10"
+            className="font-sans font-light text-[rgba(var(--cream-rgb),0.86)] max-w-[500px] leading-[1.8] mb-10"
             style={{ fontSize: "clamp(1rem, 1.6vw, 1.15rem)" }}
           >
             Choose something thoughtful, add your voice, and send it straight to their WhatsApp. They unwrap it on their phone  —  wherever they are, wherever you are.
@@ -80,7 +80,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.85 }}
-            className="text-[0.85rem] font-semibold tracking-[0.3em] uppercase text-gold-dark"
+            className="text-[0.85rem] font-semibold tracking-[0.3em] uppercase text-gold"
           >
             CHOOSE  ·  PERSONALISE  ·  REVEAL  ·  REDEEM
           </motion.div>
@@ -92,7 +92,7 @@ export default function Hero() {
           transition={{ duration: 1.1, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.5 }}
           className="flex-1 w-full max-w-[480px] lg:max-w-none"
         >
-          <div className="relative aspect-[4/5] lg:aspect-[3/4] w-full rounded-[20px] overflow-hidden border border-[rgba(201,168,76,0.18)] shadow-[0_20px_60px_rgba(0,0,0,0.5)] bg-gradient-to-br from-ink-2 via-ink to-ink-3">
+          <div className="relative aspect-[4/5] lg:aspect-[3/4] w-full rounded-[20px] overflow-hidden border border-[rgba(var(--gold-rgb),0.18)] shadow-[0_20px_60px_rgba(0,0,0,0.5)] bg-gradient-to-br from-ink-2 via-ink to-ink-3">
         <video 
           ref={videoRef} 
           autoPlay 

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "brand:tokens": "node scripts/brand-tokens.mjs",
+    "brand:check": "node scripts/brand-tokens.mjs --check"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.4",

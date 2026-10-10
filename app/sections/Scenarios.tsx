@@ -43,7 +43,7 @@ export default function Scenarios() {
     <section id="stories" className="relative overflow-hidden py-[120px] px-6 md:px-[52px]">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-[-160px] top-[30%] h-[460px] w-[460px] rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.05),transparent_68%)]"
+        className="pointer-events-none absolute right-[-160px] top-[30%] h-[460px] w-[460px] rounded-full bg-[radial-gradient(circle,rgba(var(--gold-rgb),0.05),transparent_68%)]"
       />
 
       <div className="relative mx-auto max-w-[1080px]">
@@ -62,19 +62,19 @@ export default function Scenarios() {
             </div>
 
             <p className="max-w-[340px] text-[0.9rem] leading-[1.85] text-muted-strong md:pb-2">
-              Ebun is designed for the part of giving that a bank transfer
+              SendEbun is designed for the part of giving that a bank transfer
               cannot carry.
             </p>
           </div>
         </RevealOnScroll>
 
-        <div className="mt-14 flex flex-col gap-[2px] bg-[rgba(226,192,122,0.14)]">
+        <div className="mt-14 flex flex-col gap-[2px] bg-[rgba(var(--gold-lt-rgb),0.14)]">
           {stories.map((story, index) => {
             const reversed = index % 2 === 1;
 
             return (
               <RevealOnScroll key={story.title} delay={index * 0.08}>
-                <article className="group grid grid-cols-1 overflow-hidden bg-ink-2 transition-colors duration-500 hover:bg-[#1B1813] md:grid-cols-[minmax(280px,0.8fr)_1.2fr]">
+                <article className="group grid grid-cols-1 overflow-hidden bg-ink-2 transition-colors duration-500 hover:bg-ink-3 md:grid-cols-[minmax(280px,0.8fr)_1.2fr]">
                   <div
                     className={`relative min-h-[290px] overflow-hidden md:min-h-[360px] ${
                       reversed ? "md:order-2" : ""
@@ -87,7 +87,7 @@ export default function Scenarios() {
                       sizes="(max-width: 768px) 100vw, 42vw"
                       className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.045]"
                     />
-                    <div className="absolute inset-0 bg-[rgba(14,13,11,0.32)] mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-[rgba(var(--ink-rgb),0.32)] mix-blend-multiply" />
                     <div
                       className={`absolute inset-0 ${
                         reversed
@@ -191,18 +191,18 @@ export default function Scenarios() {
 //             <br />
 //             — not just gifts that are sent.
 //           </h2>
-//           <p className="text-[0.95rem] text-[rgba(245,239,224,0.68)] leading-[1.85] max-w-[560px] mb-14">
+//           <p className="text-[0.95rem] text-[rgba(var(--cream-rgb),0.68)] leading-[1.85] max-w-[560px] mb-14">
 //             Three people. Three distances. One thing in common — the moment
 //             landed.
 //           </p>
 //         </RevealOnScroll>
 
-//         <div className="flex flex-col gap-[2px] bg-[rgba(201,168,76,0.07)]">
+//         <div className="flex flex-col gap-[2px] bg-[rgba(var(--gold-rgb),0.07)]">
 //           {stories.map((story, i) => {
 //             const flipped = i % 2 === 1;
 //             return (
 //               <RevealOnScroll key={story.who} delay={i * 0.08}>
-//                 <div className="bg-ink-2 group transition-colors duration-500 hover:bg-[#191713] grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[360px_1fr]">
+//                 <div className="bg-ink-2 group transition-colors duration-500 hover:bg-ink-3 grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[360px_1fr]">
 //                   {/* Image */}
 //                   <div
 //                     className={`relative h-[240px] md:h-auto md:min-h-[320px] overflow-hidden ${
@@ -216,16 +216,16 @@ export default function Scenarios() {
 //                       sizes="(max-width: 768px) 100vw, 360px"
 //                       className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
 //                     />
-//                     <div className="absolute inset-0 bg-[rgba(14,13,11,0.4)] mix-blend-multiply" />
+//                     <div className="absolute inset-0 bg-[rgba(var(--ink-rgb),0.4)] mix-blend-multiply" />
 //                     <div
 //                       className={`absolute inset-0 ${
 //                         flipped
-//                           ? "bg-gradient-to-l from-transparent to-[rgba(14,13,11,0.55)] md:bg-gradient-to-r"
-//                           : "bg-gradient-to-r from-transparent to-[rgba(14,13,11,0.55)]"
+//                           ? "bg-gradient-to-l from-transparent to-[rgba(var(--ink-rgb),0.55)] md:bg-gradient-to-r"
+//                           : "bg-gradient-to-r from-transparent to-[rgba(var(--ink-rgb),0.55)]"
 //                       }`}
 //                     />
 //                     {/* Tag overlaid on image */}
-//                     <span className="absolute top-6 left-6 inline-block text-[0.6rem] tracking-[0.22em] uppercase text-gold border border-[rgba(201,168,76,0.35)] bg-[rgba(14,13,11,0.6)] backdrop-blur-sm px-3 py-[5px]">
+//                     <span className="absolute top-6 left-6 inline-block text-[0.6rem] tracking-[0.22em] uppercase text-gold border border-[rgba(var(--gold-rgb),0.35)] bg-[rgba(var(--ink-rgb),0.6)] backdrop-blur-sm px-3 py-[5px]">
 //                       {story.tag}
 //                     </span>
 //                   </div>
@@ -241,13 +241,13 @@ export default function Scenarios() {
 //                     </h3>
 
 //                     {/* Pull quote */}
-//                     <blockquote className="relative pl-5 mb-6 border-l border-[rgba(201,168,76,0.45)]">
+//                     <blockquote className="relative pl-5 mb-6 border-l border-[rgba(var(--gold-rgb),0.45)]">
 //                       <p className="font-serif italic text-[1.2rem] md:text-[1.35rem] text-gold-light leading-[1.55]">
 //                         {story.quote}
 //                       </p>
 //                     </blockquote>
 
-//                     <p className="text-[0.87rem] text-[rgba(245,239,224,0.68)] leading-[1.9] max-w-[560px]">
+//                     <p className="text-[0.87rem] text-[rgba(var(--cream-rgb),0.68)] leading-[1.9] max-w-[560px]">
 //                       {story.body}
 //                     </p>
 //                   </div>

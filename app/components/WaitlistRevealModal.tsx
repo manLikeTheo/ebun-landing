@@ -1,4 +1,5 @@
 "use client";
+import brandColors from "@/brand/colors.json";
 
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,7 +15,7 @@ const SURVEY_STEPS = [
     question: "What's stopped you from sending a real gift before?",
     options: ["Bank transfer felt easier", "Vendors felt unreliable", "Too far to coordinate", "Never really tried"],
   },
-  { key: "occasion", question: "First occasion you'd use Ebun for?", options: ["Birthday", "Wedding", "Anniversary", "Just because"] },
+  { key: "occasion", question: "First occasion you'd use SendEbun for?", options: ["Birthday", "Wedding", "Anniversary", "Just because"] },
 ] as const;
 
 interface Props {
@@ -147,13 +148,13 @@ export default function WaitlistRevealModal({
     if (!ctx) return;
 
     const grad = ctx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, "#E2C07A");
-    grad.addColorStop(0.5, "#C9A84C");
-    grad.addColorStop(1, "#8A6F32");
+    grad.addColorStop(0, brandColors.goldLight);
+    grad.addColorStop(0.5, brandColors.gold);
+    grad.addColorStop(1, brandColors.goldDark);
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
-    ctx.fillStyle = "rgba(14,13,11,0.08)";
+    ctx.fillStyle = `${brandColors.background}14`;
     for (let i = 0; i < 900; i++) {
       ctx.beginPath();
       ctx.arc(Math.random() * w, Math.random() * h, Math.random() * 1.4, 0, Math.PI * 2);
@@ -267,7 +268,7 @@ export default function WaitlistRevealModal({
 
   const waLink = FOUNDER_WHATSAPP
     ? `https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(
-        `Hey! I just joined the Ebun waitlist as Founding Sender No. ${queueNumber ?? ""} 🎁`
+        `Hey! I just joined the SendEbun waitlist as Founding Sender No. ${queueNumber ?? ""} 🎁`
       )}`
     : null;
 
@@ -281,7 +282,7 @@ export default function WaitlistRevealModal({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
         >
-          <div className="absolute inset-0 bg-[rgba(10,9,8,0.82)] backdrop-blur-sm" onClick={onClose} />
+          <div className="absolute inset-0 bg-[rgba(var(--ink-deep-rgb),0.82)] backdrop-blur-sm" onClick={onClose} />
           <motion.div
             ref={panelRef}
             role="dialog"
@@ -292,12 +293,12 @@ export default function WaitlistRevealModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 10 }}
             transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="relative w-full max-w-[460px] bg-ink-2 border border-[rgba(201,168,76,0.18)] rounded-[16px] p-8 outline-none max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-[460px] bg-ink-2 border border-[rgba(var(--gold-rgb),0.18)] rounded-[16px] p-8 outline-none max-h-[90vh] overflow-y-auto"
           >
             <button
               onClick={onClose}
               aria-label="Close"
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-muted hover:text-gold-light hover:bg-[rgba(201,168,76,0.08)] transition-colors"
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-muted hover:text-gold-light hover:bg-[rgba(var(--gold-rgb),0.08)] transition-colors"
             >
               ✕
             </button>
@@ -313,7 +314,7 @@ export default function WaitlistRevealModal({
                   Founding Sender No. {displayNumber ?? queueNumber}
                 </div>
                 <div className="text-cream text-[0.85rem] max-w-[280px] leading-[1.6]">
-                  First to know when Ebun opens. First to send the first gift.
+                  First to know when SendEbun opens. First to send the first gift.
                 </div>
               </div>
 
@@ -325,7 +326,7 @@ export default function WaitlistRevealModal({
                 />
               )}
               {playScratch && !revealed && (
-                <div className="absolute top-[14px] left-1/2 -translate-x-1/2 text-[0.66rem] tracking-[0.16em] uppercase text-[rgba(14,13,11,0.55)] pointer-events-none">
+                <div className="absolute top-[14px] left-1/2 -translate-x-1/2 text-[0.66rem] tracking-[0.16em] uppercase text-[rgba(var(--ink-rgb),0.55)] pointer-events-none">
                   Scratch to reveal
                 </div>
               )}
@@ -349,7 +350,7 @@ export default function WaitlistRevealModal({
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-1 text-left"
+                className="border-t border-[rgba(var(--gold-rgb),0.12)] pt-5 mt-1 text-left"
               >
                 <div className="text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-2">Your invite position</div>
                 <div className="text-cream text-[1.3rem] font-serif mb-2">#{position ?? queueNumber}</div>
@@ -360,7 +361,7 @@ export default function WaitlistRevealModal({
                 </div>
                 <button
                   onClick={handleShare}
-                  className="w-full border border-[rgba(201,168,76,0.35)] rounded-lg py-[14px] text-gold text-[0.76rem] tracking-[0.14em] uppercase transition-all hover:border-gold hover:text-gold-light hover:bg-[rgba(201,168,76,0.06)]"
+                  className="w-full border border-[rgba(var(--gold-rgb),0.35)] rounded-lg py-[14px] text-gold text-[0.76rem] tracking-[0.14em] uppercase transition-all hover:border-gold hover:text-gold-light hover:bg-[rgba(var(--gold-rgb),0.06)]"
                 >
                   {copied ? "Link copied ✓" : "Copy your invite link"}
                 </button>
@@ -382,7 +383,7 @@ export default function WaitlistRevealModal({
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="border-t border-[rgba(201,168,76,0.12)] pt-5 mt-5 text-left"
+                className="border-t border-[rgba(var(--gold-rgb),0.12)] pt-5 mt-5 text-left"
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="text-[0.66rem] tracking-[0.14em] uppercase text-gold-light">One more thing — 15 seconds</div>
@@ -391,7 +392,7 @@ export default function WaitlistRevealModal({
                       <span
                         key={i}
                         className="w-[6px] h-[6px] rounded-full"
-                        style={{ background: i <= surveyStep ? "#C9A84C" : "rgba(201,168,76,0.2)" }}
+                        style={{ background: i <= surveyStep ? "var(--gold)" : "rgba(var(--gold-rgb),0.2)" }}
                       />
                     ))}
                   </div>
@@ -403,14 +404,14 @@ export default function WaitlistRevealModal({
                       key={opt}
                       disabled={surveySubmitting}
                       onClick={() => handleSurveyTap(opt)}
-                      className="px-4 py-2 rounded-full border border-[rgba(201,168,76,0.3)] text-cream text-[0.78rem] hover:border-gold hover:text-gold-light hover:bg-[rgba(201,168,76,0.06)] transition-all disabled:opacity-50"
+                      className="px-4 py-2 rounded-full border border-[rgba(var(--gold-rgb),0.3)] text-cream text-[0.78rem] hover:border-gold hover:text-gold-light hover:bg-[rgba(var(--gold-rgb),0.06)] transition-all disabled:opacity-50"
                     >
                       {opt}
                     </button>
                   ))}
                 </div>
                 {surveyError && (
-                  <div className="text-[#E0897A] text-[0.74rem] mb-2">{surveyError}</div>
+                  <div className="text-error text-[0.74rem] mb-2">{surveyError}</div>
                 )}
                 <button
                   onClick={onSurveyDone}
