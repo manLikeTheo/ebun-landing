@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
 import BrandLogo from "./BrandLogo";
+import { APP_OPEN, SEND_URL } from "@/lib/links";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -61,13 +62,25 @@ const handlePrelaunchCta = () => {
         >
           Corporate
         </a>
-        <button
-          type="button"
-          onClick={handlePrelaunchCta}
-          className="min-h-11 border border-gold/60 bg-transparent px-3 py-[9px] font-sans text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-gold transition-all duration-300 sm:px-[22px] sm:text-[0.72rem] sm:tracking-[0.16em] hover:border-amber hover:bg-amber hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light"
+        <a
+          href="#vendors"
+          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(var(--cream-rgb),0.98)] hover:text-gold-light transition-colors duration-300"
         >
-          Join Early Access
-        </button>
+          For Vendors
+        </a>
+        {APP_OPEN ? (
+          <a href={SEND_URL} className="inline-flex items-center min-h-11 border border-gold/60 bg-transparent px-3 py-[9px] font-sans text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-gold transition-all duration-300 sm:px-[22px] sm:text-[0.72rem] sm:tracking-[0.16em] hover:border-amber hover:bg-amber hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light">
+            Send a Gift
+          </a>
+        ) : (
+          <button
+            type="button"
+            onClick={handlePrelaunchCta}
+            className="min-h-11 border border-gold/60 bg-transparent px-3 py-[9px] font-sans text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-gold transition-all duration-300 sm:px-[22px] sm:text-[0.72rem] sm:tracking-[0.16em] hover:border-amber hover:bg-amber hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light"
+          >
+            Join Early Access
+          </button>
+        )}
       </div>
     </nav>
   );

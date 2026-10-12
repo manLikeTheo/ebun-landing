@@ -4,7 +4,7 @@ import { businessDetails } from "@/lib/business-details";
 const footerLinks = [
   { label: "How it works", href: "#how" },
   { label: "Corporate", href: "#corporate" },
-  { label: "Become a Founding Vendor", href: "#" }, // Existing destination pending.
+  { label: "Become a Vendor", href: "#vendors" },
   { label: "Contact", href: "#business-contact" },
 ];
 

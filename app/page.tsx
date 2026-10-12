@@ -11,6 +11,7 @@ import Categories from "./sections/Categories";
 import Diaspora from "./sections/Diaspora";
 import Scenarios from "./sections/Scenarios";
 import Corporate from "./sections/Corporate";
+import ForVendors from "./sections/ForVendors";
 import Trust from "./sections/Trust";
 import EarlyAccess from "./sections/EarlyAccess";
 import Footer from "./sections/Footer";
@@ -43,6 +44,7 @@ export default function Home() {
         <Divider />
         <Scenarios />
         <Corporate />
+        <ForVendors />
         <Divider />
         <Trust />
         <Divider />

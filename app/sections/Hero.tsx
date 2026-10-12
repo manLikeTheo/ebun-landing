@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import GoldButton from "../components/GoldButton";
 import GhostButton from "../components/GhostButton";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
+import { APP_OPEN, SEND_URL } from "@/lib/links";
 
 export default function Hero() {
   const { openModal } = useWaitlistModal();
@@ -72,7 +73,11 @@ export default function Hero() {
             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.7 }}
             className="flex items-center gap-[18px] flex-wrap justify-center lg:justify-start mb-6"
           >
-            <GoldButton onClick={openModal}>Join Early Access</GoldButton>
+            {APP_OPEN ? (
+              <GoldButton href={SEND_URL}>Send a Gift</GoldButton>
+            ) : (
+              <GoldButton onClick={openModal}>Join Early Access</GoldButton>
+            )}
             <GhostButton href="#how">See How It Works →</GhostButton>
           </motion.div>
 
