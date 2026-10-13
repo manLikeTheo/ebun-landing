@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Sparkles, UtensilsCrossed, Zap } from "lucide-react";
+import { Gift, Sparkles, UtensilsCrossed } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 
@@ -19,19 +19,21 @@ const categories = [
     icon: Sparkles,
     number: "02",
     title: "Experiences",
-    body: "A spa day, cinema night, weekend pamper package or photography session — gifts that become part of the story they tell later.",
+    body: "A spa afternoon, a mani-pedi, cinema night or a photoshoot — the treats people rarely buy themselves, and remember longest.",
     examples: ["Spa", "Cinema", "Creative sessions"],
     image: "/categories/experienceA.png",
     alt: "A relaxing premium experience",
   },
   {
-    icon: Zap,
+    icon: Gift,
     number: "03",
-    title: "Everyday Essentials",
-    body: "Data, groceries, utility and more. Practical support can still feel deeply personal and valuable.",
-    examples: ["Data", "Utility", "Groceries"],
+    title: "Celebrations & Care",
+    body: "The cake on the day, flowers that arrive with a message, a care package for the people who raised you. Small things, sent at exactly the right moment.",
+    examples: ["Celebration cakes", "Flowers", "Care packages"],
+    // TODO(theo): replace with a photo of a cake / flowers / care box.
+    // The current image shows a phone top-up and no longer matches.
     image: "/categories/utility.jpg",
-    alt: "A useful digital gift delivered to a phone",
+    alt: "A celebration cake and flowers ready to be handed over",
   },
    // {
   //   icon: Ribbon,

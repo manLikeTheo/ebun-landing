@@ -21,7 +21,7 @@ const stories = [
     number: "02",
     title: "You could not be in Enugu. You could still be part of it.",
     quote: "Cash would have arrived. This felt like I did.",
-    body: "Chidi is in Ontario when his brother graduates. He sends data, airtime, and a video message for the day. His brother opens the reveal, hears his voice, and sends one back. The distance did not disappear — but it stopped being the whole story.",
+    body: "Chidi is in Ontario when his brother graduates. He sends dinner for two at the spot his brother loves, with a message only the two of them would understand. His brother opens it, books a table for Saturday, and sends one back. The distance did not disappear — but it stopped being the whole story.",
     detail: "For people you love from far away",
     image: "/scenarios/diaspora.png",
     alt: "A person recording a heartfelt video message at home",

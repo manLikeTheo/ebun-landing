@@ -8,7 +8,12 @@ import { businessDetails } from "./business-details";
  */
 export const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || "https://app.ebun.com.ng").replace(/\/+$/, "");
 
-export const SEND_URL = `${APP_URL}/send`;
+/** UTM-tagged so the app's analytics can tell which button brought someone in. */
+export function sendUrl(placement: "hero" | "navbar" | "footer" | "final_cta"): string {
+  return `${APP_URL}/send?utm_source=landing&utm_medium=web&utm_content=${placement}`;
+}
+
+export const SEND_URL = sendUrl("hero");
 
 /**
  * Whether the public can send real gifts yet. Until Paystack is live,
@@ -27,11 +32,11 @@ export const APP_OPEN = process.env.NEXT_PUBLIC_APP_OPEN === "true";
 export function vendorWhatsAppUrl(): string {
   const digits = businessDetails.phone.replace(/\D/g, "");
   const text = [
-    "Hi SendEbun, I'd like to become a vendor.",
+    "Hi SendEbun, I'd like to become a partner.",
     "",
     "Business name: ",
     "Area / address: ",
-    "What we sell: ",
+    "What we offer (food, pampering, experiences…): ",
   ].join("\n");
   return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }

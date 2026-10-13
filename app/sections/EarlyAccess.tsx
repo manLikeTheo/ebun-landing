@@ -4,6 +4,7 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 import GhostButton from "../components/GhostButton";
 import GoldButton from "../components/GoldButton";
+import { APP_OPEN, sendUrl } from "@/lib/links";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
 
 export default function EarlyAccess() {
@@ -33,6 +34,9 @@ export default function EarlyAccess() {
           </em>{" "}
         </p>
         <div className="flex flex-col items-center gap-6">
+          {APP_OPEN ? (
+            <GoldButton href={sendUrl("final_cta")}>Send a Gift</GoldButton>
+          ) : (
           <GoldButton onClick={openModal}>
             {!mounted
             ? "Join Early Access"
@@ -42,6 +46,7 @@ export default function EarlyAccess() {
                 : `View your invite — No. ${queueNumber}`
               : "Join Early Access"}
           </GoldButton>
+          )}
           <GhostButton href="#corporate">Corporate Gifting</GhostButton>
         </div>
       </RevealOnScroll>

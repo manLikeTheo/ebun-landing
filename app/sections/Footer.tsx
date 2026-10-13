@@ -1,10 +1,11 @@
+import Link from "next/link";
 import BrandLogo from "../components/BrandLogo";
 import { businessDetails } from "@/lib/business-details";
 
 const footerLinks = [
   { label: "How it works", href: "#how" },
   { label: "Corporate", href: "#corporate" },
-  { label: "Become a Vendor", href: "#vendors" },
+  { label: "Become a Partner", href: "#vendors" },
   { label: "Contact", href: "#business-contact" },
 ];
 
@@ -14,7 +15,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1320px]">
         <div className="flex flex-col items-start justify-between gap-7 border-b border-gold/20 pb-7 lg:flex-row lg:items-center">
           <div>
-            <a href="/" className="inline-flex no-underline"><BrandLogo /></a>
+            <Link href="/" className="inline-flex no-underline"><BrandLogo /></Link>
             <p className="mt-3 text-sm text-muted-strong">The gift of giving, reimagined.</p>
           </div>
           <ul className="flex list-none flex-wrap gap-x-6 gap-y-3">

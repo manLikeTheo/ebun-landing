@@ -36,7 +36,7 @@ const steps = [
     num: "01",
     icon: Gift,
     title: "Choose",
-    body: "Pick from curated gifts across food, experiences, keepsakes and everyday essentials. Nothing generic, nothing forgettable.",
+    body: "Pick a treat from businesses we partner with — a meal, a pamper session, a celebration. Real places, real prices. Nothing generic.",
   },
   {
     num: "02",
@@ -54,7 +54,7 @@ const steps = [
     num: "04",
     icon: PackageCheck,
     title: "Receive",
-    body: "Delivered to their door, redeemed in-store, or swapped for something they'd rather have. Their choice.",
+    body: "They choose a time that suits them and collect it in person — or have it delivered, where available. No address needed from you.",
   },
 ];
 

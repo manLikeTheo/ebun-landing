@@ -8,17 +8,17 @@ const pillars = [
   {
     icon: Lock,
     title: "Secure by design",
-    body: "Payments handled through established Nigerian payment infrastructure. Nothing held, nothing risked.",
+    body: "Payments processed by Paystack — we never see your card. Partners are paid for gifts actually handed over.",
   },
   {
     icon: Package,
     title: "Curated partners",
-    body: "Every vendor vetted before a single gift goes out.",
+    body: "Every partner is visited and approved before a single gift goes out.",
   },
   {
     icon: RefreshCw,
     title: "Support when you need it",
-    body: "If something fails, it gets resolved. Automatically where possible, or with a human touch when needed.",
+    body: "If a gift can't be honoured, you get your money back in full. A real person answers when you need help.",
   },
 ];
 
