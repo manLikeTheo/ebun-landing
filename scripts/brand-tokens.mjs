@@ -20,7 +20,8 @@ lines.push('}', '');
 const css = lines.join('\n');
 const destination = new URL('../brand/tokens.css', import.meta.url);
 if (process.argv.includes('--check')) {
-  if (readFileSync(destination, 'utf8') !== css) throw new Error('Brand tokens are out of sync. Run npm run brand:tokens.');
+  // Git may check text files out as CRLF on Windows; that is not token drift.
+  if (readFileSync(destination, 'utf8').replace(/\r\n/g, '\n') !== css) throw new Error('Brand tokens are out of sync. Run npm run brand:tokens.');
   console.log('Brand CSS matches colors.json.');
 } else {
   writeFileSync(destination, css);
