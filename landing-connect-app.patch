@@ -1,0 +1,250 @@
+From 1c0669617f3befa7448052ac259f287eda807e7f Mon Sep 17 00:00:00 2001
+From: Theo <innerfriend1@gmail.com>
+Date: Mon, 12 Oct 2026 14:58:14 +0000
+Subject: [PATCH] feat: connect the landing page to the app and add a For
+ Vendors section
+
+'Become a vendor' opens a pre-written WhatsApp chat. 'Send a gift' replaces Join Early Access in the hero and navbar once NEXT_PUBLIC_APP_OPEN=true, so the switch to launch is one variable.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Qe8vTBaCvgshPWHn3EGMUR
+---
+ app/components/Navbar.tsx   | 25 ++++++++++---
+ app/page.tsx                |  2 +
+ app/sections/Footer.tsx     |  2 +-
+ app/sections/ForVendors.tsx | 75 +++++++++++++++++++++++++++++++++++++
+ app/sections/Hero.tsx       |  7 +++-
+ lib/links.ts                | 37 ++++++++++++++++++
+ 6 files changed, 140 insertions(+), 8 deletions(-)
+ create mode 100644 app/sections/ForVendors.tsx
+ create mode 100644 lib/links.ts
+
+diff --git a/app/components/Navbar.tsx b/app/components/Navbar.tsx
+index 4362db0..abb3b75 100644
+--- a/app/components/Navbar.tsx
++++ b/app/components/Navbar.tsx
+@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
+ import { cn } from "@/lib/utils";
+ import { useWaitlistModal } from "../context/WaitlistModalContext";
+ import BrandLogo from "./BrandLogo";
++import { APP_OPEN, SEND_URL } from "@/lib/links";
+ 
+ export default function Navbar() {
+   const [scrolled, setScrolled] = useState(false);
+@@ -61,13 +62,25 @@ const handlePrelaunchCta = () => {
+         >
+           Corporate
+         </a>
+-        <button
+-          type="button"
+-          onClick={handlePrelaunchCta}
+-          className="min-h-11 border border-gold/60 bg-transparent px-3 py-[9px] font-sans text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-gold transition-all duration-300 sm:px-[22px] sm:text-[0.72rem] sm:tracking-[0.16em] hover:border-amber hover:bg-amber hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light"
++        <a
++          href="#vendors"
++          className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(var(--cream-rgb),0.98)] hover:text-gold-light transition-colors duration-300"
+         >
+-          Join Early Access
+-        </button>
++          For Vendors
++        </a>
++        {APP_OPEN ? (
++          <a href={SEND_URL} className="inline-flex items-center min-h-11 border border-gold/60 bg-transparent px-3 py-[9px] font-sans text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-gold transition-all duration-300 sm:px-[22px] sm:text-[0.72rem] sm:tracking-[0.16em] hover:border-amber hover:bg-amber hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light">
++            Send a Gift
++          </a>
++        ) : (
++          <button
++            type="button"
++            onClick={handlePrelaunchCta}
++            className="min-h-11 border border-gold/60 bg-transparent px-3 py-[9px] font-sans text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-gold transition-all duration-300 sm:px-[22px] sm:text-[0.72rem] sm:tracking-[0.16em] hover:border-amber hover:bg-amber hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light"
++          >
++            Join Early Access
++          </button>
++        )}
+       </div>
+     </nav>
+   );
+diff --git a/app/page.tsx b/app/page.tsx
+index 0160792..15f3edd 100644
+--- a/app/page.tsx
++++ b/app/page.tsx
+@@ -11,6 +11,7 @@ import Categories from "./sections/Categories";
+ import Diaspora from "./sections/Diaspora";
+ import Scenarios from "./sections/Scenarios";
+ import Corporate from "./sections/Corporate";
++import ForVendors from "./sections/ForVendors";
+ import Trust from "./sections/Trust";
+ import EarlyAccess from "./sections/EarlyAccess";
+ import Footer from "./sections/Footer";
+@@ -43,6 +44,7 @@ export default function Home() {
+         <Divider />
+         <Scenarios />
+         <Corporate />
++        <ForVendors />
+         <Divider />
+         <Trust />
+         <Divider />
+diff --git a/app/sections/Footer.tsx b/app/sections/Footer.tsx
+index 2760649..f6f6b5c 100644
+--- a/app/sections/Footer.tsx
++++ b/app/sections/Footer.tsx
+@@ -4,7 +4,7 @@ import { businessDetails } from "@/lib/business-details";
+ const footerLinks = [
+   { label: "How it works", href: "#how" },
+   { label: "Corporate", href: "#corporate" },
+-  { label: "Become a Founding Vendor", href: "#" }, // Existing destination pending.
++  { label: "Become a Vendor", href: "#vendors" },
+   { label: "Contact", href: "#business-contact" },
+ ];
+ 
+diff --git a/app/sections/ForVendors.tsx b/app/sections/ForVendors.tsx
+new file mode 100644
+index 0000000..fa88ef3
+--- /dev/null
++++ b/app/sections/ForVendors.tsx
+@@ -0,0 +1,75 @@
++"use client";
++
++import RevealOnScroll from "../components/RevealOnScroll";
++import SectionEyebrow from "../components/SectionEyebrow";
++import GoldButton from "../components/GoldButton";
++import { Check } from "lucide-react";
++import { vendorWhatsAppUrl } from "@/lib/links";
++
++/**
++ * The vendor pitch, in the vendor's terms. Kept to what is true today:
++ * their own price, prepaid orders, pickups booked ahead, setup from a
++ * phone. No promise about payout timing until payouts are built.
++ */
++const benefits = [
++  "Every order is paid before the customer walks in. No cash-on-delivery, no wasted food.",
++  "You keep your own prices. SendEbun never sells your items for more than your counter does.",
++  "Customers book their pickup time, so you know who is coming and when — and it's ready on arrival.",
++  "Set up from your phone in minutes: your shop, your items, your photos. Scan a code to hand over.",
++];
++
++const steps = [
++  { num: "01", label: "Message us on WhatsApp" },
++  { num: "02", label: "Get your private shop link" },
++  { num: "03", label: "Add your items and photos" },
++  { num: "04", label: "Start receiving gift orders" },
++];
++
++export default function ForVendors() {
++  return (
++    <section id="vendors" className="border-t border-b border-[rgba(var(--gold-rgb),0.07)]">
++      <div className="max-w-[1080px] mx-auto py-[120px] px-6 md:px-[52px] grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
++        <RevealOnScroll>
++          <SectionEyebrow text="For restaurants, bakeries and shops" />
++          <h2
++            className="font-serif font-light text-cream mb-6"
++            style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
++          >
++            New customers, <br />
++            <em className="text-gold" style={{ fontStyle: "italic" }}>
++              already paid for.
++            </em>
++          </h2>
++          <p className="text-[1rem] text-[rgba(var(--cream-rgb),0.75)] leading-[1.85] mb-10">
++            People in Nigeria and abroad send your food and products as gifts. They pay upfront; the person they love
++            collects from you.
++          </p>
++          <ul className="flex flex-col gap-[18px] mb-10">
++            {benefits.map((b) => (
++              <li key={b} className="flex items-start gap-[14px] text-[0.9rem] text-[rgba(var(--cream-rgb),0.68)] leading-[1.75]">
++                <span className="w-[18px] h-[18px] min-w-[18px] border border-gold-dark rounded-full flex items-center justify-center text-[0.6rem] text-gold mt-[2px]">
++                  <Check className="w-3 h-3" strokeWidth={2} />
++                </span>
++                {b}
++              </li>
++            ))}
++          </ul>
++          <GoldButton href={vendorWhatsAppUrl()} className="text-center text-lg tracking-wide">
++            Become a vendor
++          </GoldButton>
++        </RevealOnScroll>
++
++        <RevealOnScroll delay={0.2}>
++          <ol className="grid grid-cols-1 gap-[2px] bg-[rgba(var(--gold-rgb),0.07)]">
++            {steps.map((s) => (
++              <li key={s.num} className="bg-ink p-8 flex items-baseline gap-6">
++                <span className="font-serif text-[2.2rem] font-light text-gold leading-none">{s.num}</span>
++                <span className="text-[0.95rem] text-[rgba(var(--cream-rgb),0.8)]">{s.label}</span>
++              </li>
++            ))}
++          </ol>
++        </RevealOnScroll>
++      </div>
++    </section>
++  );
++}
+diff --git a/app/sections/Hero.tsx b/app/sections/Hero.tsx
+index 90585fb..fb0d83f 100644
+--- a/app/sections/Hero.tsx
++++ b/app/sections/Hero.tsx
+@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
+ import GoldButton from "../components/GoldButton";
+ import GhostButton from "../components/GhostButton";
+ import { useWaitlistModal } from "../context/WaitlistModalContext";
++import { APP_OPEN, SEND_URL } from "@/lib/links";
+ 
+ export default function Hero() {
+   const { openModal } = useWaitlistModal();
+@@ -72,7 +73,11 @@ export default function Hero() {
+             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.7 }}
+             className="flex items-center gap-[18px] flex-wrap justify-center lg:justify-start mb-6"
+           >
+-            <GoldButton onClick={openModal}>Join Early Access</GoldButton>
++            {APP_OPEN ? (
++              <GoldButton href={SEND_URL}>Send a Gift</GoldButton>
++            ) : (
++              <GoldButton onClick={openModal}>Join Early Access</GoldButton>
++            )}
+             <GhostButton href="#how">See How It Works →</GhostButton>
+           </motion.div>
+ 
+diff --git a/lib/links.ts b/lib/links.ts
+new file mode 100644
+index 0000000..4b968c1
+--- /dev/null
++++ b/lib/links.ts
+@@ -0,0 +1,37 @@
++import { businessDetails } from "./business-details";
++
++/**
++ * Where the landing page sends people into the product.
++ *
++ * NEXT_PUBLIC_ values are fixed at build time on Vercel: change one,
++ * then redeploy.
++ */
++export const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || "https://app.ebun.com.ng").replace(/\/+$/, "");
++
++export const SEND_URL = `${APP_URL}/send`;
++
++/**
++ * Whether the public can send real gifts yet. Until Paystack is live,
++ * "Send a gift" would take a stranger's card to a test checkout, so the
++ * page keeps "Join Early Access" as its main button. Flip
++ * NEXT_PUBLIC_APP_OPEN=true on Vercel (and redeploy) on launch day.
++ */
++export const APP_OPEN = process.env.NEXT_PUBLIC_APP_OPEN === "true";
++
++/**
++ * "Become a vendor" opens a WhatsApp chat with SendEbun, the message
++ * already written. While vendors are signed one by one, a conversation
++ * converts better than a form — and it lands where the vendor's private
++ * setup link is sent next anyway.
++ */
++export function vendorWhatsAppUrl(): string {
++  const digits = businessDetails.phone.replace(/\D/g, "");
++  const text = [
++    "Hi SendEbun, I'd like to become a vendor.",
++    "",
++    "Business name: ",
++    "Area / address: ",
++    "What we sell: ",
++  ].join("\n");
++  return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
++}
+-- 
+2.43.0
+
