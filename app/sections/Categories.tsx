@@ -28,12 +28,12 @@ const categories = [
     icon: Gift,
     number: "03",
     title: "Celebrations & Care",
-    body: "The cake on the day, flowers that arrive with a message, a care package for the people who raised you. Small things, sent at exactly the right moment.",
-    examples: ["Celebration cakes", "Flowers", "Care packages"],
+    body: "The cake on the day, a treat for the people who raised you, a thank-you that turns up when it matters. Small things, sent at exactly the right moment.",
+    examples: ["Celebration cakes", "Treats", "Thank-yous"],
     // TODO(theo): replace with a photo of a cake / flowers / care box.
     // The current image shows a phone top-up and no longer matches.
     image: "/categories/utility.jpg",
-    alt: "A celebration cake and flowers ready to be handed over",
+    alt: "A phone held up at night with a gift on its screen",
   },
    // {
   //   icon: Ribbon,
@@ -128,7 +128,7 @@ export default function Categories() {
 
         <RevealOnScroll delay={0.35}>
           <p className="mt-12 text-center text-[0.7rem] uppercase tracking-[0.16em] text-gold">
-            Starting with a focused collection of founding vendor partners soon
+            Live in Akure with local favourites · More cities soon
           </p>
         </RevealOnScroll>
       </div>

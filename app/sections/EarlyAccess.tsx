@@ -4,11 +4,14 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 import GhostButton from "../components/GhostButton";
 import GoldButton from "../components/GoldButton";
-import { APP_OPEN, sendUrl } from "@/lib/links";
+import { sendUrl } from "@/lib/links";
+import { LAUNCH_CTA_LABEL } from "@/lib/launch";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
+import { useLaunched } from "../hooks/useLaunchClock";
 
 export default function EarlyAccess() {
   const { openModal, mounted, hasJoined, queueNumber } = useWaitlistModal();
+  const launched = useLaunched();
 
   return (
     <section id="early-access" className="py-[140px] px-6 text-center">
@@ -27,15 +30,14 @@ export default function EarlyAccess() {
           </em>{" "}
         </h2>
         <p className="text-base text-[rgba(var(--cream-rgb),0.58)] mb-12">
-          It should take only a few seconds. It should last much longer than that....
-          {" "}
+          It takes minutes to send. It lasts much longer than that.{" "}
           <em className="text-gold" style={{ fontStyle: "italic" }}>
-            Early access opens soon.  Be first to send one.
-          </em>{" "}
+            {launched ? "We\u2019re live. Send the first one." : "Opening soon. Be first to send one."}
+          </em>
         </p>
         <div className="flex flex-col items-center gap-6">
-          {APP_OPEN ? (
-            <GoldButton href={sendUrl("final_cta")}>Send a Gift</GoldButton>
+          {launched ? (
+            <GoldButton href={sendUrl("final_cta")}>{LAUNCH_CTA_LABEL}</GoldButton>
           ) : (
           <GoldButton onClick={openModal}>
             {!mounted
@@ -47,7 +49,7 @@ export default function EarlyAccess() {
               : "Join Early Access"}
           </GoldButton>
           )}
-          <GhostButton href="#corporate">Corporate Gifting</GhostButton>
+          <GhostButton href="#corporate">Corporate · Booking December</GhostButton>
         </div>
       </RevealOnScroll>
     </section>

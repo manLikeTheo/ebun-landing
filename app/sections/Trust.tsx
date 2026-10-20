@@ -8,12 +8,12 @@ const pillars = [
   {
     icon: Lock,
     title: "Secure by design",
-    body: "Payments processed by Paystack — we never see your card. Partners are paid for gifts actually handed over.",
+    body: "You pay upfront through Paystack — we never see your card. The gift is only handed over with the recipient’s one-time code, and partners are paid after the handover.",
   },
   {
     icon: Package,
     title: "Curated partners",
-    body: "Every partner is visited and approved before a single gift goes out.",
+    body: "Every partner is approved by us before their gifts go live — local favourites, not a marketplace free-for-all.",
   },
   {
     icon: RefreshCw,

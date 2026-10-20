@@ -30,9 +30,10 @@ export default function Diaspora() {
         <RevealOnScroll delay={0.15}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {[
-              { from: "London", to: "Lagos" },
-              { from: "Toronto", to: "Abuja" },
-              { from: "Houston", to: "Ibadan" },
+              // Only cities where gifts can actually be received today.
+              { from: "London", to: "Akure" },
+              { from: "Toronto", to: "Akure" },
+              { from: "Houston", to: "Akure" },
             ].map((route) => (
               <div
                 key={route.from}
@@ -57,9 +58,10 @@ export default function Diaspora() {
         <RevealOnScroll delay={0.25}>
           <div className="max-w-[640px]">
             <p className="text-[0.95rem] text-[rgba(var(--cream-rgb),0.75)] leading-[1.85] mb-5">
-              Made for people who want to celebrate loved ones
-              in Nigeria without being there in person — or having to
-              coordinate the entire gift experience themselves.
+              For Nigerians abroad who want to celebrate family at home
+              without flying in or coordinating anything. Pay in naira by
+              card, transfer or USSD — from wherever you are. Starting in
+              Akure, with more cities soon.
             </p>
 
             {/* <p className="text-[0.95rem] text-[rgba(var(--cream-rgb),0.75)] leading-[1.85] mb-5">
@@ -69,7 +71,7 @@ export default function Diaspora() {
             </p> */}
 
             <p className="text-[1.2rem] text-cream leading-[1.85] mb-6">
-              You shouldn&apos;t need an address, a courier, or a phone call to show up for someone. You just need their number.
+              You don&apos;t need their address or a courier. They add the address after the reveal — so the surprise stays a surprise.
             </p>
 
             {/* <p className="text-[1.6rem] text-cream font-serif italic leading-[1.65]">

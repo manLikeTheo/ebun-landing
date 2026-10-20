@@ -29,7 +29,7 @@ export default function Problem() {
 
           <div className="text-[1rem] tracking-wider text-[rgba(var(--cream-rgb),0.68)] leading-[1.85] max-w-[580px]">
             <p>
-              A transfer says: here&apos;s some money..
+              A transfer says: here&apos;s some money.
               <br />
               A voucher says: here&apos;s some value.
             </p>
@@ -40,8 +40,8 @@ export default function Problem() {
               </strong>
             </p>
 
-            <p className="mt-5">
-              SendEbun closes that gap.
+            <p className="mt-5 font-serif text-[1.5rem] italic text-gold">
+              SendEbun is closer than a bank alert.
             </p>
           </div>
         </RevealOnScroll>

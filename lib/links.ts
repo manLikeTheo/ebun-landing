@@ -18,8 +18,13 @@ export const SEND_URL = sendUrl("hero");
 /**
  * Whether the public can send real gifts yet. Until Paystack is live,
  * "Send a gift" would take a stranger's card to a test checkout, so the
- * page keeps "Join Early Access" as its main button. Flip
- * NEXT_PUBLIC_APP_OPEN=true on Vercel (and redeploy) on launch day.
+ * page keeps "Join Early Access" as its main button.
+ *
+ * The page now also opens by itself at LAUNCH_AT (lib/launch.ts). This
+ * flag remains the manual override: set NEXT_PUBLIC_APP_OPEN=true on
+ * Vercel (and redeploy) to open early, or after launch so the very first
+ * paint already shows the live buttons. Read it through useLaunched(),
+ * never directly in a component.
  */
 export const APP_OPEN = process.env.NEXT_PUBLIC_APP_OPEN === "true";
 
@@ -39,4 +44,25 @@ export function vendorWhatsAppUrl(): string {
     "What we offer (food, pampering, experiences…): ",
   ].join("\n");
   return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
+}
+
+/**
+ * "Book a December campaign" opens an email to SendEbun, pre-filled with
+ * what we need to quote. Email rather than WhatsApp: HR and procurement
+ * buyers forward and file these, and need a trail for approvals.
+ */
+export function corporateEnquiryUrl(): string {
+  const subject = "December gifting campaign — enquiry";
+  const body = [
+    "Hi SendEbun,",
+    "",
+    "We'd like to plan a gifting campaign for December.",
+    "",
+    "Company: ",
+    "Number of people: ",
+    "Budget per person (₦): ",
+    "Preferred date: ",
+    "Contact phone: ",
+  ].join("\n");
+  return `mailto:${businessDetails.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

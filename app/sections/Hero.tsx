@@ -1,22 +1,29 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import GoldButton from "../components/GoldButton";
 import GhostButton from "../components/GhostButton";
+import LaunchCountdown from "../components/LaunchCountdown";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
-import { APP_OPEN, SEND_URL } from "@/lib/links";
+import { useLaunched } from "../hooks/useLaunchClock";
+import { sendUrl } from "@/lib/links";
+import { LAUNCH_CTA_LABEL } from "@/lib/launch";
 
 export default function Hero() {
   const { openModal } = useWaitlistModal();
-  
+  const launched = useLaunched();
+  const reduceMotion = useReducedMotion();
+
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video) {
-      video.playbackRate = 0.2;
-    }
-  }, []);
+    if (!video) return;
+    video.playbackRate = 0.2;
+    // Reduced motion: hold on the poster frame instead of looping video.
+    if (reduceMotion) video.pause();
+    else video.play().catch(() => {});
+  }, [reduceMotion]);
   return (
     <section className="relative min-h-screen flex items-center px-6 md:px-[52px] pt-[140px] pb-[100px] overflow-hidden">
       <div
@@ -32,40 +39,50 @@ export default function Hero() {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
-            className="inline-flex items-center gap-[14px] text-[0.68rem] tracking-[0.26em] uppercase text-gold mb-9"
+            className="inline-flex items-center gap-[14px] text-[0.68rem] tracking-[0.26em] uppercase text-gold mb-9 text-balance"
           >
-            Digital Gifting for Nigeria & the Diaspora
+            Real gifts · Your voice · Starting in Akure
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
-            className="font-serif font-light text-cream leading-[1.04]"
-            style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}
-          >
-            Sending a gift should be
-          </motion.h1>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.4 }}
-            className="font-serif font-light italic text-gold leading-[1.04] mb-11"
-            style={{ fontSize: "clamp(2.8rem, 6.5vw, 5rem)" }}
-          >
-            as easy as sending money.
-          </motion.h1>
+          {/* One h1 (it used to be two), each line still animated on its own. */}
+          <h1 className="font-serif font-light leading-[1.04] mb-8" style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}>
+            <motion.span
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
+              className="block text-cream text-balance"
+            >
+              Send the gift.
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.4 }}
+              className="block italic text-gold text-balance"
+              style={{ fontSize: "clamp(2.8rem, 6.5vw, 5rem)" }}
+            >
+              Send yourself with it.
+            </motion.span>
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.55 }}
-            className="font-sans font-light text-[rgba(var(--cream-rgb),0.86)] max-w-[500px] leading-[1.8] mb-10"
+            className="font-sans font-light text-[rgba(var(--cream-rgb),0.86)] max-w-[500px] leading-[1.8] mb-9"
             style={{ fontSize: "clamp(1rem, 1.6vw, 1.15rem)" }}
           >
-            Choose something thoughtful, add your voice, and send it straight to their WhatsApp. They unwrap it on their phone  —  wherever they are, wherever you are.
+            A meal, a cake, a pamper session — with a video or voice note from you. They scratch to reveal it, then collect it or have it delivered. Even if you&rsquo;re paying from abroad.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.62 }}
+            className="w-full flex justify-center lg:justify-start mb-9"
+          >
+            <LaunchCountdown />
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 22 }}
@@ -73,8 +90,8 @@ export default function Hero() {
             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.7 }}
             className="flex items-center gap-[18px] flex-wrap justify-center lg:justify-start mb-6"
           >
-            {APP_OPEN ? (
-              <GoldButton href={SEND_URL}>Send a Gift</GoldButton>
+            {launched ? (
+              <GoldButton href={sendUrl("hero")}>{LAUNCH_CTA_LABEL}</GoldButton>
             ) : (
               <GoldButton onClick={openModal}>Join Early Access</GoldButton>
             )}

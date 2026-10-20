@@ -48,13 +48,13 @@ const steps = [
     num: "03",
     icon: Smartphone,
     title: "Reveal",
-    body: "A WhatsApp message arrives. They unwrap it on their phone — and find you waiting on the other side.",
+    body: "You send them the link. They scratch it open on their phone — and find you waiting on the other side.",
   },
   {
     num: "04",
     icon: PackageCheck,
     title: "Receive",
-    body: "They choose a time that suits them and collect it in person — or have it delivered, where available. No address needed from you.",
+    body: "They collect it at the partner’s counter with a one-time code, or add their address after the reveal for doorstep delivery. The surprise survives.",
   },
 ];
 
@@ -74,7 +74,7 @@ export default function HowItWorks() {
             </em>
           </h2>
           <p className="text-[1rem] text-[rgba(var(--cream-rgb),0.8)] leading-[1.85] max-w-[560px] mb-16">
-            No address to chase. No app for them to install. Just a thoughtful gift, your voice, and a reveal that makes the distance disappear.
+            You don&apos;t need their address. They don&apos;t need an app. You send a link; they get a moment — your voice first, then the gift.
           </p>
         </RevealOnScroll>
 
@@ -149,7 +149,7 @@ export default function HowItWorks() {
         {/* Closing line */}
         <RevealOnScroll delay={0.5}>
           <p className="text-center text-[0.8rem] tracking-[0.18em] uppercase text-[rgba(var(--gold-rgb),0.55)] mt-14">
-            Under two minutes · From anywhere in the world
+            Pay by card, transfer or USSD · From anywhere in the world
           </p>
         </RevealOnScroll>
       </div>

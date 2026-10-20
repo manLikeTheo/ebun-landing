@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
 import BrandLogo from "./BrandLogo";
-import { APP_OPEN, sendUrl } from "@/lib/links";
+import { sendUrl } from "@/lib/links";
+import { LAUNCH_CTA_LABEL } from "@/lib/launch";
+import { useLaunched } from "../hooks/useLaunchClock";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   const { openModal } = useWaitlistModal();
+  const launched = useLaunched();
 
 const handlePrelaunchCta = () => {
   window.dispatchEvent(
@@ -61,6 +64,10 @@ const handlePrelaunchCta = () => {
           className="hidden md:inline text-[0.75rem] tracking-[0.14em] uppercase text-[rgba(var(--cream-rgb),0.98)] hover:text-gold-light transition-colors duration-300"
         >
           Corporate
+          {/* Corporate campaigns are open for December bookings. */}
+          <span className="ml-2 hidden rounded-full border border-gold/50 bg-gold/10 px-2 py-[2px] align-middle text-[0.55rem] tracking-[0.14em] text-gold-light lg:inline">
+            Now booking
+          </span>
         </a>
         <a
           href="#vendors"
@@ -68,9 +75,9 @@ const handlePrelaunchCta = () => {
         >
           For Businesses
         </a>
-        {APP_OPEN ? (
+        {launched ? (
           <a href={sendUrl("navbar")} className="inline-flex items-center min-h-11 border border-gold/60 bg-transparent px-3 py-[9px] font-sans text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-gold transition-all duration-300 sm:px-[22px] sm:text-[0.72rem] sm:tracking-[0.16em] hover:border-amber hover:bg-amber hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-light">
-            Send a Gift
+            {LAUNCH_CTA_LABEL}
           </a>
         ) : (
           <button

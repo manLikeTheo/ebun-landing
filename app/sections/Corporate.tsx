@@ -4,19 +4,25 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 import GoldButton from "../components/GoldButton";
 import { Check } from "lucide-react";
+import { corporateEnquiryUrl } from "@/lib/links";
 
-const stats = [
-  { num: "3", unit: "min", label: "Average time to send any gift" },
-  { num: "0", unit: "", label: "Addresses needed from sender" },
-  { num: "₦0", unit: "", label: "Setup fee for corporate clients" },
-  { num: "100", unit: "%", label: "Trackable redemptions" },
+/**
+ * Every line here is true of company campaigns as built today — no
+ * invented averages or percentages. Keep it that way until there are
+ * real numbers to show.
+ */
+const facts = [
+  { num: "3", label: "Gift choices per person, so each gift lands" },
+  { num: "1", label: "Message, recorded once, seen by everyone" },
+  { num: "₦0", label: "For gifts nobody claims — credited back" },
+  { num: "Live", label: "Report of who opened, enjoyed and said thanks" },
 ];
 
 const benefits = [
-  "No hamper coordination. No undelivered gifts, No December stress.",
-  "Personalised reveals, not generic voucher codes.",
-  "Full redemption reporting for finance and HR.",
-  "From 30 recipients to 5,000. Same seamless process.",
+  "Upload your list, record one message, pay once. No hampers, no couriers, no December chaos.",
+  "Each person picks from up to three gifts you choose — collected locally or delivered.",
+  "You only pay for gifts that are claimed. Unclaimed value is credited back.",
+  "A live report for HR and finance: who opened, who enjoyed it, who said thanks.",
 ];
 
 export default function Corporate() {
@@ -24,18 +30,26 @@ export default function Corporate() {
     <section id="corporate" className="bg-ink-2 border-t border-b border-[rgba(var(--gold-rgb),0.07)]">
       <div className="max-w-[1080px] mx-auto py-[120px] px-6 md:px-[52px] grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
         <RevealOnScroll>
-          <SectionEyebrow text="For Companies and  Corporate Organizations" />
+          <div className="mb-5">
+            {/* Bookings, not "coming soon": campaigns are built, and December budgets are set now. */}
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gold/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.2em] text-gold-light">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+              Now booking for December
+            </span>
+          </div>
+          <SectionEyebrow text="For companies" />
           <h2
             className="font-serif font-light text-cream mb-6"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
           >
-           Reward your people. Skip the logistics. <br />
+            Thank your people. Skip the logistics. <br />
             <em className="text-gold" style={{ fontStyle: "italic" }}>
-              At scale.
+              In time for December.
             </em>
           </h2>
           <p className="text-[1rem] text-[rgba(var(--cream-rgb),0.75)] leading-[1.85] mb-10">
-            One campaign. One payment. Every person receives a personalised gift with your messages attached... and you receive a full report.
+            One campaign, one payment. Every person gets a gift they chose, with a message from you — and you see
+            exactly how it landed.
           </p>
           <ul className="flex flex-col gap-[18px] mb-10">
             {benefits.map((b) => (
@@ -47,18 +61,20 @@ export default function Corporate() {
               </li>
             ))}
           </ul>
-          <GoldButton href="#early-access" className="text-center text-lg tracking-wide">Talk to us about corporate gifting</GoldButton>
+          <GoldButton href={corporateEnquiryUrl()} className="text-center text-lg tracking-wide">
+            Book a December campaign
+          </GoldButton>
+          <p className="mt-4 text-[0.78rem] text-[rgba(var(--cream-rgb),0.55)]">
+            Tell us your team size, budget and date — we&rsquo;ll put the campaign together with you.
+          </p>
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.2}>
           <div className="grid grid-cols-2 gap-[2px] bg-[rgba(var(--gold-rgb),0.07)]">
-            {stats.map((s) => (
-              <div key={s.label} className="bg-ink p-8">
-                <div className="font-serif text-[2.8rem] font-light text-gold leading-none mb-2">
-                  {s.num}
-                  {s.unit && <span className="text-[1.3rem]">{s.unit}</span>}
-                </div>
-                <div className="text-[0.78rem] text-[rgba(var(--cream-rgb),0.68)]">{s.label}</div>
+            {facts.map((f) => (
+              <div key={f.label} className="bg-ink p-8">
+                <div className="font-serif text-[2.8rem] font-light text-gold leading-none mb-2 [font-variant-numeric:lining-nums]">{f.num}</div>
+                <div className="text-[0.78rem] text-[rgba(var(--cream-rgb),0.68)]">{f.label}</div>
               </div>
             ))}
           </div>

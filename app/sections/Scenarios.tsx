@@ -5,13 +5,19 @@ import { ArrowUpRight } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 
+/**
+ * These are scenarios, not testimonials: the pull-lines carry no quotation
+ * marks and nobody is credited with saying them. Every feature named here
+ * is live. Keep it that way — no real-sounding quotes until real customers
+ * have said them (with permission).
+ */
 const stories = [
   {
     tag: "A birthday",
     number: "01",
     title: "The birthday you nearly missed",
-    quote: "It was 10:06. I remembered. I still showed up.",
-    body: "On his commute, Segun chooses a birthday meal, records a quick voice note, and enters her number. A few minutes later, her phone lights up. She hears his voice before she sees the gift. He did not just remember — he made the moment count.",
+    pullLine: "Remembered late. Still showed up.",
+    body: "On his commute, Segun realises it is her birthday. He picks a treat from a spot she loves, records a quick voice note, and sends her the link before his stop. She hears his voice before she sees the gift. He did not just remember — he made the moment count.",
     detail: "For the moments that almost slipped by",
     image: "/scenarios/consumer.png",
     alt: "A woman smiling after receiving a thoughtful surprise on her phone",
@@ -19,19 +25,19 @@ const stories = [
   {
     tag: "Across distance",
     number: "02",
-    title: "You could not be in Enugu. You could still be part of it.",
-    quote: "Cash would have arrived. This felt like I did.",
-    body: "Chidi is in Ontario when his brother graduates. He sends dinner for two at the spot his brother loves, with a message only the two of them would understand. His brother opens it, books a table for Saturday, and sends one back. The distance did not disappear — but it stopped being the whole story.",
+    title: "You couldn’t be in Akure. You could still be there.",
+    pullLine: "Money would have arrived. This arrived like him.",
+    body: "Chidi is in Toronto when his sister lands her first job. He sends her dinner for two at the spot she loves, with a video only she would understand. She scratches it open, picks Saturday, and sends him a photo from the table. The distance didn’t disappear — it just stopped being the whole story.",
     detail: "For people you love from far away",
     image: "/scenarios/diaspora.png",
-    alt: "A person recording a heartfelt video message at home",
+    alt: "A man in Toronto smiling at his phone while his sister, at home, smiles at hers",
   },
   {
     tag: "At scale",
     number: "03",
     title: "A better December for everyone in HR",
-    quote: "Four hundred people. One upload. No hamper chaos.",
-    body: "The team uploads a recipient list. The CEO records one message. On the chosen day, every phone lights up with a gift that feels considered instead of routine. The team gets clarity on redemptions; employees get a moment of recognition.",
+    pullLine: "One message. Every person. Pay only for what’s claimed.",
+    body: "The team uploads a staff list and the CEO records one message. Everyone gets their own gift link, picks one of three gifts, and collects it or has it delivered. HR watches a live report of who opened, enjoyed and said thanks — and anything unclaimed is credited back.",
     detail: "For teams that deserve more than a generic voucher",
     image: "/scenarios/corporate_png.png",
     alt: "A warm, modern Nigerian office team celebrating together",
@@ -116,11 +122,10 @@ export default function Scenarios() {
                       {story.title}
                     </h3>
 
-                    <blockquote className="mt-7 border-l border-gold/50 pl-5">
-                      <p className="font-serif text-[1.2rem] italic leading-[1.55] text-gold-champagne md:text-[1.35rem]">
-                        “{story.quote}”
-                      </p>
-                    </blockquote>
+                    {/* A pull-line, not a quotation: no quote marks, no <blockquote>. */}
+                    <p className="mt-7 border-l border-gold/50 pl-5 font-serif text-[1.2rem] italic leading-[1.55] text-gold-champagne md:text-[1.35rem]">
+                      {story.pullLine}
+                    </p>
 
                     <p className="mt-7 max-w-[560px] text-[0.87rem] leading-[1.9] text-muted-strong">
                       {story.body}
