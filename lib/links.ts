@@ -67,6 +67,12 @@ export function corporateEnquiryUrl(): string {
   return `mailto:${businessDetails.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
+/** General "chat with us" link for the footer, with a short greeting so the chat doesn't open empty. */
+export function whatsAppChatUrl(): string {
+  const digits = businessDetails.phone.replace(/\D/g, "");
+  return `https://wa.me/${digits}?text=${encodeURIComponent("Hi SendEbun, I have a question.")}`;
+}
+
 /**
  * "Planning a wedding?" opens WhatsApp with the date asked for up front.
  * Registries aren't built: this collects dated demand without promising

@@ -5,4 +5,6 @@ export const businessDetails = {
   // registrationNumber: "",
   email: "hello@ebun.com.ng",
   phone: "+2348168628936", // Include the international country code, e.g. +234.
+  // Handle only, no "@". Add other platforms here once they have posts worth sending people to.
+  instagram: "sendebun.gifting",
 };

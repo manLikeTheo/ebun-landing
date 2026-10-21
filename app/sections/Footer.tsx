@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BrandLogo from "../components/BrandLogo";
 import { businessDetails } from "@/lib/business-details";
+import { whatsAppChatUrl } from "@/lib/links";
 
 const footerLinks = [
   { label: "How it works", href: "#how" },
@@ -38,6 +39,32 @@ export default function Footer() {
             <p className="mb-2 text-xs uppercase tracking-[0.16em] text-gold">Get in touch</p>
             <p>Email:  {businessDetails.email ? <a className="break-all underline underline-offset-4 hover:text-gold-light" href={`mailto:${businessDetails.email}`}>{businessDetails.email}</a> : <span className="text-muted-strong">[BUSINESS_EMAIL]</span>}</p>
             <p>Phone: {businessDetails.phone ? <a className="underline underline-offset-4 hover:text-gold-light" href={`tel:${businessDetails.phone.replace(/\s/g, "")}`}>{businessDetails.phone}</a> : <span className="text-muted-strong">[BUSINESS_PHONE]</span>}</p>
+            {businessDetails.phone && (
+              <p>
+                WhatsApp:{" "}
+                <a
+                  className="underline underline-offset-4 hover:text-gold-light"
+                  href={whatsAppChatUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Chat with us
+                </a>
+              </p>
+            )}
+            {businessDetails.instagram && (
+              <p>
+                Instagram:{" "}
+                <a
+                  className="underline underline-offset-4 hover:text-gold-light"
+                  href={`https://www.instagram.com/${businessDetails.instagram}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @{businessDetails.instagram}
+                </a>
+              </p>
+            )}
           </div>
         </div>
       </div>
