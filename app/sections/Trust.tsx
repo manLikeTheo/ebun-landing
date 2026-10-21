@@ -13,7 +13,7 @@ const pillars = [
   {
     icon: Package,
     title: "Curated partners",
-    body: "Every partner is approved by us before their gifts go live — local favourites, not a marketplace free-for-all.",
+    body: "Every partner is approved by us before their gifts go live — starting with local favourites like Perfect Menu and Unique Catering.",
   },
   {
     icon: RefreshCw,
@@ -27,7 +27,7 @@ export default function Trust() {
     <section className="py-[120px] px-6 md:px-[52px]">
       <div className="max-w-[1080px] mx-auto">
         <RevealOnScroll>
-          <SectionEyebrow text="HOW WE'RE BUILDING IT" />
+          <SectionEyebrow text="Why you can trust it" />
           <h2
             className="font-serif font-light text-cream mb-14"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}

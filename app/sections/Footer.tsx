@@ -30,6 +30,7 @@ export default function Footer() {
           <div>
             <p className="mb-2 text-xs uppercase tracking-[0.16em] text-gold">The business behind SendEbun</p>
             <p>SendEbun is a product of {businessDetails.name}, registered in Nigeria.</p>
+            <p className="text-muted-strong">Part of the iDICE Startup Bridge Founders Lab, Cohort 2.</p>
             {/* <p className="text-muted-strong">BN: {businessDetails.registrationNumber || "[CAC_BN_NUMBER]"}</p> */}
             <p className="mt-3 text-gold"><a href="https://ebun.com.ng">ebun.com.ng</a> · Nigeria</p>
           </div>

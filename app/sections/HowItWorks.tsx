@@ -24,7 +24,7 @@ const steps = [
     who: "you",
     icon: Video,
     title: "Personalise",
-    body: "Record a video or voice note, or write a few words. Pay in naira by card, transfer or USSD, pick the day it arrives, and send them the link.",
+    body: "Record a video or voice note, or write a few words. Pay in naira — the shop's price plus a small service fee, shown before you pay — and send them the link.",
   },
   {
     num: "03",
@@ -38,7 +38,7 @@ const steps = [
     who: "them",
     icon: PackageCheck,
     title: "Receive",
-    body: "They collect it at the counter with a one-time code, or add their address for doorstep delivery — after the reveal, so the surprise survives.",
+    body: "They collect it at the counter with a one-time code. Where delivery is available, they add their address after the reveal — so the surprise survives.",
   },
 ] as const;
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "../brand/tokens.css";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -19,24 +20,31 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+// Title leads with the tagline: this is what WhatsApp and Instagram show
+// when someone shares the link. The legal name stays in the description
+// (and the footer) for business verification.
+const TITLE = "SendEbun — Gift like you're there";
+const DESCRIPTION =
+  "Send a real gift — a meal, a cake, a spa afternoon, a cinema night — with a video or voice note from you. They scratch to reveal it, then collect it. A product of TadecLabs Innovations, registered in Nigeria.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://ebun.com.ng"),
-  title: "SendEbun — Digital Gifting in Nigeria | TadecLabs Innovations",
-  description:
-    "SendEbun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
+  title: TITLE,
+  description: DESCRIPTION,
   openGraph: {
     type: "website",
     locale: "en_NG",
     siteName: "SendEbun",
-    title: "SendEbun — Digital Gifting in Nigeria | TadecLabs Innovations",
-    description:
-      "SendEbun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
+    url: "https://ebun.com.ng",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "SendEbun — Gift like you're there" }],
   },
   twitter: {
-    card: "summary",
-    title: "SendEbun — Digital Gifting in Nigeria | TadecLabs Innovations",
-    description:
-      "SendEbun is a digital gifting platform by TadecLabs Innovations, registered in Nigeria. Join early access for thoughtful gifts with personal messages.",
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og.jpg"],
   },
 };
 
@@ -49,6 +57,8 @@ export default function RootLayout({
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="font-sans antialiased" suppressHydrationWarning>
         {children}
+        {/* Page views only, no cookies. Turn on Web Analytics in the Vercel project for data to appear. */}
+        <Analytics />
       </body>
     </html>
   );

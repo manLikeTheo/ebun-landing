@@ -132,8 +132,8 @@ export default function Categories() {
             </div>
 
             <p className="max-w-[360px] text-[0.9rem] leading-[1.85] text-muted-strong md:pb-2">
-              Real treats from trusted local spots — never marked up. Collected with a code, or delivered to
-              their door.
+              Real treats from trusted local spots, at the shop&apos;s own price. Collected with a code, or
+              delivered where available.
             </p>
           </div>
         </RevealOnScroll>
