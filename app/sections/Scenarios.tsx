@@ -17,16 +17,16 @@ const stories = [
     number: "01",
     title: "The birthday you nearly missed",
     pullLine: "Remembered late. Still showed up.",
-    body: "On his commute, Segun realises it is her birthday. He picks a treat from a spot she loves, records a quick voice note, and sends her the link before his stop. She hears his voice before she sees the gift. He did not just remember — he made the moment count.",
+    body: "On his commute, Segun realises it's his sister Tolu's birthday. He picks a treat from a spot she loves, records a quick voice note, and sends her the link before his stop. She hears his voice before she sees the gift. He didn't just remember — he made the moment count.",
     detail: "For the moments that almost slipped by",
     image: "/scenarios/consumer.png",
-    alt: "A woman smiling after receiving a thoughtful surprise on her phone",
+    alt: "A young woman smiling at a birthday gift on her phone",
   },
   {
     tag: "Across distance",
     number: "02",
-    title: "You couldn’t be in Akure. You could still be there.",
-    pullLine: "Money would have arrived. This arrived like him.",
+    title: "Miles away. Still part of the night.",
+    pullLine: "He wasn’t at the table. He was the reason for it.",
     body: "Chidi is in Toronto when his sister lands her first job. He sends her dinner for two at the spot she loves, with a video only she would understand. She scratches it open, picks Saturday, and sends him a photo from the table. The distance didn’t disappear — it just stopped being the whole story.",
     detail: "For people you love from far away",
     image: "/scenarios/diaspora.png",
@@ -61,15 +61,14 @@ export default function Scenarios() {
                 className="font-serif font-light text-cream"
                 style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.12 }}
               >
-                Different distances.
-                <br />
-                <em className="text-gold">The same feeling: you showed up.</em>
+                <span className="block">Late, far away, or at scale.</span>
+                <em className="block text-gold text-balance">It still lands like you meant it.</em>
               </h2>
             </div>
 
             <p className="max-w-[340px] text-[0.9rem] leading-[1.85] text-muted-strong md:pb-2">
-              SendEbun is designed for the part of giving that a bank transfer
-              cannot carry.
+              Three everyday situations SendEbun was built for — a birthday remembered late, a celebration
+              from abroad, and a team at year-end.
             </p>
           </div>
         </RevealOnScroll>

@@ -41,7 +41,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
             className="inline-flex items-center gap-[14px] text-[0.68rem] tracking-[0.26em] uppercase text-gold mb-9 text-balance"
           >
-            Real gifts · Your voice · Starting in Akure
+            Gifting for Nigeria & the diaspora
           </motion.div>
 
           {/* One h1 (it used to be two), each line still animated on its own. */}

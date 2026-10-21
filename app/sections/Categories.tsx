@@ -6,7 +6,10 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 
 /**
- * Only what's live in Akure: meals, cakes, pampering and cinema.
+ * Only categories that are live: meals, cakes, pampering and cinema.
+ *
+ * Location: the page names the launch city once, in the line under these
+ * cards, framed as the first of many. Don't repeat it elsewhere.
  *
  * A card shows a photo only when the photo shows what we actually sell.
  * Until there are real ones, a card shows the gift ticket the recipient
@@ -113,8 +116,8 @@ export default function Categories() {
             </div>
 
             <p className="max-w-[360px] text-[0.9rem] leading-[1.85] text-muted-strong md:pb-2">
-              Treats from Akure&apos;s local favourites, at the price they&apos;d pay at the counter. Collected with
-              a code, or delivered to their door.
+              Real treats from trusted local spots — never marked up. Collected with a code, or delivered to
+              their door.
             </p>
           </div>
         </RevealOnScroll>
@@ -180,7 +183,7 @@ export default function Categories() {
 
         <RevealOnScroll delay={0.35}>
           <p className="mt-12 text-center text-[0.7rem] uppercase tracking-[0.16em] text-gold">
-            Live in Akure · More cities soon
+            Growing city by city · Starting in Akure
           </p>
         </RevealOnScroll>
       </div>
