@@ -104,7 +104,7 @@ export default function Hero() {
             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.85 }}
             className="text-[0.85rem] font-semibold tracking-[0.3em] uppercase text-gold"
           >
-            CHOOSE  ·  PERSONALISE  ·  REVEAL  ·  REDEEM
+            CHOOSE  ·  PERSONALISE  ·  REVEAL  ·  RECEIVE
           </motion.div>
         </div>
 
