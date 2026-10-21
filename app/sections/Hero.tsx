@@ -72,7 +72,7 @@ export default function Hero() {
             className="font-sans font-light text-[rgba(var(--cream-rgb),0.86)] max-w-[500px] leading-[1.8] mb-9"
             style={{ fontSize: "clamp(1rem, 1.6vw, 1.15rem)" }}
           >
-            A meal, a cake, a pamper session — with a video or voice note from you. They scratch to reveal it, then collect it or have it delivered. Even if you&rsquo;re paying from abroad.
+            A meal, a cake, a pamper session — with a video or voice note from you. They scratch to reveal it, then collect it with a code. Send it from wherever you are.
           </motion.p>
 
           <motion.div

@@ -20,9 +20,10 @@ const facts = [
 
 const benefits = [
   "Upload your list, record one message, pay once. No hampers, no couriers, no December chaos.",
-  "Each person picks from up to three gifts you choose — collected locally or delivered.",
+  "Each person picks from up to three gifts you choose — collected locally, or delivered where available.",
   "You only pay for gifts that are claimed. Unclaimed value is credited back.",
   "A live report for HR and finance: who opened, who enjoyed it, who said thanks.",
+  "Not just December: thank speakers, guests and clients after an event the same way.",
 ];
 
 export default function Corporate() {

@@ -18,7 +18,7 @@ const pillars = [
   {
     icon: RefreshCw,
     title: "Support when you need it",
-    body: "If a gift can't be honoured, you get your money back in full. A real person answers when you need help.",
+    body: "If a gift can't be honoured, or is never claimed, you get your money back in full. A real person answers when you need help.",
   },
 ];
 

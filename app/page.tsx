@@ -10,9 +10,11 @@ import HowItWorks from "./sections/HowItWorks";
 import Categories from "./sections/Categories";
 import Diaspora from "./sections/Diaspora";
 import Scenarios from "./sections/Scenarios";
+import Weddings from "./sections/Weddings";
 import Corporate from "./sections/Corporate";
 import ForVendors from "./sections/ForVendors";
 import Trust from "./sections/Trust";
+import Faq from "./sections/Faq";
 import EarlyAccess from "./sections/EarlyAccess";
 import Footer from "./sections/Footer";
 import { WaitlistModalProvider } from "./context/WaitlistModalContext";
@@ -43,10 +45,13 @@ export default function Home() {
         <Diaspora />
         <Divider />
         <Scenarios />
+        <Weddings />
         <Corporate />
         <ForVendors />
         <Divider />
         <Trust />
+        <Divider />
+        <Faq />
         <Divider />
         <EarlyAccess />
       </main>

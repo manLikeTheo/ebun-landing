@@ -138,7 +138,14 @@ export default function Categories() {
           </div>
         </RevealOnScroll>
 
-        <div className="mt-14 grid grid-cols-1 gap-[2px] bg-[rgba(var(--gold-lt-rgb),0.14)] md:grid-cols-2">
+        {/* People shop by occasion; this names the moments without new categories. */}
+        <RevealOnScroll delay={0.1}>
+          <p className="mt-10 text-[0.68rem] uppercase leading-[2] tracking-[0.2em] text-[rgba(var(--gold-lt-rgb),0.85)]">
+            For birthdays · weddings · new babies · graduations · results day · thank-yous · just because
+          </p>
+        </RevealOnScroll>
+
+        <div className="mt-8 grid grid-cols-1 gap-[2px] bg-[rgba(var(--gold-lt-rgb),0.14)] md:grid-cols-2">
           {categories.map((category, index) => {
             const Icon = category.icon;
 

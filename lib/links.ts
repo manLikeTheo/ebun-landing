@@ -9,7 +9,7 @@ import { businessDetails } from "./business-details";
 export const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || "https://app.ebun.com.ng").replace(/\/+$/, "");
 
 /** UTM-tagged so the app's analytics can tell which button brought someone in. */
-export function sendUrl(placement: "hero" | "navbar" | "footer" | "final_cta"): string {
+export function sendUrl(placement: "hero" | "navbar" | "footer" | "final_cta" | "weddings"): string {
   return `${APP_URL}/send?utm_source=landing&utm_medium=web&utm_content=${placement}`;
 }
 
@@ -65,4 +65,21 @@ export function corporateEnquiryUrl(): string {
     "Contact phone: ",
   ].join("\n");
   return `mailto:${businessDetails.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+/**
+ * "Planning a wedding?" opens WhatsApp with the date asked for up front.
+ * Registries aren't built: this collects dated demand without promising
+ * a launch date.
+ */
+export function weddingInterestUrl(): string {
+  const digits = businessDetails.phone.replace(/\D/g, "");
+  const text = [
+    "Hi SendEbun, we're planning a wedding and would love a gift registry.",
+    "",
+    "Wedding date: ",
+    "City: ",
+    "Rough number of guests: ",
+  ].join("\n");
+  return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }
