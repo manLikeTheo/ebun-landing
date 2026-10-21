@@ -44,7 +44,7 @@ export default function Hero() {
             Gifting for Nigeria & the diaspora
           </motion.div>
 
-          {/* One h1 (it used to be two), each line still animated on its own. */}
+          {/* Clarity first: say what it is and why it's easier. The tagline stays in the footer and link preview. */}
           <h1 className="font-serif font-light leading-[1.04] mb-8" style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}>
             <motion.span
               initial={{ opacity: 0, y: 22 }}
@@ -52,7 +52,7 @@ export default function Hero() {
               transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
               className="block text-cream text-balance"
             >
-              Send the gift.
+              Send real gifts,
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 22 }}
@@ -61,7 +61,7 @@ export default function Hero() {
               className="block italic text-gold text-balance"
               style={{ fontSize: "clamp(2.8rem, 6.5vw, 5rem)" }}
             >
-              Send yourself with it.
+              without the hassle.
             </motion.span>
           </h1>
 
@@ -72,7 +72,7 @@ export default function Hero() {
             className="font-sans font-light text-[rgba(var(--cream-rgb),0.86)] max-w-[500px] leading-[1.8] mb-9"
             style={{ fontSize: "clamp(1rem, 1.6vw, 1.15rem)" }}
           >
-            A meal, a cake, a pamper session — with a video or voice note from you. They scratch to reveal it, then collect it with a code. Send it from wherever you are.
+            A meal, a cake, a spa afternoon — with a video or voice note from you. They scratch to reveal it and collect it with a code. You never have to ask for their address.
           </motion.p>
 
           <motion.div

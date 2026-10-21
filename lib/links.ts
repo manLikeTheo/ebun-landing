@@ -67,10 +67,15 @@ export function corporateEnquiryUrl(): string {
   return `mailto:${businessDetails.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-/** General "chat with us" link for the footer, with a short greeting so the chat doesn't open empty. */
+/**
+ * General "chat with us" link for the footer. The greeting assumes the most
+ * likely (and most valuable) reason to message: wanting to send a gift. It
+ * opens a sales conversation instead of a support ticket, and still reads
+ * fine if they actually have a question.
+ */
 export function whatsAppChatUrl(): string {
   const digits = businessDetails.phone.replace(/\D/g, "");
-  return `https://wa.me/${digits}?text=${encodeURIComponent("Hi SendEbun, I have a question.")}`;
+  return `https://wa.me/${digits}?text=${encodeURIComponent("Hi SendEbun! 👋 I'd like to send a gift to someone special. Can you help me choose?")}`;
 }
 
 /**
