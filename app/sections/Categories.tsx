@@ -1,72 +1,120 @@
 "use client";
 
 import Image from "next/image";
-import { Gift, Sparkles, UtensilsCrossed } from "lucide-react";
+import { Cake, Sparkles, UtensilsCrossed, type LucideIcon } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 
-const categories = [
+/**
+ * Only what's live in Akure: meals, cakes, pampering and cinema.
+ *
+ * A card shows a photo only when the photo shows what we actually sell.
+ * Until there are real ones, a card shows the gift ticket the recipient
+ * gets instead — honest, and it previews the product. To swap in a photo,
+ * add `image` + `alt` (export ~1000px wide, WebP).
+ */
+type Category = {
+  icon: LucideIcon;
+  number: string;
+  title: string;
+  body: string;
+  examples: string[];
+  image?: string;
+  alt?: string;
+  ticket: { item: string; forWho: string; code: string };
+};
+
+const categories: Category[] = [
   {
     icon: UtensilsCrossed,
     number: "01",
-    title: "Food & Drinks",
-    body: "The birthday cake, the lunch delivered at work, the dinner you wish you could have taken them to yourself.",
-    examples: ["Cakes", "Meals", "Restaurant moments"],
+    title: "Meals & Dining",
+    body: "Lunch at their desk. Dinner for two at the spot they love. The meal you'd have taken them to, if you could.",
+    examples: ["Lunch", "Dinner for two", "Favourite spots"],
     image: "/categories/food.png",
-    alt: "A celebratory meal and cake",
+    alt: "Jollof rice and grilled chicken in a takeaway box, with a handwritten note",
+    ticket: { item: "Dinner for two", forWho: "For Tolu · Saturday", code: "7MD · 2KX" },
+  },
+  {
+    icon: Cake,
+    number: "02",
+    title: "Cakes & Celebrations",
+    body: "The birthday cake, on the day. The congratulations cake when the results come out. Small celebrations that land exactly on time.",
+    examples: ["Birthdays", "Congrats", "On the day"],
+    ticket: { item: "Birthday cake", forWho: "For Mummy · Today", code: "4K7 · Q92" },
   },
   {
     icon: Sparkles,
-    number: "02",
-    title: "Experiences",
-    body: "A spa afternoon, a mani-pedi, cinema night or a photoshoot — the treats people rarely buy themselves, and remember longest.",
-    examples: ["Spa", "Cinema", "Creative sessions"],
-    image: "/categories/experienceA.png",
-    alt: "A relaxing premium experience",
-  },
-  {
-    icon: Gift,
     number: "03",
-    title: "Celebrations & Care",
-    body: "The cake on the day, a treat for the people who raised you, a thank-you that turns up when it matters. Small things, sent at exactly the right moment.",
-    examples: ["Celebration cakes", "Treats", "Thank-yous"],
-    // TODO(theo): replace with a photo of a cake / flowers / care box.
-    // The current image shows a phone top-up and no longer matches.
-    image: "/categories/utility.jpg",
-    alt: "A phone held up at night with a gift on its screen",
+    title: "Pampering & Cinema",
+    body: "A spa afternoon, a mani-pedi, a cinema night out. The treats people rarely buy for themselves — and remember longest.",
+    examples: ["Spa", "Mani-pedi", "Cinema"],
+    ticket: { item: "Spa afternoon", forWho: "For Ada · Whenever she's ready", code: "R8T · 6PB" },
   },
-   // {
-  //   icon: Ribbon,
-  //   number: "04",
-  //   title: "Custom Pieces",
-  //   body: "Personalised pieces for the moments that deserve more than a quick message and a transfer.",
-  //   examples: ["Photo frames", "Engraved pieces", "Memory boxes"],
-  //   image: "/categories/keepsakes.jpg",
-  //   alt: "A personalised keepsake gift",
-  // },
 ];
+
+/** The gift as the recipient receives it: what it is, who it's for, a one-time code. */
+function GiftTicket({ icon: Icon, ticket }: Pick<Category, "icon" | "ticket">) {
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 flex items-center justify-center"
+      style={{
+        background:
+          "radial-gradient(ellipse at 50% 40%, rgba(var(--gold-rgb),0.16), transparent 65%)",
+      }}
+    >
+      <div className="w-[76%] max-w-[280px] rounded-xl border border-gold/35 bg-ink shadow-[0_18px_40px_rgba(0,0,0,0.45)] transition-transform duration-700 ease-out motion-safe:group-hover:-rotate-[1.5deg] motion-safe:group-hover:scale-[1.03]">
+        <div className="flex items-start justify-between gap-3 px-5 pb-4 pt-4">
+          <div>
+            <p className="text-[0.56rem] uppercase tracking-[0.22em] text-gold">A gift for you</p>
+            <p className="mt-1.5 font-serif text-[1.35rem] leading-tight text-cream">{ticket.item}</p>
+            <p className="mt-1 text-[0.68rem] text-[rgba(var(--cream-rgb),0.55)]">{ticket.forWho}</p>
+          </div>
+          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold/35 bg-gold/10">
+            <Icon className="h-[15px] w-[15px] text-gold" strokeWidth={1.5} />
+          </span>
+        </div>
+
+        {/* Perforation */}
+        <div className="relative border-t border-dashed border-gold/30">
+          <span className="absolute -left-[7px] -top-[7px] h-[14px] w-[14px] rounded-full bg-ink-3" />
+          <span className="absolute -right-[7px] -top-[7px] h-[14px] w-[14px] rounded-full bg-ink-3" />
+        </div>
+
+        <div className="flex items-center justify-between px-5 py-3">
+          <span className="text-[0.56rem] uppercase tracking-[0.2em] text-[rgba(var(--cream-rgb),0.5)]">
+            Collect with code
+          </span>
+          <span className="text-[0.8rem] tracking-[0.2em] text-gold-light [font-variant-numeric:tabular-nums]">
+            {ticket.code}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Categories() {
   return (
     <section className="py-[120px] px-6 md:px-[52px]">
       <div className="mx-auto max-w-[1080px]">
         <RevealOnScroll>
-          <SectionEyebrow text="The Catalogue" />
+          <SectionEyebrow text="What you can send" />
           <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_auto] md:items-end">
             <div>
               <h2
-                className="font-serif font-light text-cream"
+                className="font-serif font-light text-cream text-balance"
                 style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.12 }}
               >
-                Not more stuff.
-                <br />
-                <em className="text-gold">Better ways to show up.</em>
+                <span className="block">Not more stuff.</span>
+                <em className="block text-gold text-balance">Something they&apos;ll actually enjoy.</em>
               </h2>
             </div>
 
             <p className="max-w-[360px] text-[0.9rem] leading-[1.85] text-muted-strong md:pb-2">
-              SendEbun begins with the kinds of gifts people already reach for when
-              they want someone to feel remembered.
+              Treats from Akure&apos;s local favourites, at the price they&apos;d pay at the counter. Collected with
+              a code, or delivered to their door.
             </p>
           </div>
         </RevealOnScroll>
@@ -76,38 +124,42 @@ export default function Categories() {
             const Icon = category.icon;
 
             return (
-              <RevealOnScroll key={category.title} delay={index * 0.08}>
+              <RevealOnScroll key={category.title} delay={index * 0.08} className="h-full">
                 <article className="group h-full overflow-hidden bg-ink-2 transition-colors duration-500 hover:bg-ink-3">
-                  <div className="relative h-[230px] overflow-hidden">
-                    <Image
-                      src={category.image}
-                      alt={category.alt}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-[1100ms] ease-out group-hover:scale-[1.06]"
-                    />
-                    <div className="absolute inset-0 bg-[rgba(var(--ink-rgb),0.28)] mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-[rgba(var(--ink-rgb),0.22)] to-transparent" />
+                  <div className="relative h-[230px] overflow-hidden bg-ink-3">
+                    {category.image ? (
+                      <>
+                        <Image
+                          src={category.image}
+                          alt={category.alt ?? ""}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                          className="object-cover transition-transform duration-[1100ms] ease-out motion-safe:group-hover:scale-[1.06]"
+                        />
+                        <div className="absolute inset-0 bg-[rgba(var(--ink-rgb),0.28)] mix-blend-multiply" />
+                      </>
+                    ) : (
+                      <GiftTicket icon={category.icon} ticket={category.ticket} />
+                    )}
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-2 to-transparent transition-colors duration-500 group-hover:from-ink-3" />
 
                     <div className="absolute left-5 top-5 flex items-center gap-2">
-                      <span className="text-[0.62rem] tracking-[0.2em] text-gold-champagne">
-                        {category.number}
-                      </span>
+                      <span className="text-[0.62rem] tracking-[0.2em] text-gold-champagne">{category.number}</span>
                       <span className="h-px w-7 bg-gold/50" />
                     </div>
 
-                    <div className="absolute bottom-5 left-5 flex h-10 w-10 items-center justify-center rounded-full border border-gold/35 bg-[rgba(var(--ink-rgb),0.72)] backdrop-blur-sm">
-                      <Icon className="h-[18px] w-[18px] text-gold" strokeWidth={1.5} />
-                    </div>
+                    {category.image && (
+                      <div className="absolute bottom-5 left-5 flex h-10 w-10 items-center justify-center rounded-full border border-gold/35 bg-[rgba(var(--ink-rgb),0.72)] backdrop-blur-sm">
+                        <Icon className="h-[18px] w-[18px] text-gold" strokeWidth={1.5} />
+                      </div>
+                    )}
                   </div>
 
                   <div className="px-6 py-7">
                     <h3 className="font-serif text-[1.6rem] font-semibold tracking-wide text-cream">
                       {category.title}
                     </h3>
-                    <p className="mt-3 text-[0.92rem] leading-[1.8] text-muted-strong">
-                      {category.body}
-                    </p>
+                    <p className="mt-3 text-[0.92rem] leading-[1.8] text-muted-strong">{category.body}</p>
 
                     <div className="mt-6 flex flex-wrap gap-2">
                       {category.examples.map((example) => (
@@ -128,116 +180,10 @@ export default function Categories() {
 
         <RevealOnScroll delay={0.35}>
           <p className="mt-12 text-center text-[0.7rem] uppercase tracking-[0.16em] text-gold">
-            Live in Akure with local favourites · More cities soon
+            Live in Akure · More cities soon
           </p>
         </RevealOnScroll>
       </div>
     </section>
   );
 }
-
-// "use client";
-
-// import RevealOnScroll from "../components/RevealOnScroll";
-// import SectionEyebrow from "../components/SectionEyebrow";
-// import { UtensilsCrossed, Sparkles, Ribbon, Zap } from "lucide-react";
-// import Image from "next/image";
-
-// const categories = [
-//   {
-//     icon: UtensilsCrossed,
-//     title: "Food & Drinks",
-//     body: "Cakes, Work lunch packages, Dining experiences. Thoughtfulness that extends beyond the moment.",
-//     image: "/categories/food.png",
-//     alt: "A celebration cake and meal spread",
-//   },
-//   {
-//     icon: Sparkles,
-//     title: "Experiences",
-//     body: "Cinema, spa days, photography sessions, pamper packages... Memories, not things.",
-//     image: "/categories/experienceA.png",
-//     alt: "A spa treatment room",
-//   },
-//   {
-//     icon: Ribbon,
-//     title: "Custom Gifts",
-//     body: "Personalised, made to last beyond the moment.",
-//     image: "/categories/utility.jpg",
-//     alt: "A personalised framed keepsake",
-//   },
-//   {
-//     icon: Zap,
-//     title: "Everyday Essentials",
-//     body: "Fuel credit, data and more. Practical gifts, given with meaning.",
-//     image: "/categories/utility.jpg",
-//     alt: "A phone showing a data top-up",
-//   },
-// ];
-
-// export default function Categories() {
-//   return (
-//     <section className="py-[120px] px-6 md:px-[52px]">
-//       <div className="max-w-[1080px] mx-auto">
-//         <RevealOnScroll>
-//           <SectionEyebrow text="The Catalogue" />
-//           <h2
-//             className="font-serif font-light text-cream mb-6"
-//             style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.14 }}
-//           >
-//             Gifts worth{" "}
-//             <em className="text-gold" style={{ fontStyle: "italic" }}>
-//               giving.
-//             </em>
-//           </h2>
-//           <p className="text-[0.95rem] text-[rgba(var(--cream-rgb),0.68)] leading-[1.85] max-w-[560px] mb-14">
-//             Every category curated with Nigerian vendors and brands people
-//             genuinely love — from a ₦2,000 gesture to a milestone celebration.
-//           </p>
-//         </RevealOnScroll>
-
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-[rgba(var(--gold-rgb),0.1)]">
-//           {categories.map((cat, i) => (
-//             <RevealOnScroll key={cat.title} delay={i * 0.1}>
-//               <div className="bg-ink-2 group h-full overflow-hidden transition-colors duration-500 hover:bg-ink-3">
-//                 {/* Image */}
-//                 <div className="relative h-[190px] w-full overflow-hidden">
-//                   <Image
-//                     src={cat.image}
-//                     alt={cat.alt}
-//                     fill
-//                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-//                     className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
-//                   />
-//                   {/* Warm tint + fade into card */}
-//                   <div className="absolute inset-0 bg-[rgba(var(--ink-rgb),0.35)] mix-blend-multiply" />
-//                   <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-[rgba(var(--ink-rgb),0.35)] to-transparent" />
-
-//                   {/* Icon badge */}
-//                   <div className="absolute bottom-4 left-6 w-9 h-9 rounded-full border border-[rgba(var(--gold-rgb),0.4)] bg-[rgba(var(--ink-rgb),0.7)] backdrop-blur-sm flex items-center justify-center">
-//                     <cat.icon className="w-4 h-4 text-gold" strokeWidth={1.5} />
-//                   </div>
-//                 </div>
-
-//                 {/* Copy */}
-//                 <div className="px-6 pt-5 pb-9">
-//                   <h3 className="font-serif text-[1.4rem] font-light text-cream mb-2.5 tracking-wide">
-//                     {cat.title}
-//                   </h3>
-//                   <p className="text-[0.82rem] text-[rgba(var(--cream-rgb),0.68)] leading-[1.8]">
-//                     {cat.body}
-//                   </p>
-//                 </div>
-//               </div>
-//             </RevealOnScroll>
-//           ))}
-//         </div>
-
-//         <RevealOnScroll delay={0.5}>
-//           <p className="text-center text-[0.85rem] tracking-[0.16em] uppercase text-[rgba(var(--gold-rgb),0.65)] mt-14">
-//             Onboarding founding vendor partners across Nigeria.
-//           </p>
-//         </RevealOnScroll>
-//       </div>
-//     </section>
-//   );
-// }
