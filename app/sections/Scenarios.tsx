@@ -19,8 +19,8 @@ const stories = [
     pullLine: "Remembered late. Still showed up.",
     body: "On his commute, Segun realises it's his sister Tolu's birthday. He picks a treat from a spot she loves, records a quick voice note, and sends her the link before his stop. She hears his voice before she sees the gift. He didn't just remember — he made the moment count.",
     detail: "For the moments that almost slipped by",
-    image: "/scenarios/consumer.png",
-    alt: "A young woman smiling at a birthday gift on her phone",
+    image: "/scenarios/consumer-moment.webp",
+    alt: "A young woman on her sofa, eyes closed and smiling, holding her phone to her chest",
   },
   {
     tag: "Across distance",

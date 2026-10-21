@@ -1,20 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { Cake, Sparkles, UtensilsCrossed, type LucideIcon } from "lucide-react";
+import { Cake, Popcorn, Sparkles, UtensilsCrossed, type LucideIcon } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 
 /**
- * Only categories that are live: meals, cakes, pampering and cinema.
+ * One card per live category — meals, cakes, spa and cinema — so each
+ * name maps to something a sender can actually pick in the app.
  *
  * Location: the page names the launch city once, in the line under these
  * cards, framed as the first of many. Don't repeat it elsewhere.
  *
- * A card shows a photo only when the photo shows what we actually sell.
- * Until there are real ones, a card shows the gift ticket the recipient
- * gets instead — honest, and it previews the product. To swap in a photo,
- * add `image` + `alt` (export ~1000px wide, WebP).
+ * Photos must show what we actually sell. A category without an honest
+ * photo yet can leave out `image` and set `ticket` instead: the card then
+ * shows the gift ticket the recipient gets.
  */
 type Category = {
   icon: LucideIcon;
@@ -24,7 +24,9 @@ type Category = {
   examples: string[];
   image?: string;
   alt?: string;
-  ticket: { item: string; forWho: string; code: string };
+  /** Where to anchor the crop: the photos are portrait, the frame is landscape. */
+  focus?: string;
+  ticket?: { item: string; forWho: string; code: string };
 };
 
 const categories: Category[] = [
@@ -36,28 +38,42 @@ const categories: Category[] = [
     examples: ["Lunch", "Dinner for two", "Favourite spots"],
     image: "/categories/food.png",
     alt: "Jollof rice and grilled chicken in a takeaway box, with a handwritten note",
-    ticket: { item: "Dinner for two", forWho: "For Tolu · Saturday", code: "7MD · 2KX" },
+    focus: "center 55%",
   },
   {
     icon: Cake,
     number: "02",
-    title: "Cakes & Celebrations",
-    body: "The birthday cake, on the day. The congratulations cake when the results come out. Small celebrations that land exactly on time.",
-    examples: ["Birthdays", "Congrats", "On the day"],
-    ticket: { item: "Birthday cake", forWho: "For Mummy · Today", code: "4K7 · Q92" },
+    title: "Cakes & Treats",
+    body: "The birthday cake, on the day. The congratulations cake when the results come out. Something sweet that turns up exactly when it should.",
+    examples: ["Birthdays", "Congrats", "Just because"],
+    image: "/categories/cakes.webp",
+    alt: "A two-tier cream cake topped with berries on a stand, beside a wrapped gift",
+    focus: "center 58%",
   },
   {
     icon: Sparkles,
     number: "03",
-    title: "Pampering & Cinema",
-    body: "A spa afternoon, a mani-pedi, a cinema night out. The treats people rarely buy for themselves — and remember longest.",
-    examples: ["Spa", "Mani-pedi", "Cinema"],
-    ticket: { item: "Spa afternoon", forWho: "For Ada · Whenever she's ready", code: "R8T · 6PB" },
+    title: "Spa & Pampering",
+    body: "A spa afternoon or a mani-pedi. The kind of treat people rarely book for themselves — and remember longest.",
+    examples: ["Spa", "Mani-pedi", "Me-time"],
+    image: "/categories/pampering.webp",
+    alt: "A woman relaxing with her eyes closed while getting a manicure in a warmly lit salon",
+    focus: "center 32%",
+  },
+  {
+    icon: Popcorn,
+    number: "04",
+    title: "Cinema Nights",
+    body: "A night at the movies for two, on whichever evening suits them. Easy to send, easy to say yes to.",
+    examples: ["For two", "Date night", "Friends"],
+    image: "/categories/cinema.webp",
+    alt: "Two friends laughing and sharing popcorn in a cinema",
+    focus: "center 30%",
   },
 ];
 
 /** The gift as the recipient receives it: what it is, who it's for, a one-time code. */
-function GiftTicket({ icon: Icon, ticket }: Pick<Category, "icon" | "ticket">) {
+function GiftTicket({ icon: Icon, ticket }: { icon: LucideIcon; ticket: NonNullable<Category["ticket"]> }) {
   return (
     <div
       aria-hidden="true"
@@ -122,28 +138,29 @@ export default function Categories() {
           </div>
         </RevealOnScroll>
 
-        <div className="mt-14 grid grid-cols-1 gap-[2px] bg-[rgba(var(--gold-lt-rgb),0.14)] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-[2px] bg-[rgba(var(--gold-lt-rgb),0.14)] md:grid-cols-2">
           {categories.map((category, index) => {
             const Icon = category.icon;
 
             return (
               <RevealOnScroll key={category.title} delay={index * 0.08} className="h-full">
                 <article className="group h-full overflow-hidden bg-ink-2 transition-colors duration-500 hover:bg-ink-3">
-                  <div className="relative h-[230px] overflow-hidden bg-ink-3">
+                  <div className="relative h-[240px] overflow-hidden bg-ink-3 sm:h-[280px] lg:h-[300px]">
                     {category.image ? (
                       <>
                         <Image
                           src={category.image}
                           alt={category.alt ?? ""}
                           fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                          sizes="(max-width: 768px) 100vw, 540px"
+                          style={{ objectPosition: category.focus ?? "center" }}
                           className="object-cover transition-transform duration-[1100ms] ease-out motion-safe:group-hover:scale-[1.06]"
                         />
                         <div className="absolute inset-0 bg-[rgba(var(--ink-rgb),0.28)] mix-blend-multiply" />
                       </>
-                    ) : (
+                    ) : category.ticket ? (
                       <GiftTicket icon={category.icon} ticket={category.ticket} />
-                    )}
+                    ) : null}
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-2 to-transparent transition-colors duration-500 group-hover:from-ink-3" />
 
                     <div className="absolute left-5 top-5 flex items-center gap-2">
@@ -158,7 +175,7 @@ export default function Categories() {
                     )}
                   </div>
 
-                  <div className="px-6 py-7">
+                  <div className="px-7 py-8 md:px-8">
                     <h3 className="font-serif text-[1.6rem] font-semibold tracking-wide text-cream">
                       {category.title}
                     </h3>
