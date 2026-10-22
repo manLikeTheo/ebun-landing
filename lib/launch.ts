@@ -12,9 +12,16 @@ import { APP_OPEN } from "./links";
  * Always include the +01:00 offset (Africa/Lagos). Without it, the
  * time is read in each visitor's own timezone.
  */
-export const LAUNCH_AT = "2026-10-22T11:59:00+01:00";
+/**
+ * null = launch postponed, date to be announced: no countdown, nothing
+ * flips, every button stays "Join Early Access". Set a date string again
+ * (e.g. "2026-11-05T11:59:00+01:00") to bring the countdown back.
+ *
+ * Postponed 22 Oct 2026 (Railway security incident; API deploys paused).
+ */
+export const LAUNCH_AT: string | null = null;
 
-export const LAUNCH_AT_MS = Date.parse(LAUNCH_AT);
+export const LAUNCH_AT_MS = LAUNCH_AT ? Date.parse(LAUNCH_AT) : Number.POSITIVE_INFINITY;
 
 /** What every early-access button says once SendEbun is live. */
 export const LAUNCH_CTA_LABEL = "Send your first gift";

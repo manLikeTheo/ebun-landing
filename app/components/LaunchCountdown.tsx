@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useNow, useLaunched } from "../hooks/useLaunchClock";
-import { launchLabel, timeLeft } from "@/lib/launch";
+import { LAUNCH_AT, launchLabel, timeLeft } from "@/lib/launch";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.25, 0.46, 0.45, 0.94] as const;
@@ -79,6 +79,19 @@ export default function LaunchCountdown({ className }: { className?: string }) {
           We&rsquo;re live.
         </p>
       </motion.div>
+    );
+  }
+
+  // Launch postponed with no new date: no numbers, no promise of a time.
+  if (LAUNCH_AT === null) {
+    return (
+      <div className={cn("w-full max-w-[520px] border-y border-gold/20 py-5", className)}>
+        <p className="text-[0.68rem] uppercase tracking-[0.26em] text-gold">Opening soon</p>
+        <p className="mt-2 text-[0.95rem] leading-[1.7] text-[rgba(var(--cream-rgb),0.78)]">
+          We&rsquo;re putting the final touches on SendEbun. Join early access and you&rsquo;ll be the first to
+          know when it opens.
+        </p>
+      </div>
     );
   }
 

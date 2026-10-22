@@ -25,7 +25,8 @@ function clear() {
 
 function schedule() {
   clear();
-  if (document.hidden || nowMs >= LAUNCH_AT_MS) return;
+  // No date set (postponed) or already launched: nothing to tick for.
+  if (document.hidden || !Number.isFinite(LAUNCH_AT_MS) || nowMs >= LAUNCH_AT_MS) return;
   // Align to the next second boundary so digits change on the real second.
   timer = setTimeout(tick, 1000 - (Date.now() % 1000) + 10);
 }
