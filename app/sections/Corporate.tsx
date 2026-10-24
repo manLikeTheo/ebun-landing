@@ -4,7 +4,7 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 import GoldButton from "../components/GoldButton";
 import { Check } from "lucide-react";
-import { corporateEnquiryUrl } from "@/lib/links";
+import { companyStartUrl, corporateEnquiryUrl } from "@/lib/links";
 
 /**
  * Every line here is true of company campaigns as built today — no
@@ -62,11 +62,15 @@ export default function Corporate() {
               </li>
             ))}
           </ul>
-          <GoldButton href={corporateEnquiryUrl()} className="text-center text-lg tracking-wide">
-            Book a December campaign
+          <GoldButton href={companyStartUrl("corporate")} className="text-center text-lg tracking-wide">
+            Start your company&rsquo;s gifts
           </GoldButton>
           <p className="mt-4 text-[0.78rem] text-[rgba(var(--cream-rgb),0.55)]">
-            Tell us your team size, budget and date — we&rsquo;ll put the campaign together with you.
+            Takes about 10 minutes with your list to hand. Prefer to talk first?{" "}
+            <a href={corporateEnquiryUrl()} className="underline underline-offset-4 hover:text-gold-light">
+              Email us
+            </a>{" "}
+            and we&rsquo;ll set it up with you.
           </p>
         </RevealOnScroll>
 

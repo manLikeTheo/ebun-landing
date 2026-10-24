@@ -47,6 +47,16 @@ export function vendorWhatsAppUrl(): string {
 }
 
 /**
+ * "Start your company's gifts" — the app's self-serve signup. A company
+ * fills in four fields and gets its private campaign link by email;
+ * nobody from SendEbun has to be awake. Open independently of the
+ * consumer launch: company campaigns are live and take real payments.
+ */
+export function companyStartUrl(placement: "corporate" | "navbar" = "corporate"): string {
+  return `${APP_URL}/company/start?utm_source=landing&utm_medium=web&utm_content=${placement}`;
+}
+
+/**
  * "Book a December campaign" opens an email to SendEbun, pre-filled with
  * what we need to quote. Email rather than WhatsApp: HR and procurement
  * buyers forward and file these, and need a trail for approvals.
