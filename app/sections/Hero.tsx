@@ -1,165 +1,164 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import GoldButton from "../components/GoldButton";
-import GhostButton from "../components/GhostButton";
-import LaunchCountdown from "../components/LaunchCountdown";
+
+import { useState, type FormEvent } from "react";
+import { ArrowRight } from "lucide-react";
+import GiftIllustration from "../components/GiftIllustration";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
-import { usePartnerModal } from "../context/PartnerModalContext";
 import { useLaunched } from "../hooks/useLaunchClock";
 import { sendUrl } from "@/lib/links";
 import { LAUNCH_CTA_LABEL } from "@/lib/launch";
 
+/**
+ * Redesigned hero (Oct 2026), modelled on Chowdeck / Glovo:
+ * one headline, one supporting line, ONE action, one visual. Nothing else
+ * above the fold — no countdown, pills or stock photography.
+ *
+ * The action is a WhatsApp-number field (our version of their address box).
+ * Submitting opens the existing waitlist modal with the number filled in,
+ * so the queue number, consent and survey flow all stay as they were.
+ */
+const COUNTRY_CODES = [
+  { code: "+234", label: "🇳🇬 +234" },
+  { code: "+44", label: "🇬🇧 +44" },
+  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+971", label: "🇦🇪 +971" },
+];
+
 export default function Hero() {
-  const { openModal } = useWaitlistModal();
-  const { openPartnerModal } = usePartnerModal();
+  const { openModal, openModalWith, mounted, hasJoined, queueNumber } = useWaitlistModal();
   const launched = useLaunched();
-  const reduceMotion = useReducedMotion();
 
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [countryCode, setCountryCode] = useState("+234");
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.playbackRate = 0.2;
-    // Reduced motion: hold on the poster frame instead of looping video.
-    if (reduceMotion) video.pause();
-    else video.play().catch(() => {});
-  }, [reduceMotion]);
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 7) {
+      setError("Enter your WhatsApp number to join.");
+      return;
+    }
+    setError("");
+    window.dispatchEvent(
+      new CustomEvent("ebun:prelaunch_cta_clicked", { detail: { source: "hero_form", destination: "waitlist_modal" } })
+    );
+    openModalWith({ countryCode, phone });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center px-6 md:px-[52px] pt-[140px] pb-[100px] overflow-hidden">
-      <div
-        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse, rgba(var(--sendebun-surfaceRaised-rgb),0.35) 0%, transparent 70%)",
-        }}
-      />
+    <section className="relative overflow-hidden bg-paper pt-28 md:pt-32">
+      <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-10 px-4 pb-24 md:px-8 md:pb-32 lg:grid-cols-[1.2fr_0.8fr] lg:gap-4">
+        <div className="text-center lg:text-left">
+          <span className="inline-flex items-center gap-2 rounded-full bg-paper-warm px-4 py-1.5 text-[0.85rem] font-semibold text-forest">
+            <span aria-hidden="true">🎁</span> Ẹ̀bùn means gift
+          </span>
 
-      <div className="relative w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-10">
-        <div className="flex-1 text-center lg:text-left flex flex-col items-center lg:items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
-            className="inline-flex items-center gap-[14px] text-[0.68rem] tracking-[0.26em] uppercase text-gold mb-9 text-balance"
+          <h1
+            className="mt-6 font-sans font-extrabold leading-[1.02] tracking-[-0.035em] text-forest text-balance"
+            style={{ fontSize: "clamp(2.6rem, 5.6vw, 4.6rem)" }}
           >
-            Gifting for Nigeria & the diaspora
-          </motion.div>
-
-          {/* Clarity first: say what it is and why it's easier. The tagline stays in the footer and link preview. */}
-          <h1 className="font-serif font-light leading-[1.04] mb-8" style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}>
-            <motion.span
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
-              className="block text-cream text-balance"
-            >
-              Send real gifts,
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.4 }}
-              className="block italic text-gold text-balance"
-              style={{ fontSize: "clamp(2.8rem, 6.5vw, 5rem)" }}
-            >
-              without the hassle.
-            </motion.span>
+            Send{" "}
+            <span className="whitespace-nowrap bg-[linear-gradient(transparent_64%,rgba(254,167,3,0.55)_64%,rgba(254,167,3,0.55)_90%,transparent_90%)] px-1">
+              real gifts
+            </span>
+            , <span className="lg:whitespace-nowrap">without the hassle.</span>
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.55 }}
-            className="font-sans font-light text-[rgba(var(--cream-rgb),0.86)] max-w-[500px] leading-[1.8] mb-9"
-            style={{ fontSize: "clamp(1rem, 1.6vw, 1.15rem)" }}
-          >
-            A meal, a cake, a spa afternoon — with a video or voice note from you. They scratch to reveal it and collect it with a code. You never have to ask for their address.
-          </motion.p>
+          <p className="mx-auto mt-5 max-w-[500px] text-[1.1rem] leading-[1.65] text-ink-text/75 lg:mx-0">
+            A meal, a cake or a spa day — sent with your voice note. They open it on their phone and collect it with a
+            code. No address needed.
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.62 }}
-            className="w-full flex justify-center lg:justify-start mb-9"
-          >
-            <LaunchCountdown />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.7 }}
-            className="flex items-center gap-[18px] flex-wrap justify-center lg:justify-start mb-6"
-          >
+          <div className="mx-auto mt-8 max-w-[540px] lg:mx-0">
             {launched ? (
-              <GoldButton href={sendUrl("hero")}>{LAUNCH_CTA_LABEL}</GoldButton>
+              <a
+                href={sendUrl("hero")}
+                className="inline-flex min-h-14 items-center gap-2 rounded-full bg-forest px-8 text-[1.05rem] font-semibold text-paper transition-colors hover:bg-forest-hover"
+              >
+                {LAUNCH_CTA_LABEL} <ArrowRight className="h-5 w-5" strokeWidth={2} />
+              </a>
+            ) : mounted && hasJoined ? (
+              <button
+                type="button"
+                onClick={openModal}
+                className="inline-flex min-h-14 items-center gap-2 rounded-full bg-forest px-8 text-[1.05rem] font-semibold text-paper transition-colors hover:bg-forest-hover"
+              >
+                You&apos;re on the list{queueNumber !== null ? ` — No. ${queueNumber}` : ""}
+                <ArrowRight className="h-5 w-5" strokeWidth={2} />
+              </button>
             ) : (
-              <GoldButton onClick={openModal}>Join Early Access</GoldButton>
+              <form onSubmit={onSubmit} noValidate>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-0 sm:rounded-full sm:bg-white sm:p-1.5 sm:shadow-[0_10px_30px_rgba(3,69,43,0.10)] sm:ring-1 sm:ring-forest/10 sm:focus-within:ring-2 sm:focus-within:ring-forest">
+                  <div className="flex min-w-0 flex-1 items-center rounded-full bg-white shadow-[0_10px_30px_rgba(3,69,43,0.10)] ring-1 ring-forest/10 focus-within:ring-2 focus-within:ring-forest sm:shadow-none sm:ring-0 sm:focus-within:ring-0">
+                    <label htmlFor="hero-cc" className="sr-only">
+                      Country code
+                    </label>
+                    <select
+                      id="hero-cc"
+                      value={countryCode}
+                      onChange={(e) => setCountryCode(e.target.value)}
+                      className="cursor-pointer bg-transparent py-3.5 pl-4 pr-1 text-[0.95rem] font-medium text-ink-text outline-none"
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <option key={c.code} value={c.code}>
+                          {c.label}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="h-6 w-px bg-forest/15" aria-hidden="true" />
+                    <label htmlFor="hero-phone" className="sr-only">
+                      Your WhatsApp number
+                    </label>
+                    <input
+                      id="hero-phone"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel-national"
+                      placeholder="Your WhatsApp number"
+                      value={phone}
+                      onChange={(e) => {
+                        setPhone(e.target.value);
+                        if (error) setError("");
+                      }}
+                      aria-invalid={error ? true : undefined}
+                      aria-describedby={error ? "hero-phone-error" : "hero-phone-hint"}
+                      className="min-w-0 flex-1 bg-transparent px-3 py-3.5 text-[1rem] text-ink-text outline-none placeholder:text-ink-text/45"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="min-h-12 shrink-0 rounded-full bg-forest px-6 text-[1rem] font-semibold text-paper transition-colors hover:bg-forest-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
+                  >
+                    Get early access
+                  </button>
+                </div>
+                {error ? (
+                  <p id="hero-phone-error" role="alert" className="mt-3 text-[0.9rem] font-medium text-[#B42318]">
+                    {error}
+                  </p>
+                ) : (
+                  <p id="hero-phone-hint" className="mt-3 text-[0.88rem] text-ink-text/60">
+                    Free to join. We&apos;ll message you on WhatsApp when we open — nothing else.
+                  </p>
+                )}
+              </form>
             )}
-            <GhostButton href="#how">See How It Works →</GhostButton>
-          </motion.div>
-
-          {/* Partners' way in, above the fold on every screen (the navbar's
-              "For Businesses" is hidden on phones). One quiet line, so it
-              never competes with sending a gift. */}
-          <motion.p
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.78 }}
-            className="mb-7 text-[0.92rem] text-[rgba(var(--cream-rgb),0.78)] text-center lg:text-left"
-          >
-            Own a restaurant, bakery, spa or hotel?{" "}
-            <button
-              type="button"
-              onClick={openPartnerModal}
-              className="font-semibold text-gold underline decoration-gold/50 underline-offset-4 transition-colors hover:text-gold-light"
-            >
-              Become a partner
-            </button>
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.85 }}
-            className="text-[0.85rem] font-semibold tracking-[0.3em] uppercase text-gold"
-          >
-            CHOOSE  ·  PERSONALISE  ·  REVEAL  ·  RECEIVE
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.1, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.5 }}
-          className="flex-1 w-full max-w-[480px] lg:max-w-none"
-        >
-          <div className="relative aspect-[4/5] lg:aspect-[3/4] w-full rounded-[20px] overflow-hidden border border-[rgba(var(--gold-rgb),0.18)] shadow-[0_20px_60px_rgba(0,0,0,0.5)] bg-gradient-to-br from-ink-2 via-ink to-ink-3">
-        <video 
-          ref={videoRef} 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          poster="/hero-gift-poster.jpg" className="w-full h-full object-cover">
-          <source src="/hero-gift.mp4" type="video/mp4" />
-        </video>
-      </div>
-        </motion.div>
+        <GiftIllustration className="max-w-[420px] lg:max-w-[540px]" />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 22 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94], delay: 1.1 }}
-        className="absolute bottom-11 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      {/* Soft wave into the next section (Glovo pattern). Fill matches the section below. */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 1440 80"
+        preserveAspectRatio="none"
+        className="absolute inset-x-0 bottom-[-1px] block h-[40px] w-full md:h-[70px]"
       >
-        <div
-          className="w-px h-11 animate-pulse"
-          style={{ background: "linear-gradient(to bottom, var(--gold-dk), transparent)" }}
-        />
-      </motion.div>
+        <path d="M0,50 C360,95 1080,0 1440,40 L1440,80 L0,80 Z" style={{ fill: "var(--ink)" }} />
+      </svg>
     </section>
   );
 }

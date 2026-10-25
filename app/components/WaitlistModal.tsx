@@ -48,10 +48,20 @@ export default function WaitlistModal() {
     handleJoinSuccess,
     handleRevealed,
     handleSurveyDone,
+    prefill,
   } = useWaitlistModal();
 
   const [countryCode, setCountryCode] = useState("+234");
   const [phone, setPhone] = useState("");
+
+  // Number typed in the hero form: copy it in once per submission. Done while
+  // rendering (React's "adjust state when a prop changes" pattern), not in an effect.
+  const [appliedPrefill, setAppliedPrefill] = useState<typeof prefill>(null);
+  if (prefill && prefill !== appliedPrefill) {
+    setAppliedPrefill(prefill);
+    setCountryCode(prefill.countryCode);
+    setPhone(prefill.phone);
+  }
   const [optin, setOptin] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
   const [email, setEmail] = useState("");

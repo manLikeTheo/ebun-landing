@@ -116,7 +116,7 @@ function GiftTicket({ icon: Icon, ticket }: { icon: LucideIcon; ticket: NonNulla
 
 export default function Categories() {
   return (
-    <section className="py-[120px] px-6 md:px-[52px]">
+    <section id="gifts" className="scroll-mt-24 py-[120px] px-6 md:px-[52px]">
       <div className="mx-auto max-w-[1080px]">
         <RevealOnScroll>
           <SectionEyebrow text="What you can send" />

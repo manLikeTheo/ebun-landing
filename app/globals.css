@@ -52,3 +52,23 @@
   html { scroll-behavior: auto; }
   .shimmer-text, .sparkle { animation: none; }
 }
+
+/* Redesign hero: a slow float for the gift and its voice-note chip.
+   Off entirely for people who ask for reduced motion. */
+@keyframes ebun-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.ebun-float {
+  transform-box: fill-box;
+  animation: ebun-float 6s ease-in-out infinite;
+}
+.ebun-float-delayed {
+  animation: ebun-float 6s ease-in-out 1.2s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ebun-float,
+  .ebun-float-delayed {
+    animation: none;
+  }
+}

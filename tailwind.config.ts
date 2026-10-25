@@ -11,6 +11,11 @@ const config: Config = {
         amber: { DEFAULT: colors.amber, light: colors.amberHover },
         cream: { DEFAULT: colors.text, 2: colors.textSecondary },
         muted: { DEFAULT: colors.textMuted, strong: colors.textSecondary },
+        // Light theme (redesign, Oct 2026) — colours sampled from the logo.
+        paper: { DEFAULT: colors.paper, warm: colors.paperWarm },
+        forest: { DEFAULT: colors.forest, hover: colors.forestHover },
+        sun: { DEFAULT: colors.sun, hover: colors.sunHover },
+        "ink-text": colors.inkText,
         error: colors.error,
         success: colors.success,
       },

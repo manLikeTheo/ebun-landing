@@ -15,5 +15,12 @@
   "textMuted": "#ABBEB1",
   "error": "#F0A295",
   "success": "#91C9A7",
-  "logoGreen": "#004B35"
+  "logoGreen": "#004B35",
+  "paper": "#FDFCF7",
+  "paperWarm": "#FFF1CC",
+  "forest": "#03452B",
+  "forestHover": "#0A5C3D",
+  "sun": "#FEA703",
+  "sunHover": "#FFB829",
+  "inkText": "#14271F"
 }

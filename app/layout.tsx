@@ -13,8 +13,9 @@ const cormorant = Cormorant_Garamond({
 });
 
 const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  // latin-ext covers Yoruba letters with dots and tone marks (Ẹ̀bùn).
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
   variable: "--font-dm-sans",
   display: "swap",

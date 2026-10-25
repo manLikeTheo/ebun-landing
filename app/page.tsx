@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import CustomCursor from "./components/CustomCursor";
-import NoiseOverlay from "./components/NoiseOverlay";
 import Navbar from "./components/Navbar";
 import Divider from "./components/Divider";
 import Hero from "./sections/Hero";
@@ -32,8 +30,6 @@ export default function Home() {
   return (
     <WaitlistModalProvider>
       <PartnerModalProvider>
-      <CustomCursor />
-      <NoiseOverlay />
       <Navbar />
 
       <main>

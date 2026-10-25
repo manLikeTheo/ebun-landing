@@ -7,9 +7,19 @@ const ID_STORAGE_KEY = "ebun_waitlist_id";
 const REVEALED_STORAGE_KEY = "ebun_waitlist_revealed";
 const SURVEY_STORAGE_KEY = "ebun_waitlist_surveyed";
 
+/** A number typed into the hero form, handed to the modal so nobody types it twice. */
+export interface WaitlistPrefill {
+  countryCode: string;
+  phone: string;
+}
+
 interface WaitlistModalContextValue {
   isOpen: boolean;
   openModal: () => void;
+  /** Open with a phone number already filled in (hero form). Kept separate from
+   *  openModal, which is passed straight to onClick and would receive the event. */
+  openModalWith: (prefill: WaitlistPrefill) => void;
+  prefill: WaitlistPrefill | null;
   closeModal: () => void;
   mounted: boolean;
   hasJoined: boolean;
@@ -27,6 +37,7 @@ const WaitlistModalContext = createContext<WaitlistModalContextValue | null>(nul
 
 export function WaitlistModalProvider({ children }: { children: ReactNode }) {
 const [isOpen, setIsOpen] = useState(false);
+const [prefill, setPrefill] = useState<WaitlistPrefill | null>(null);
 const [mounted, setMounted] = useState(false);
 
 const [myId, setMyId] = useState<string | null>(null);
@@ -103,6 +114,11 @@ useEffect(() => {
       value={{
         isOpen,
         openModal: () => setIsOpen(true),
+        openModalWith: (p: WaitlistPrefill) => {
+          setPrefill(p);
+          setIsOpen(true);
+        },
+        prefill,
         closeModal: () => setIsOpen(false),
         mounted,
         hasJoined,
