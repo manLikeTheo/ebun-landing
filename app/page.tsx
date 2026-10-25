@@ -19,6 +19,8 @@ import EarlyAccess from "./sections/EarlyAccess";
 import Footer from "./sections/Footer";
 import { WaitlistModalProvider } from "./context/WaitlistModalContext";
 import WaitlistModal from "./components/WaitlistModal";
+import { PartnerModalProvider } from "./context/PartnerModalContext";
+import PartnerModal from "./components/PartnerModal";
 
 export const metadata: Metadata = {
   alternates: {
@@ -29,6 +31,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <WaitlistModalProvider>
+      <PartnerModalProvider>
       <CustomCursor />
       <NoiseOverlay />
       <Navbar />
@@ -58,6 +61,8 @@ export default function Home() {
 
       <Footer />
       <WaitlistModal />
+      <PartnerModal />
+      </PartnerModalProvider>
     </WaitlistModalProvider>
   );
 }

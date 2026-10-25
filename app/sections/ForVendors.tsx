@@ -4,7 +4,7 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 import GoldButton from "../components/GoldButton";
 import { Check } from "lucide-react";
-import { vendorWhatsAppUrl } from "@/lib/links";
+import { usePartnerModal } from "../context/PartnerModalContext";
 
 /**
  * The partner pitch. Written for any business people would love to be
@@ -38,6 +38,7 @@ const steps = [
 ];
 
 export default function ForVendors() {
+  const { openPartnerModal } = usePartnerModal();
   return (
     <section id="vendors" className="border-t border-b border-[rgba(var(--gold-rgb),0.07)]">
       <div className="max-w-[1080px] mx-auto py-[120px] px-6 md:px-[52px] grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
@@ -58,7 +59,7 @@ export default function ForVendors() {
             paid in full upfront.
           </p>
           <p className="text-[0.85rem] tracking-[0.04em] text-gold mb-10">
-            Bakeries · Restaurants · Spas & salons · Florists · Experiences
+            Restaurants · Bakeries · Spas & salons · Experiences · Florists · Hotels & resorts
           </p>
           <ul className="flex flex-col gap-[18px] mb-10">
             {benefits.map((b) => (
@@ -73,7 +74,7 @@ export default function ForVendors() {
               </li>
             ))}
           </ul>
-          <GoldButton href={vendorWhatsAppUrl()} className="text-center text-lg tracking-wide">
+          <GoldButton onClick={openPartnerModal} className="text-center text-lg tracking-wide">
             Become a partner
           </GoldButton>
         </RevealOnScroll>

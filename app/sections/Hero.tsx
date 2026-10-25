@@ -5,12 +5,14 @@ import GoldButton from "../components/GoldButton";
 import GhostButton from "../components/GhostButton";
 import LaunchCountdown from "../components/LaunchCountdown";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
+import { usePartnerModal } from "../context/PartnerModalContext";
 import { useLaunched } from "../hooks/useLaunchClock";
 import { sendUrl } from "@/lib/links";
 import { LAUNCH_CTA_LABEL } from "@/lib/launch";
 
 export default function Hero() {
   const { openModal } = useWaitlistModal();
+  const { openPartnerModal } = usePartnerModal();
   const launched = useLaunched();
   const reduceMotion = useReducedMotion();
 
@@ -97,6 +99,25 @@ export default function Hero() {
             )}
             <GhostButton href="#how">See How It Works →</GhostButton>
           </motion.div>
+
+          {/* Partners' way in, above the fold on every screen (the navbar's
+              "For Businesses" is hidden on phones). One quiet line, so it
+              never competes with sending a gift. */}
+          <motion.p
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.78 }}
+            className="mb-7 text-[0.92rem] text-[rgba(var(--cream-rgb),0.78)] text-center lg:text-left"
+          >
+            Own a restaurant, bakery, spa or hotel?{" "}
+            <button
+              type="button"
+              onClick={openPartnerModal}
+              className="font-semibold text-gold underline decoration-gold/50 underline-offset-4 transition-colors hover:text-gold-light"
+            >
+              Become a partner
+            </button>
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 22 }}
