@@ -50,9 +50,9 @@ export default function Hero() {
     <section className="relative overflow-hidden bg-paper pt-28 md:pt-32">
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-10 px-4 pb-24 md:px-8 md:pb-32 lg:grid-cols-[1.2fr_0.8fr] lg:gap-4">
         <div className="text-center lg:text-left">
-          <span className="inline-flex items-center gap-2 rounded-full bg-paper-warm px-4 py-1.5 text-[0.85rem] font-semibold text-forest">
+          {/* <span className="inline-flex items-center gap-2 rounded-full bg-paper-warm px-4 py-1.5 text-[0.85rem] font-semibold text-forest">
             <span aria-hidden="true">🎁</span> Ẹ̀bùn means gift
-          </span>
+          </span> */}
 
           <h1
             className="mt-6 font-sans font-extrabold leading-[1.02] tracking-[-0.035em] text-forest text-balance"
