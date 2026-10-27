@@ -66,7 +66,7 @@ export default function Hero() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-[500px] text-[1.1rem] leading-[1.65] text-ink-text/75 lg:mx-0">
-            Choose something they’ll love, add your own message, and send it to their phone. A little treat, a thank-you, or just because. Simple for you. Meaningful for them.
+            Choose something they’ll love, add your own message, and send it to their phone. A little treat, a thank-you, or just because.
           </p>
 
           <div className="mx-auto mt-8 max-w-[540px] lg:mx-0">
