@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import GiftIllustration from "../components/GiftIllustration";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
 import { useLaunched } from "../hooks/useLaunchClock";
-import { sendUrl } from "@/lib/links";
+import { appUrl } from "@/lib/links";
 import { LAUNCH_CTA_LABEL } from "@/lib/launch";
 
 /**
@@ -72,7 +72,7 @@ export default function Hero() {
           <div className="mx-auto mt-8 max-w-[540px] lg:mx-0">
             {launched ? (
               <a
-                href={sendUrl("hero")}
+                href={appUrl("hero")}
                 className="inline-flex min-h-14 items-center gap-2 rounded-full bg-forest px-8 text-[1.05rem] font-semibold text-paper transition-colors hover:bg-forest-hover"
               >
                 {LAUNCH_CTA_LABEL} <ArrowRight className="h-5 w-5" strokeWidth={2} />

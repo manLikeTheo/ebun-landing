@@ -1,19 +1,17 @@
 "use client";
 
-import { ArrowUpRight, Video } from "lucide-react";
+import { ArrowRight, Video } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 import GoldButton from "../components/GoldButton";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
 import { useLaunched } from "../hooks/useLaunchClock";
-import { sendUrl, weddingInterestUrl } from "@/lib/links";
+import { eventStartUrl, sendUrl } from "@/lib/links";
 import { LAUNCH_CTA_LABEL } from "@/lib/launch";
 
 /**
- * Weddings as an occasion for gifts that are live today — not a registry
- * or a "digital spray". Pooling or holding guests' money is a different,
- * regulated product, and spraying is cash: the fight SendEbun isn't picking.
- * Registry demand is collected through WhatsApp with the date attached.
+ * Weddings from both sides: a guest sends the couple a gift (send flow),
+ * and a couple planning their own day makes an event gift page.
  */
 function NewlywedsTicket() {
   return (
@@ -81,16 +79,14 @@ export default function Weddings() {
           )}
 
           <a
-            href={weddingInterestUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={eventStartUrl()}
             className="mt-8 flex max-w-[520px] items-start gap-2 text-[0.85rem] leading-[1.7] text-[rgba(var(--cream-rgb),0.7)] transition-colors hover:text-gold-light"
           >
             <span>
-              <span className="text-cream">Planning your own wedding?</span> We&apos;re exploring gift registries —
-              tell us your date on WhatsApp.
+              <span className="text-cream">Planning your own wedding?</span> Make a gift page your guests can
+              give from.
             </span>
-            <ArrowUpRight className="mt-1 h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.5} />
+            <ArrowRight className="mt-1 h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.5} />
           </a>
         </RevealOnScroll>
 

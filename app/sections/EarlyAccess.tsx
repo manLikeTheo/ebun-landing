@@ -4,7 +4,7 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import SectionEyebrow from "../components/SectionEyebrow";
 import GhostButton from "../components/GhostButton";
 import GoldButton from "../components/GoldButton";
-import { sendUrl } from "@/lib/links";
+import { appUrl } from "@/lib/links";
 import { LAUNCH_CTA_LABEL } from "@/lib/launch";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
 import { useLaunched } from "../hooks/useLaunchClock";
@@ -37,7 +37,7 @@ export default function EarlyAccess() {
         </p>
         <div className="flex flex-col items-center gap-6">
           {launched ? (
-            <GoldButton href={sendUrl("final_cta")}>{LAUNCH_CTA_LABEL}</GoldButton>
+            <GoldButton href={appUrl("final_cta")}>{LAUNCH_CTA_LABEL}</GoldButton>
           ) : (
           <GoldButton onClick={openModal}>
             {!mounted

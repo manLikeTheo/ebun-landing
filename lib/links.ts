@@ -16,6 +16,20 @@ export function sendUrl(placement: "hero" | "navbar" | "footer" | "final_cta" | 
 export const SEND_URL = sendUrl("hero");
 
 /**
+ * The app's front door: the launcher, where a visitor picks who the gift
+ * is for (someone, an event, a team). The page's general "start" buttons
+ * go here; a section about one use-case links straight into that flow.
+ */
+export function appUrl(placement: "hero" | "navbar" | "final_cta"): string {
+  return `${APP_URL}/?utm_source=landing&utm_medium=web&utm_content=${placement}`;
+}
+
+/** "Planning your own?" — straight into creating an event gift page. */
+export function eventStartUrl(placement: "weddings" = "weddings"): string {
+  return `${APP_URL}/events/new?utm_source=landing&utm_medium=web&utm_content=${placement}`;
+}
+
+/**
  * Whether the public can send real gifts yet. Until Paystack is live,
  * "Send a gift" would take a stranger's card to a test checkout, so the
  * page keeps "Join Early Access" as its main button.
@@ -86,21 +100,4 @@ export function corporateEnquiryUrl(): string {
 export function whatsAppChatUrl(): string {
   const digits = businessDetails.phone.replace(/\D/g, "");
   return `https://wa.me/${digits}?text=${encodeURIComponent("Hi SendEbun! 👋 I'd like to send a gift to someone special. Can you help me choose?")}`;
-}
-
-/**
- * "Planning a wedding?" opens WhatsApp with the date asked for up front.
- * Registries aren't built: this collects dated demand without promising
- * a launch date.
- */
-export function weddingInterestUrl(): string {
-  const digits = businessDetails.phone.replace(/\D/g, "");
-  const text = [
-    "Hi SendEbun, we're planning a wedding and would love a gift registry.",
-    "",
-    "Wedding date: ",
-    "City: ",
-    "Rough number of guests: ",
-  ].join("\n");
-  return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }

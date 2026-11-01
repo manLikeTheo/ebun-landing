@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useWaitlistModal } from "../context/WaitlistModalContext";
 import BrandLogo from "./BrandLogo";
-import { sendUrl } from "@/lib/links";
+import { appUrl } from "@/lib/links";
 import { LAUNCH_CTA_LABEL } from "@/lib/launch";
 import { useLaunched } from "../hooks/useLaunchClock";
 
@@ -68,7 +68,7 @@ export default function Navbar() {
           </ul>
 
           {launched ? (
-            <a href={sendUrl("navbar")} className={button}>
+            <a href={appUrl("navbar")} className={button}>
               {LAUNCH_CTA_LABEL}
             </a>
           ) : (
